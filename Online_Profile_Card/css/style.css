@@ -1,0 +1,381 @@
+@charset "utf-8"; /*스타일 시트의 인코딩 방식을 utf-8로 정함*/
+@import url("https://fonts.googleapis.com/css2?family=Orbitron&display=swap");/*예제에서 사용할 orbitron웹 폰트 연결구문을 추가한다*/
+
+* {/*전체 요소의 */
+	margin: 0px; /*여백과 안쪽여백을 0으로 설정한다*/
+	padding: 0px;
+	box-sizing: border-box;
+}
+
+
+ul {
+	list-style: none;
+}
+
+/*목록과 링크의 꾸며주기 효과를 제거해서 전체 스타일을 초기화 한다.*/
+a {
+	text-decoration: none;
+}
+
+
+
+section{ /*프로필카드의 프레임이 될 섹션 요소 선택하여*/
+
+	width: 340px; /*너빗값지정*/
+	padding: 30px;/*안쪽여백 30px*/
+	background-color: #fff; /*프로필 카드의 배경색은 흰색*/
+	margin: 50px auto;/*상하여백을 50px로 지정한 후, 가운데로 정렬*/
+	box-shadow: 10px 10px 30px rgba(0,0,0.1); /*그림자 적용*/
+	border-radius: 10px; /*모서리 10px만큼 둥글게 만듬*/
+}
+
+
+section nav.menu{
+
+	width: 100%;
+}
+
+section nav.menu::after{
+
+	content:"";
+	display: block;
+	clear: both;
+}
+
+section nav.menu a{
+
+	font-size: 20px;
+	color: #666;
+
+}
+
+section nav.menu a:nth-of-type(1){
+	float: left;
+}
+
+section nav.menu a:nth-of-type(2){
+
+	float: right;
+}
+
+
+/*article.profile영역의 너비를 100%로, text-align을 center로 설정하여 안쪽의 인라인 요소인 img를 가운데 배치 합니다. */
+section article.profile{
+	width: 100%;
+	text-align: center;
+}
+
+/*이미지는 border-radius를 50%로 설정해 동그란 형태로 만들고 은은한 그림자도 넣습니다.*/
+
+section article.profile img{
+
+	width:200px;
+	height: 200px;
+	border-radius: 50%;
+	margin-bottom: 20px;
+	
+}
+
+section article.profile h1{
+
+	font-weight: bold;
+	font-size: 22px;
+	font-family: "arial";
+	line-height: 1;
+	color: #555;
+	margin-bottom: 5px;
+
+}
+
+section article.profile h2{
+	font-weight: normal;
+	font-size: 12px;
+	font-family: "arial";
+	color: #bbb;
+	margin-bottom: 30px;
+
+}
+
+/*h1,h2 요소를 만들어 크기를 설정하고 상하여백을 설정한다. 버튼의 border-radius 값은 높잇값의 절반으로 설정해 좌우 끝의 모양을 둥글게 설정하고 linear-gradient로 그레이디언트를 배경색으로 지정한다. 이때 그림자를 배경색과 비슷한 색으로 설정하면 투명한 버튼 효과를 줄 수 있다. */
+
+section a.btnView{
+
+
+	display: block;
+	width: 180px;
+	height: 32px;
+	margin: 0px auto 20px;
+	background-color: #444;
+	border-radius: 16px;
+	font-weight: bold;
+	font-size: 10px;
+	font-family: "arial";
+	color: #fff;
+	line-height: 32px;
+	text-align: center;
+	background: linear-gradient(45deg, #4affff,#35e0f7); /*색의 점진적 변화 표현*/
+	box-shadow: 5px 10px 20px rgba(0, 255, 255, 0.493);
+
+}
+
+
+section ul.contact {
+	margin-bottom: 25px; 
+}
+
+/*li요소에 안쪽 여백을 각각 설정하고 아래쪽 테두리를 만듭니다. 이때 마지막 목록은 :last-child 선택자를 이용하여 하단 테두리를 제거합니다. 웹 폰트 아이콘과 오른쪽 텍스트의 폰트 크기를 지정한 후 font-family:"orbitrion"을 입력합니다.*/
+section ul.contact li{
+
+	width: 100%;
+	padding: 10px 0px;
+	border-bottom: 1px solid #eee;
+
+}
+
+
+section ul.contact li:last-child{
+
+	border-bottom: none;
+
+}
+
+section ul.contact li i {
+
+	width: 20%;
+	text-align: center;
+	color:#555;
+	font-size: 15px;
+	text-shadow: 2px 2px 2px #ddd;
+}
+
+section ul.contact li span{
+
+	font-weight: normal;
+	font-size: 11px;
+	font-family: "orbitrion";
+	color: #555;
+	letter-spacing: 1px;
+
+}
+
+/*nav.others의 너빗값을 100%로 설정하고 text-align: center를 추가해 자식인 a요소 버튼을 가운데 정렬한다*/
+section nav.others{
+
+	width: 100%;
+	text-align: center;
+
+
+}
+
+/*그 다음 a요소의 display 속성을 inline-block으로 지정한다. a요소는 인라인요소이므로 float: left를 이용하여 좌우로 배치할 필요는 없다. 하지만 이 요소의 너빗값 및 높이값을 지정하기 위해 inline-block 속성을 추가하여 인라인과 블록속성을 갖게 해야 한다. 나중에 프로필 카드 4개의 배경색을 다르게 지정할 것이므로 일단 지금은 background-color 속성을 입력하지 않고 넘어간다. */
+
+section nav.others a{
+
+	display: inline-block;
+	width: 30px;
+	height: 30px;
+	border-radius: 50%;
+	margin: 0px 10px;
+	opacity: 0.4; 
+	filter: saturate(0.7); /*채도를 낮게 변경*/
+
+
+} 
+
+/*a 태그에 on 클래스가 있으면 opacity:1 과 filter:saturate(1)을 실행해 버튼을 활성화함*/
+
+section nav.others a.on{
+	opacity: 1;
+	filter: saturate(1);
+}
+
+/*순서 선택자를 이용하여 멤버별 프로필 링크의 배경색과 그림자색을 지정한다. */
+section nav.others a:nth-of-type(1){
+
+	background-color: #35e0f7;
+	box-shadow: 5px 5px 10px rgba(74, 255, 255, 0.7);
+
+}
+
+
+/*버튼의 공통모양은 태그 선택자로 지정하고 배경색이나 그림자색처럼 달라지는 부분만 순서 선택자로 적용하면 불필요한 CSS코드를 줄일 수 있다.*/
+section nav.others a:nth-of-type(2){
+
+	background-color: #55f5cd;
+	box-shadow: 5px 5px 10px rgba(85, 245, 178, 0.7);
+
+}
+
+section nav.others a:nth-of-type(3){
+
+	background-color: #ff80df;
+	box-shadow: 5px 5px 10px rgba(255, 128, 223, 0.7);
+
+}
+
+
+section nav.others a:nth-of-type(4){
+
+	background-color: #a794fd;
+	box-shadow: 5px 5px 10px rgba(167, 148, 253, 0.7);
+
+}
+
+
+/*member1*/
+body.member1{
+
+	background-color: #ebfaff;
+}
+
+body.member1 section article.profile img{
+
+	box-shadow: 5px 15px 30px rgba(173,216, 230, 0.8);
+}
+body.member1 section a.btnView{
+
+	background: linear-gradient(45deg, #4affff, #35e0f7);
+	box-shadow: 5px 10px 20px rgba(0,255,255,0.493);
+}
+
+
+/*member2*/
+body.member2{
+
+	background-color: #edffeb;
+}
+
+body.member2 section article.profile img{
+
+	box-shadow: 5px 15px 20px #bdccb783;
+}
+body.member2 section a.btnView{
+
+	background: linear-gradient(45deg, #a0ff9d, #55f5b2);
+	box-shadow: 5px 10px 20px rgba(33,250,105,0.3);
+}
+
+
+
+/*member3*/
+body.member3{
+
+	background-color: #fff3fd;
+}
+
+body.member3 section article.profile img{
+
+	box-shadow: 5px 15px 20px rgba(252,99,214,0.2);
+}
+body.member3 section a.btnView{
+
+	background: linear-gradient(45deg, #ef74ff, #ff11c4);
+	box-shadow: 5px 10px 20px rgba(255,17,196,0.357);
+}
+
+
+/*member4*/
+body.member4{
+
+	background-color: #f5f0ff;
+}
+
+body.member4 section article.profile img{
+
+	box-shadow: 5px 15px 20px rgba(183,82,250,0.2);
+}
+body.member4 section a.btnView{
+
+	background: linear-gradient(45deg, #8e74ff, #a011ff);
+	box-shadow: 5px 10px 20px rgba(160,17,255,0.4);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
