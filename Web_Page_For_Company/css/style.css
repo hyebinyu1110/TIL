@@ -167,27 +167,202 @@ header .inner{ /*자식 콘텐츠를 묶는 inner선택*/
 	 color: #555;
  }
 
+/*news*/
+
+section{
+	width: 100%;
+	padding: 200px 0px;
+
+}
+
+section .inner{
+
+	width: 1180px;
+	margin: 0px auto;
+
+}
+
+section .inner h1{ /*제목 스타일 지정*/
+
+	font: bold 24px/1 "arial";
+	color: #555;
+	text-align: center;
+	margin-bottom: 50px;
+
+}
+
+/*자식요소의 article의 float을 해제하기위해 .wrap에 가상 선택자로 float을 해제 한다..*/
+section .inner .wrap{
+	width: 100%;
+}
+
+section .inner .wrap::after{ /*자식요소인 article 의 float 해제*/
+
+	content: "";
+	display: block;
+	clear: both;
+
+}
+
+/*float을 이용해 article을 좌우로 배치*/
+section .inner .wrap article{
+
+	width: 280px;
+	float: left;
+	margin-right: 20px;
+}
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+section .inner .wrap article:last-child{ /*맨 마지막 요소의 여백만 제거*/
  
+	margin-right: 0px;
+
+
+} 
+
+section .inner .wrap article h2{
+
+	margin-bottom: 10px;
+}
+
+section .inner .wrap article h2 a{
+
+	font: bold 16px/1 "arial";
+	color: #555;
+	
+}
+
+section .inner .wrap article p{
+
+	font: 14px/4 "arial";
+	color: #777;
+
+}
+
+section .inner .wrap article .pic{
+
+	width: 100%;
+	height: 120px;
+	background: #333;
+	margin-bottom: 15px;
+	position: relative;
+	overflow: hidden;
+}
+
+section .inner .wrap article .pic img{
+
+	object-fit: cover; /*pic프레임 안에 이미지를 꽉 채움*/
+	width: 100%;
+	height: 100%;
+
+}
+
+
+/*footer*/
+
+footer{ /**/
+
+	width: 100%;
+	background: #333;
+	padding: 100px 0px;
+	border-top: 1px solid  #888;
+
+}
+
+footer .inner{
+
+	width: 1180px;
+	margin: 0px auto;
+
+}
+
+footer .inner .upper{
+
+	width:100%;
+	border-bottom: 1px solid #777;
+	padding-bottom: 20px;
+}
+
+footer .inner .upper::after{ /*상단 영역 float 해제*/
+
+content: "";
+display: block;
+clear: both;
+
+}
+
+footer .inner .upper h1{
+
+	float: left;
+	font: bold 24px/1 "arial";
+	color: #666;
+
+}
+
+
+footer .inner .upper ul{
+
+	float: right;
+
+}
+
+footer .inner .upper ul li{
+
+	float: left;
+	margin-left: 20px;
+
+}
+
+footer .inner .upper  ul li a{
+
+	font: bold 14px/1 "arial";
+	color: #666;
+}
+
+footer .inner .lower{
+	width: 100%;
+	padding-top: 20px;
+
+}
+
+footer .inner .lower p{
+	width: 100%;
+	font: 12px/1 "arial";
+	color: #777;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
