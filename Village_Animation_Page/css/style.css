@@ -1,0 +1,70 @@
+@charset "utf-8";
+@import url('https://fonts.googleapis.com/css?family=Poiret+One');
+
+* {
+	margin: 0px;
+	padding: 0px;
+}
+
+
+body{
+	width: 100%;
+	height: 100vh;
+	overflow: hidden; 
+	background-color: #b1e1e2;
+
+}
+
+h1{
+	width: 100px;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, 150%);
+	font:  92px/1 "Poiret one";
+	text-align: center;
+}
+section{
+
+	width: 1000px;
+	height: 400px;
+	position: absolute; /*section 아래 영역에 텍스트를 삽입할 공간을 확보하기 위해 absolute와  transform 을 이용하여 화면 가운데에서 살짝 위로 올라가 보이게 만듭니다.*/
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -70%);
+	border: 1px solid red;
+
+}
+
+section .sky{
+	
+	position: absolute;
+	width: 100%;
+	height: 100%;
+
+}
+
+section .sky .sun{
+
+	position: absolute;
+	top: -150px;
+	left: 50%;
+	margin-left: -100px; 
+	transform-origin: center 500px; /*태양의 중심축을 아래로 500만큼 이동*/
+	
+}
+
+section .sky .cloud1{
+
+	position: absolute;
+	top: -30px;
+	left: 10%;
+
+}
+
+section .sky .cloud2{
+	position: absolute;
+	top: 20px;
+	left: 0%;
+}
+
