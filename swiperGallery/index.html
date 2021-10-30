@@ -1,150 +1,151 @@
 <!DOCTYPE html>
 <html lang="ko">
+
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
 	<meta http-equiv="X-UA-Compatible" content="ie=edge">
 	<title>스와이프 갤러리</title>
-	<link rel="icon" href="img/favicon.ico" type="image/x-icon">	
-	<link rel="stylesheet" href="https://unpkg.com/swiper@7/swiper-bundle.min.css"
-/>
-	<link rel="stylesheet" href="css/style.css">	
+	<link rel="icon" href="img/favicon.ico" type="image/x-icon">
+	<link rel="stylesheet" href="https://unpkg.com/swiper@7/swiper-bundle.min.css" />
+	<link rel="stylesheet" href="css/style.css">
 	<script src="https://kit.fontawesome.com/c47106c6a7.js" crossorigin="anonymous"></script>
 	<script src="https://unpkg.com/swiper@7/swiper-bundle.min.js"></script>
 </head>
-<body>	
 
-<div class="wrap">
+<body>
 
-<h1>UI/UX<span> PORTFOLIO</span></h1>
+	<div class="wrap">
 
-<ul class="auto">
-	<li class="btnStart"><i class="fas fa-play"></i></li>
-	<li class="btnStop"><i class="fas fas fa-pause"></i></li>
-</ul>
+		<h1>UI/UX<span> PORTFOLIO</span></h1>
+
+		<ul class="auto">
+			<li class="btnStart"><i class="fas fa-play"></i></li>
+			<li class="btnStop"><i class="fas fas fa-pause"></i></li>
+		</ul>
 
 
 
-<div class="swiper-wrapper">
-	<div class="swiper-slide">
-		<div class="inner">
-			<div class="con">
-				<img src="img/pic1.png" alt="">
-				<h2>Lorem, ipsum dolor.</h2>
-				<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad, harum.</p>
+		<div class="swiper-wrapper">
+			<div class="swiper-slide">
+				<div class="inner">
+					<div class="con">
+						<img src="img/pic1.png" alt="">
+						<h2>Lorem, ipsum dolor.</h2>
+						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad, harum.</p>
+					</div>
+				</div>
+			</div>
+			<div class="swiper-slide">
+				<div class="inner">
+					<div class="con">
+						<img src="img/pic2.png" alt="">
+						<h2>Debitis, nam possimus?</h2>
+						<p>Distinctio, totam? Exercitationem sint sapiente mollitia dolores accusamus autem laborum?</p>
+					</div>
+				</div>
+			</div>
+			<div class="swiper-slide">
+				<div class="inner">
+					<div class="con">
+						<img src="img/pic3.png" alt="">
+						<h2>Saepe, enim eum!</h2>
+						<p>Eos accusamus, alias magni nisi obcaecati optio officiis at distinctio.</p>
+					</div>
+				</div>
+			</div>
+			<div class="swiper-slide">
+				<div class="inner">
+					<div class="con">
+						<img src="img/pic4.png" alt="">
+						<h2>Nobis, similique commodi.</h2>
+						<p>Aut, voluptatem eveniet voluptatum numquam totam blanditiis molestias tenetur velit.</p>
+					</div>
+				</div>
+			</div>
+			<div class="swiper-slide">
+				<div class="inner">
+					<div class="con">
+						<img src="img/pic5.png" alt="">
+						<h2>Omnis, veritatis ex.</h2>
+						<p>Autem, assumenda commodi. Atque illum, ipsam porro sapiente tenetur deleniti.</p>
+					</div>
+				</div>
 			</div>
 		</div>
+
+
+
+		<div class="swiper-button-next"></div>
+		<div class="swiper-button-prev"></div>
+
+		<div class="swiper-pagination"></div>
+
 	</div>
-	<div class="swiper-slide">
-		<div class="inner">
-			<div class="con">
-				<img src="img/pic2.png" alt="">
-				<h2>Debitis, nam possimus?</h2>
-				<p>Distinctio, totam? Exercitationem sint sapiente mollitia dolores accusamus autem laborum?</p>
-			</div>
-		</div>
-	</div>
-	<div class="swiper-slide">
-		<div class="inner">
-			<div class="con">
-				<img src="img/pic3.png" alt="">
-				<h2>Saepe, enim eum!</h2>
-				<p>Eos accusamus, alias magni nisi obcaecati optio officiis at distinctio.</p>
-			</div>
-		</div>
-	</div>
-	<div class="swiper-slide">
-		<div class="inner">
-			<div class="con">
-				<img src="img/pic4.png" alt="">
-				<h2>Nobis, similique commodi.</h2>
-				<p>Aut, voluptatem eveniet voluptatum numquam totam blanditiis molestias tenetur velit.</p>
-			</div>
-		</div>
-	</div>
-	<div class="swiper-slide">
-		<div class="inner">
-			<div class="con">
-				<img src="img/pic5.png" alt="">
-				<h2>Omnis, veritatis ex.</h2>
-				<p>Autem, assumenda commodi. Atque illum, ipsam porro sapiente tenetur deleniti.</p>
-			</div>
-		</div>
-	</div>
-</div>
-	
 
-</div>
+	<script>
 
-<div class="swiper-button-next"></div>
-<div class="swiper-button-prev"></div>
-
-<div class="swiper-pagination"></div>
-
-</div>
-
-<script>
-
-const swiper = new Swiper(".wrap", {
+		const swiper = new Swiper(".wrap", {
 
 
 
-  // Optional parameters
-  direction: "horizontal",
-  loop: true,
- // If we need pagination
-  pagination: {
-    el: ".swiper-pagination",
-	type: "fraction" //페이지 버튼 대신 슬라이더 번호 출력
-  },
+			// Optional parameters
+			direction: "horizontal",
+			loop: true,
+			// If we need pagination
+			pagination: {
+				el: ".swiper-pagination",
+				type: "fraction" //페이지 버튼 대신 슬라이더 번호 출력
+			},
 
-  // Navigation arrows
-  navigation: {
-    nextEl: "swiper-button-next",
-    prevEl: "swiper-button-prev",
-  },
+			// Navigation arrows
+			navigation: {
+				nextEl: "swiper-button-next",
+				prevEl: "swiper-button-prev",
+			},
 
-  spaceBetween: 0, // 패널 사이의 간격을 50으로 설정
-  slidesPerView: "auto",  //CSS에 지정한 슬라이더의 크기 반영
-  grabCursor: true,  //스와이프 시 마우스 포인터 모양 변경
-  centeredSlides: true, //슬라이더 패널을 항상 가운데로 정렬
-  speed: 1000,  // 슬라이더 이동 속도 지정
-
-  
-effect: "coverflow", // 이펙트 효과 지정
-coverflowEffect:  {
-	rotate: 50, // 회전각도 지정
-	stretch: -100,  // 슬라이드 간의 당김 정도 지정
-	depth: 400, //원근감 지정
-	modifier: 1, // 중첩 정도 지정
-	slideShadow: false, //슬라이드의 그림자 생성
-},
-
-autoplay: {
-	delay:1000,
-	disableOnInteraction: true,
-	
-}
-
-});
-  
-// .btnStart 요소를 찾아서 btnStart에 저장
-const btnStart = document.querySelector(".btnStart");
-// .btnStop 요소를 찾아서 btnStop에 저장
-const btnStop = document.querySelector(".btnStop");
-
-//btnStart 버튼을 클릭하면 자동 스와이프를 시작
-btnStart.addEventListener("click",  ()=>{
-	swiper.autoplay.start();
-});
+			spaceBetween: 0, // 패널 사이의 간격을 50으로 설정
+			slidesPerView: "auto",  //CSS에 지정한 슬라이더의 크기 반영
+			grabCursor: true,  //스와이프 시 마우스 포인터 모양 변경
+			centeredSlides: true, //슬라이더 패널을 항상 가운데로 정렬
+			speed: 1000,  // 슬라이더 이동 속도 지정
 
 
-//btnStop 버튼을 클릭시 자동 스와이프를 정지
-btnStop.addEventListener("click", ()=>{
-	swiper.autoplay.stop();
-})
+			effect: "coverflow", // 이펙트 효과 지정
+			coverflowEffect: {
+				rotate: 50, // 회전각도 지정
+				stretch: -100,  // 슬라이드 간의 당김 정도 지정
+				depth: 400, //원근감 지정
+				modifier: 1, // 중첩 정도 지정
+				slideShadow: false, //슬라이드의 그림자 생성
+			},
+
+			autoplay: {
+				delay: 1000,
+				disableOnInteraction: true,
+
+			}
+
+		});
+
+		// .btnStart 요소를 찾아서 btnStart에 저장
+		const btnStart = document.querySelector(".btnStart");
+		// .btnStop 요소를 찾아서 btnStop에 저장
+		const btnStop = document.querySelector(".btnStop");
+
+		//btnStart 버튼을 클릭하면 자동 스와이프를 시작
+		btnStart.addEventListener("click", () => {
+			swiper.autoplay.start();
+		});
 
 
-  </script>
+		//btnStop 버튼을 클릭시 자동 스와이프를 정지
+		btnStop.addEventListener("click", () => {
+			swiper.autoplay.stop();
+		})
+
+
+	</script>
 </body>
+
 </html>
