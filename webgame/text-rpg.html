@@ -124,11 +124,12 @@
                     hero.hp = hero.maxHp;
                     this.updateHeroStat();
                     this.updateMonsterStat();
+                    this.showMessage("충분한 휴식을 취했다~");
 
                 } else if (input === "3") { // 종료
 
                     this.quit();
-                    this.showMessage(``);
+                    this.showMessage("");
                 }
             }
 
@@ -164,16 +165,15 @@
                     }
                     this.updateHeroStat();
                     this.updateMonsterStat();
-                    console.log(hero.hp);
-
-
+                    this.showMessage("체력을 조금 회복했다!");
 
                 } else if (input === "3") { // 도망
 
                     const { hero, monster } = this;
 
-                    this.monster = null;
+                    
                     this.changeScreen("game");
+                    this.monster = null;
                     this.updateMonsterStat();
                     this.showMessage(`도망쳤군요, 괜찮아요 다시 도전해봐요`);
 
