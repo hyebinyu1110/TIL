@@ -17,10 +17,8 @@
         const $form = document.querySelector("#form");
         const $logs = document.querySelector("#logs");
 
-        const numbers = [];
-        for (let n = 1; n <= 9; n += 1) {
-            numbers.push(n);
-        }
+        const numbers = Array(9).fill().map((v, i) => i + 1);
+        console.log(numbers);
 
         const answer = [];
         for (let n = 0; n <= 3; n++) { // 네번 반복
@@ -46,6 +44,12 @@
             }
             return true;
         }
+
+        function defeated() {
+            const message = document.createTextNode(`패배! 정답은 ${answer.join("")}`);
+            $logs.appendChild(message);
+        }
+        let out = 0;
         $form.addEventListener("submit", (event) => {
             event.preventDefault();
             const value = $input.value;
@@ -57,11 +61,8 @@
                 return;
             }
             if (tries.length >= 9) {
-                const message = document.createTextNode(`패배! 정답은 ${answer.join("")}`);
-                $logs.appendChild(message);
+                defeated();
                 return;
-              
-
             }
             console.log(tries.length);
             // 몇 스트라이크 몇 볼인지 검사
@@ -72,19 +73,23 @@
                 if (index > -1) { // 일치하는 숫자 발견
                     if (index === i) { // 자릿수도 같음
                         strike += 1;
-
                     } else { // 숫자만 같음
-
                         ball += 1;
                     }
                 }
             }
-            $logs.append(`${value}: ${strike} 스크라이크 ${ball}볼`, document.createElement("br"));
+            if (strike === 0 && ball === 0) {
+                out++;
+                $logs.append(`${value}: 아웃! , 아웃카운트:${out}`, document.createElement("br"));
+            } else {
+                $logs.append(`${value}: ${strike} 스크라이크 ${ball}볼`, document.createElement("br"));
+            }
+            if (out === 3) {
+                defeated();
+                return;
+            }
             tries.push(value);
-
-
         })
-
     </script>
 </body>
 
