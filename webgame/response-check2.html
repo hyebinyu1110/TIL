@@ -37,9 +37,10 @@
 
         let startTime;
         let endTime;
-        let count =0;
+        let count = 0;
         const records = [];
         let timeoutId;
+
 
         function onClickScreen() {
             if ($screen.classList.contains("waiting")) { // 대기화면
@@ -52,25 +53,33 @@
                     $screen.classList.replace("ready", "now");
                     $screen.textContent = "클릭하세요!";
 
-                }, Math.floor((Math.random()*1000)+2000)); // 2000~3000 사이의 수
+                }, Math.floor((Math.random() * 1000) + 2000)); // 2000~3000 사이의 수
             } else if ($screen.classList.contains("ready")) {  // 준비화면            
                 clearTimeout(timeoutId);
                 $screen.classList.replace("ready", "waiting");
-                $screen.textContent = "성급하셨네요! 다시 처음부터 시작해주세요";               
+                $screen.textContent = "성급하셨네요! 다시 처음부터 시작해주세요";
             } else if ($screen.classList.contains("now")) {  // 클릭화면
 
                 endTime = new Date();
                 count++;
-                const current = (endTime - startTime)/1000;
+                const current = (endTime - startTime) / 1000;
                 records.push(current);
-                const average = records.reduce((a,c) => a+c) /records.length;
-                $result.append(`${count}번째 시도, 현재: ${current}ms, 평균: ${average}ms`, document.createElement("br"));
-                if(count >=2){
-                    for(let i=0; i<5; i++){
-                    let fastest = records.sort((a,b)=>b-a);
-                    $result.appendChild(`${fastest[i]} `);
+                const average = records.reduce((a, c) => a + c) / records.length;
+                $result.textContent = `현재 ${current}ms, 평균: ${average}ms`;
+                const topFive = records.sort((a, b) => a - b).slice(0,5);
+                console.log(records);
+                /* 내가 첨에 코딩 한것
+                if (count >= 5) {
+                    console.log(records);
+                    $result.append(`${count}번째 시도, 현재: ${current}ms, 평균: ${average}ms 가장 빠른 5번의 시도: ${records.slice(0, 4).join(' ')}`, document.createElement("br"));
+                } else {
+                    $result.append(`${count}번째 시도, 현재: ${current}ms, 평균: ${average}ms`, document.createElement("br"));
                 }
-                }
+                */
+               //책에 있는 대로 적은 것...
+                topFive.forEach((top, index) =>{
+                    $result.append(document.createElement("br"),`${index +1}위: ${top}ms`);
+                })
                 startTime = null;
                 endTime = null;
                 $screen.classList.replace("now", "waiting");
@@ -78,7 +87,6 @@
             }
         }
         $screen.addEventListener("click", onClickScreen);
-
     </script>
 </body>
 
