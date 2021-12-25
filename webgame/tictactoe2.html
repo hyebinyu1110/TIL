@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <title>틱택토</title>
+    <style>
+        table {
+            border-collapse: collapse;
+        }
+
+        td {
+            border: 1px solid black;
+            width: 40px;
+            height: 40px;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <script>
+        /* 내가 처음에 코딩 한 것
+
+        const $body = document.body;
+        const $result = document.createElement("div");
+        const table = [];
+        let row = [];
+        for (let i = 0; i < 3; i++) {
+            const $tr = document.createElement("tr");
+            for (let i = 0; i < 3; i++) {
+                const $td = document.createElement("td");
+                row.push($td);
+                $tr.appendChild($td);      
+            }
+            table.push(row.splice(0,3));
+            $body.appendChild($tr);
+        }
+             */
+
+        const { body } = document;
+        const $table = document.createElement("table");
+        const $result = document.createElement("div");
+        const rows = [];
+        let turn = "O";
+
+        const checkWinner = (target) => {
+            const rowIndex = target.parentNode.rowIndex;
+            const cellIndex = target.cellIndex;
+
+            //세 칸 다 채워졌는가?
+            let hasWinner = false;
+            //가로줄 검사
+            if (rows[rowIndex][0].textContent === turn &&
+                rows[rowIndex][1].textContent === turn &&
+                rows[rowIndex][2].textContent === turn
+            ) {
+                hasWinner = true;
+            }
+
+            //세로줄 검사
+
+            if (rows[0][cellIndex].textContent === turn &&
+                rows[1][cellIndex].textContent === turn &&
+                rows[2][cellIndex].textContent === turn
+            ) {
+                hasWinner = true;
+            }
+
+            // 대각선 검사
+            if (rows[0][0].textContent === turn &&
+                rows[1][1].textContent === turn &&
+                rows[2][2].textContent === turn
+            ) {
+                hasWinner = true;
+            }
+
+            if (rows[0][2].textContent === turn &&
+                rows[1][1].textContent === turn &&
+                rows[2][0].textContent === turn
+            ) {
+                hasWinner = true;
+            }
+            return hasWinner;
+        }
+
+
+        const callBack = (event) => {
+
+            if (event.target.textContent !== "") {
+                console.log("빈칸이 아닙니다.");
+
+            }
+            //빈칸이면
+            if (turn === "O") {
+                console.log("빈칸입니다.");
+                event.target.textContent = turn;
+                turn = "X";
+            }
+
+       
+            if (turn === "X") {
+          
+                    if (rows[Math.floor(Math.random() * 3)][Math.floor(Math.random() * 3)] === "") {
+                        event.target.textContent = turn;
+                        turn = "O" ;
+                }
+            }
+        }
+
+                console.log(turn);
+                const hasWinner = checkWinner(event.target);
+                //승자가 있으면
+                if (hasWinner) {
+                    $result.textContent = `${turn}님이 승리!`;
+                    $table.removeEventListener("click", callBack);
+                    return;
+                }
+            
+
+                //승자가 없으면
+                /*let draw = true;
+                rows.forEach((row) =>{
+                    row.forEach((cell) =>{
+                        if(!cell.textContent){
+                            draw = false;
+                        }
+                    });
+                }); */
+                const draw = rows.flat().every((cell) => cell.textContent);
+
+                if (draw) {
+                    $result.textContent = "무승부";
+                    return;
+                }
+
+            };
+
+            for (let i = 1; i <= 3; i++) {
+                const $tr = document.createElement("tr");
+                const cells = [];
+                for (let j = 1; j <= 3; j++) {
+                    const $td = document.createElement("td");
+                    cells.push($td);
+                    $tr.appendChild($td)
+                }
+                rows.push(cells);
+                $table.appendChild($tr);
+            }
+
+
+            body.appendChild($table);
+            body.appendChild($result);
+
+
+            $table.addEventListener("click", callBack);
+
+        /* 내가 처음에  코딩 한 것
+        let click = "O"
+        function onClickTable(event) {
+            if (!event.target.textContent) {
+                if (click === "X") {
+                    event.target.textContent = click;
+                    click = "O";
+                    return;
+                }
+                if (click === "O") {
+                    event.target.textContent = click;
+                    click = "X";
+                    return;
+                }
+            } else {
+                alert("이미 플레이한 곳 입니다. 다른 칸을 눌러주세요!");
+            }
+        }
+        */
+
+
+    </script>
+</body>
+
+</html>
