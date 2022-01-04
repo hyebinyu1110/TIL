@@ -2,5 +2,6 @@
 Today I learned
 
 
-- Just do it, No pressure
+- Just do it, 
+- do it everyday without having pressure
 
