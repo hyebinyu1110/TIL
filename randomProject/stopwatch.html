@@ -1,0 +1,119 @@
+<iDOCTYPE html>
+    <html>
+
+    <head>
+
+        <title>stop watch</title>
+        <style>
+            #wrap {
+
+                width: 500;
+                height: 400;
+                background: orange;
+            }
+
+            div {
+                margin-bottom: 30;
+                font-size: 30;
+                color: white;
+                text-align: center;
+            }
+
+            button {
+                width: 120;
+                height: 50;
+                margin-right: 20;
+                font-size: 15;
+                font-family: "Nanum Gothic";
+                color: white;
+                border: 1px solid white;
+                background-color: orange;
+                border-radius: 5px;
+            }
+        </style>
+    </head>
+
+    <body>
+
+
+        <div id="wrap">
+
+            <div>STOPWATCH</div>
+            <div>VANILLA JAVASCRIPT STOPWATCH</div>
+            <div id="timer">00:00</div>
+
+            <button id="start">Start</button>
+            <button id="stop">Stop</button>
+            <button id="reset">Reset</button>
+        </div>
+
+        <script>
+            const $timer = document.getElementById("timer");
+            const $start = document.getElementById("start");
+            const $stop = document.getElementById("stop");
+            const $reset = document.getElementById("reset");
+            let setIntervalId;
+            let minute = [0, 0];
+            let second = [0, 0];
+            let clickable = true;
+
+
+            function onClickStart() {
+                if (clickable) {
+                    clickable = false;
+                    setTimeout(() => {
+                        second[1] += 1;
+                        $timer.textContent = `${minute.join('')}:${second.join('')}`;
+                    }, 0)
+
+
+                    setIntervalId = setInterval(() => {
+                        second[1] += 1;
+                        if (second[1] === 10) {
+                            second[0] += 1;
+                            second[1] = 0;
+                        }
+                        if (second[0] === 6) {
+                            minute[1] += 1;
+                            second[0] = 0;
+                            second[1] = 0;
+                        }
+                        if (minute[1] === 10) {
+                            minute[0] += 1;
+                            minute[1] = 0;
+                        }
+                        $timer.textContent = `${minute.join('')}:${second.join('')}`;
+                    }, 1000)
+                }
+            }
+
+            function onClickStop() {
+
+                clearInterval(setIntervalId);
+                clickable = true;
+            }
+
+
+            function onClickReset() {
+
+                clearInterval(setIntervalId);
+                minute = [0, 0];
+                second = [0, 0];
+                $timer.textContent = `${minute.join('')}:${second.join('')}`;
+                clickable = true;
+            }
+
+
+
+
+            $start.addEventListener("click", onClickStart);
+            $stop.addEventListener("click", onClickStop);
+            $reset.addEventListener("click", onClickReset);
+
+        </script>
+
+
+
+    </body>
+
+    </html>
