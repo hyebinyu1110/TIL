@@ -1,0 +1,62 @@
+<iDOCTYPE html>
+    <html>
+
+    <head>
+        <meta charset="UTF-8">
+        <title>JavaScript clock</title>
+ 
+
+        <style>
+            #wrap{
+                width: 700;
+                height: 500;
+                background-color: black;
+            }
+
+            #wrap #time{
+                color: skyblue;
+                text-align: center;
+                font-size: 80px;
+                font-family: "orbitron";
+                line-height: 500px;
+            }
+        </style>
+    </head>
+
+    <body>
+<div id="wrap">
+    <div id="time"></div>
+</div>
+
+<script>
+    const $time = document.getElementById("time");
+    
+
+    setInterval(()=>{
+        const currentTime = new Date();
+        let hours = currentTime.getHours();
+        let minutes = currentTime.getMinutes();
+        let seconds = currentTime.getSeconds();
+        let amOrPm;
+        hours = hours < 10? `0${hours}` : hours;
+        minutes = minutes < 10? `0${minutes}` : minutes;
+        seconds = seconds <10? `0${seconds}` : seconds;
+
+
+
+        if(currentTime.getHours() >=0 &&currentTime.getHours() <=11 )
+        {
+            amOrPm = "AM";
+        }else if(currentTime.getHours() >=12 &&currentTime.getHours() <=23 ){
+            
+        }
+        $time.textContent = `${hours}:${minutes}:${seconds} ${amOrPm}`;
+    }, 1000);
+
+    
+
+   
+</script>
+    </body>
+
+    </html>
