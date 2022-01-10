@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>계산기</title>
+  <style>
+
+    
+    .calculator {
+      width: 400px;
+      height: 400px;
+      margin: 4vh auto;
+      padding: 40px;
+      border: 1px solid #ddd;
+      border-radius: 1px;
+    }
+
+    .inner {
+
+      width: 100%;
+      height: 100%;
+      padding: 10px;
+      box-sizing: border-box;
+    }
+
+    .row .input {
+      width: 380px;
+      height: 60px;
+      border-radius: 1px;
+    }
+
+    .operators {
+      display: inline-block;
+      margin-top: 20px;
+      padding: 5px;
+      box-sizing: border-box;
+    }
+
+    .numbers {
+
+      display: inline-block;
+      padding: 5px;
+      box-sizing: border-box;
+
+
+    }
+
+    .row div {
+      display: inline-block;
+      width: 70px;
+      height: 50px;
+      margin-right: 15px;
+      margin-bottom: 10px;
+      border-radius: 1px;
+      border: 1px solid #ddd;
+      padding: 10px;
+      box-sizing: border-box;
+      text-align: center;
+      cursor: pointer;
+    }
+
+    div.equal {
+
+      display: inline-block;
+      width: 70px;
+      height: 175px;
+      box-sizing: border-box;
+      padding-top: 70px;
+      border: 1px solid #3079ED;
+      border-radius: 1px;
+      text-align: center;
+      vertical-align: top;
+      cursor: pointer;
+      color: #FFF;
+      background-color: #4d90fe;
+    }
+  </style>
+</head>
+
+<body>
+
+
+  <div class="calculator">
+    <div class="inner">
+      <div class="row">
+        <div id="result" class="input"></div>
+      </div>
+
+      <div id="operators" class="operators">
+        <div class="row">
+          <div id="plus">+</div>
+          <div id="minus">-</div>
+          <div id="multiply">X</div>
+          <div id="divide">%</div>
+        </div>
+      </div>
+
+      <div id="numbers" class="numbers">
+        <div class="row">
+          <div id="num-7">7</div>
+          <div id="num-8">8</div>
+          <div id="num-9">9</div>
+        </div>
+
+        <div class="row">
+          <div id="num-4">4</div>
+          <div id="num-5">5</div>
+          <div id="num-6">6</div>
+        </div>
+
+        <div class="row">
+          <div id="num-1">1</div>
+          <div id="num-2">2</div>
+          <div id="num-3">3</div>
+        </div>
+      </div>
+
+      <div id="equal" class="equal">=</div>
+    </div>
+  </div>
+
+
+
+
+
+  <script>
+
+    const $result = document.getElementById("result");
+    const $num9 = document.getElementById("num-9");
+    const $num8 = document.getElementById("num-8");
+    const $num7 = document.getElementById("num-7");
+    const $num6 = document.getElementById("num-6");
+    const $num5 = document.getElementById("num-5");
+    const $num4 = document.getElementById("num-4");
+    const $num3 = document.getElementById("num-3");
+    const $num2 = document.getElementById("num-2");
+    const $num1 = document.getElementById("num-1");
+    const $plus = document.getElementById("plus");
+    const $minus = document.getElementById("minus");
+    const $multiply = document.getElementById("multiply");
+    const $divide = document.getElementById("divide");
+    const $equal = document.getElementById("equal");
+
+
+    let firstNum = "";
+    let secondNum = "";
+    let operator = "";
+    let calculatedResult;
+
+
+
+    function onClickNum(event) {
+
+      if (operator === "") {
+        firstNum = Number(event.target.textContent);
+        $result.textContent = firstNum;
+        console.log(firstNum);
+      }
+
+      if (operator !== "") {
+        secondNum = Number(event.target.textContent);
+        $result.textContent = secondNum;
+        console.log(secondNum);
+
+      }
+    }
+
+
+    function onClickOperator(event) {
+
+      if (firstNum === "") {
+        alert("숫자부터 먼저 클릭해주세요!");
+        return;
+      }
+
+      if (secondNum !== "") {
+        firstNum = calculatedResult;
+        secondNum = 0;
+      }
+
+      operator = event.target.textContent;
+      $result.textContent = operator;
+      console.log(operator);
+
+    }
+
+    function onClickCalculate(event) {
+
+      if (operator === "+") {
+        calculatedResult = firstNum + secondNum;
+
+      } else if (operator === "-") {
+        calculatedResult = firstNum - secondNum;
+      } else if (operator === "X") {
+        calculatedResult = firstNum * secondNum;
+      } else if (operator === "%") {
+        calculatedResult = firstNum / secondNum;
+      }
+
+      $result.textContent = `${firstNum} ${operator} ${secondNum} = ${calculatedResult}`;
+      console.log(calculatedResult);
+
+    }
+
+
+    $num1.addEventListener("click", onClickNum);
+    $num2.addEventListener("click", onClickNum);
+    $num3.addEventListener("click", onClickNum);
+    $num4.addEventListener("click", onClickNum);
+    $num5.addEventListener("click", onClickNum);
+    $num6.addEventListener("click", onClickNum);
+    $num7.addEventListener("click", onClickNum);
+    $num8.addEventListener("click", onClickNum);
+    $num9.addEventListener("click", onClickNum);
+    $plus.addEventListener("click", onClickOperator);
+    $minus.addEventListener("click", onClickOperator);
+    $multiply.addEventListener("click", onClickOperator);
+    $divide.addEventListener("click", onClickOperator);
+    $equal.addEventListener("click", onClickCalculate);
+
+//에휴 어렵다... 
+
+  </script>
+</body>
+
+</html>
