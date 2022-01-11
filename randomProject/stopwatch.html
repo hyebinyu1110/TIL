@@ -53,8 +53,8 @@
             const $stop = document.getElementById("stop");
             const $reset = document.getElementById("reset");
             let setIntervalId;
-            let minute = [0, 0];
-            let second = [0, 0];
+            let minute = 0;
+            let second = 0;
             let clickable = true;
 
 
@@ -62,27 +62,19 @@
                 if (clickable) {
                     clickable = false;
                     setTimeout(() => {
-                        second[1] += 1;
-                        $timer.textContent = `${minute.join('')}:${second.join('')}`;
-                    }, 0)
+                        second += 1;
+                        $timer.textContent = `${minute.toString().padStart(2, 0)}:${second.toString().padStart(2, 0)}`
+                    }, 0);
 
 
                     setIntervalId = setInterval(() => {
-                        second[1] += 1;
-                        if (second[1] === 10) {
-                            second[0] += 1;
-                            second[1] = 0;
+                        second += 1;
+
+                        if (second === 60) {
+                            minute += 1;
+                            second = 0;
                         }
-                        if (second[0] === 6) {
-                            minute[1] += 1;
-                            second[0] = 0;
-                            second[1] = 0;
-                        }
-                        if (minute[1] === 10) {
-                            minute[0] += 1;
-                            minute[1] = 0;
-                        }
-                        $timer.textContent = `${minute.join('')}:${second.join('')}`;
+                        $timer.textContent = `${minute.toString().padStart(2, 0)}:${second.toString().padStart(2, 0)}`
                     }, 1000)
                 }
             }
@@ -97,9 +89,11 @@
             function onClickReset() {
 
                 clearInterval(setIntervalId);
-                minute = [0, 0];
-                second = [0, 0];
-                $timer.textContent = `${minute.join('')}:${second.join('')}`;
+                minute = 0;
+                second = 0;
+                minute = toString(minute);
+                second = toString(second);
+                $timer.textContent = `${minute.padStart(2, 0)}:${second.padStart(2, 0)}`;
                 clickable = true;
             }
 
