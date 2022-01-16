@@ -16,6 +16,6 @@
 + 
      ` recognition = new SpeechRecognition();`
 + Stack Flow 에 찾아보니(아래의 URL 참조) HTML5로 개정되면서 API 함수 이름도 업데이트가 된듯!
-+ REF URL: https://stackoverflow.com/questions/22932636/speech-to-text-with-javascript-in-chrome-doesnt-recognize-anything/22933671
++ Reference -  [Speech-to-text with javascript in Chrome doesn't recognize anything](https://stackoverflow.com/questions/22932636/speech-to-text-with-javascript-in-chrome-doesnt-recognize-anything/22933671)
 + 따라서 ` recognition = new SpeechRecognition();` 가 아니라 ` recognition = new webkitSpeechRecognition();` 로 적어야 정상 작동한다.
 
