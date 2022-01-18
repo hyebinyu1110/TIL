@@ -21,7 +21,8 @@
 
 ##  4. 변수.substring(시작인덱스, 종료인덱스) 
     -  substring() 함수는 slice() 함수와 동일한 기능을 함 단, 파라미터로 음수 허용 안함
-    -  slice() 함수는 파라미터로 시작위치와 종료위치를 알려주면 문자열에서 해당부분을 잘라내서 반환하는 함수. (단, 종료위치 바로 앞까지 반환)
+    -  slice() 함수는 파라미터로 시작위치와 종료위치를 알려주면 문자열에서 해당부분을 잘라내서 반환하는 함수. 
+       (단, 종료위치 바로 앞까지 반환)
    
 ##  5. 변수.replace(변경될 내용, 변경할 내용)
     -  replace() 함수는 문자열 내의 특별한 문자열을 지정한 문자열로 바꾸는 함수입니다. 
@@ -56,7 +57,8 @@
      function convertCurrencyFormatter(amount, format){
 
       let currencyUnit = ""; // 화폐의 단위 표기
-      //포맷에 제일 첫 문자가 #이 아닐 경우, 원(W) 혹은 달러($) 같은 화폐 단위로 인식하고 해당 단위를 currencyUnit에 저장하기 위한 조건문
+      //포맷에 제일 첫 문자가 #이 아닐 경우, 원(W) 혹은 달러($) 같은 화폐 단위로 인식하고 해당 단위를 
+      currencyUnit에 저장하기 위한 조건문
       if(format.substring(0,1) !=="#"){
         currencyUnit = format.substring(0,1); // 첫문자 가져오기
       }
@@ -121,7 +123,8 @@
       if(maxFractionDigits > 0 && v.indexOf(".") > -1){
 
         d = v.substring(v.indexOf(".")); // amount가  5421339.12이면, 변수 d에는 .12가 저장
-        d = d.replace(".", decimalSeparator); // 소수점 구분자인 점(.)을 포맷에서 지정한 소수점 구분자인 decimalSeparator로 변경
+        d = d.replace(".", decimalSeparator); // 소수점 구분자인 점(.)을 포맷에서 지정한 소수점 구분자인 
+            decimalSeparator로 변경
         v = v.subString(0, v.indexOf(".")) // amount가 5421339.12이면, 변수 v에는 5421338
       }
 
