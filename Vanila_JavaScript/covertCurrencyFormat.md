@@ -8,6 +8,7 @@
 
 -  .indexOf(".") == -1 
    + indexOf 함수는 문자열안에 특정 문자열이 존재하는지 찾고, 찾고자하는 문자열이 시작되는 index를 반환하는 함수.
+   + ex) "23.00".indexOf(".") => 2 반환
    +  문자열을 찾지 못하면 -1을 반환
    
 -  Math.round()
@@ -15,7 +16,7 @@
 
 -  .parseFloat()
    +  전역함수로서 부동소수점으로 반환한다.
-   +  예) parseFloat("amount") -> 변수 타입이 string에서 float 타입으로 변경됨
+   +  예) parseFloat("23.55") -> "23.55" 의 타입이 string에서 float 타입으로 변경됨
 
 -  .substring() 
    +  substring() 함수는 slice() 함수와 동일한 기능을 함 단, 파라미터로 음수 허용 안함
