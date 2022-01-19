@@ -10,4 +10,5 @@
 * [Show_Calendar](https://github.com/hyebinyu1110/TIL/blob/main/Vanila_JavaScript/Show_Calendar.md)
 * [Date_Formatter](https://github.com/hyebinyu1110/TIL/blob/main/Vanila_JavaScript/Date_Formatter.md)
 * [covertCurrencyFormat](https://github.com/hyebinyu1110/TIL/blob/main/Vanila_JavaScript/covertCurrencyFormat.md)
-* [Integer_Only_Available_Input_Field](https://github.com/hyebinyu1110/TIL/blob/main/Vanila_JavaScript/Integer_Only_Available_Input_Field.md)
+* [Integer_Only_Available_Input](https://github.com/hyebinyu1110/TIL/blob/main/Vanila_JavaScript/Integer_Only_Available_Input_Field.md)
+* [i18n](https://github.com/hyebinyu1110/TIL/blob/main/Vanila_JavaScript/%EB%8B%A4%EA%B5%AD%EC%96%B4(i18n).md)
