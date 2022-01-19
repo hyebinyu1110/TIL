@@ -141,8 +141,9 @@ function load() {
      *@returns
      */
     
-     function checkKr(e){
+     function checkKr(e){ 
          e.target.value = e.target.value.replace(/[^0-9]/gi, "");
+         //백스페이스, delete키, 좌우 방향키는 입력되면 "" 로 대체됨!
      }
 
 
