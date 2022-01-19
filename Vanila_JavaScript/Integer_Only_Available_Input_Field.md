@@ -22,7 +22,7 @@
     
 ##  3. event.keyCode
     - 자바스크립트는 사용자의 키입력을 감지하여 함수 처리 가능
-    - event.KeyCode는 ASCII코드에 기반함 예) 여기서 e는 호출한 함수에 전달된 이벤트, 
+    - (event.KeyCode는 ASCII코드에 기반함 예) 여기서 e는 호출한 함수에 전달된 이벤트, 
     // 키보드가 눌러질때마다(keydown이벤트) 키보드에 눌린 글자의 아스키코드가 컴퓨터에 전달됨
  
 ##  4. event.preventDefault();
