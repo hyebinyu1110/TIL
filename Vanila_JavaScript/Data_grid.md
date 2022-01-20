@@ -117,10 +117,29 @@ items.sort(function (a, b) {
 });
 ~~~        
       
-      
-##  3. new RegExp(txt, "i");
+##  3. new RegExp(문자열 || 문자열을 담은 변수, "i");
+    + RegExp 생성자 함수는 첫번째 매개변수로 받은 문자열과 두번째 플래그를 조합하여 정규표현식을 반환한다.
+    + 생성자 함수를 사용할 경우, 보통의 문자열 이스케이프 규칙(특수문자를 문자열에 사용할 때 앞에 역빗금(\)을 붙이는 것)을 준수한다.
+    
+~~~Java Script
+let re = /\w+/i  // console.log(re) =>  /\w+/i
+let re = new RegExp('\\w+', 'i') =>  /\w+/i           <- 역빗금을 붙임.
+// 둘을 콘솔로 출력하면 동일한 정규표현식을 보여준다.
+~~~ 
+
 
 ##  4. filter(()=> {}) 함수
+    + filter() 함수는 함수 내부에 주어진 함수의 조건을 통과하는 모든 요소를 모아 새로운 배열로 반환한다.
+    + 어떤 요소도 조건을 통과하지 않으면 빈 배열을 반환
+  
+~~~Java Script
+const words = ['spray', 'limit', 'elite', 'exuberant', 'destruction', 'present'];
+
+const result = words.filter(word => word.length > 6);
+
+console.log(result);
+// expected output: Array ["exuberant", "destruction", "present"]
+~~~
   
 ##  5. document.querySelectorAll("th[data-sort-key]").forEach((th) =>
   
@@ -262,4 +281,11 @@ window.addEventListener("load", function(){
 });
   </script>
 </body>
-~~~JAva Script
+~~~
+
+
+* [캐리지리턴 참조 블로그](https://kwangcheolchae.wordpress.com/2012/12/04/%EC%BA%90%EB%A6%AC%EC%A7%80-%EB%A6%AC%ED%84%B4%EC%9D%B4%EB%9E%80/#:~:text=%EC%BA%90%EB%A6%AC%EC%A7%80%20%EB%A6%AC%ED%84%B4(Carriage%20Return)%20%EC%9D%80,%EB%A1%9C%20%EC%9D%B4%EB%8F%99%EC%8B%9C%ED%82%A8%EB%8B%A4%EB%8A%94%20%EB%9C%BB%EC%9E%85%EB%8B%88%EB%8B%A4.&text=%EC%9C%88%EB%8F%84%EC%9A%B0%EC%97%90%EC%84%9C%EB%8A%94%20%EC%9D%B4%20%EB%91%90%20%EB%8F%99%EC%9E%91,Enter%20%EB%8F%99%EC%9E%91%EC%9D%84%20%ED%95%98%EB%8A%94%EA%B2%83%EC%9E%85%EB%8B%88%EB%8B%A4..)
+* [sort()함수 참조 블로그](https://mber.tistory.com/51)
+* [[,thisArg]참조 블로그](https://ktpark1651.tistory.com/215)
+* [MDN 공식 웹사이트 filter()함수 관련 정보](https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/Array/filter)
+* 
