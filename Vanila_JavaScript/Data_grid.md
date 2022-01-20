@@ -79,7 +79,7 @@ function compareNumbers(a, b) {
   return a - b;
 }
 ~~~   
-    + sort함수는 함수식(및 클로저)와 함께 사용 가능하다.
+    + sort함수는 함수식(및 클로저)와 함께 사용 가능하다. -> 클로저가 아직 무슨 개념인지는 모르지만 지금은 패스~
  ~~~Java Script
 var numbers = [4, 2, 5, 1, 3];
 numbers.sort(function(a, b) { // (a,b) => { 함수 내용 } 도 가능
