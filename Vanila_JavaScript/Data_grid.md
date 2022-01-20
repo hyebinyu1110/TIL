@@ -91,12 +91,26 @@ console.log(numbers);
 ];
 
 // value 기준으로 정렬
+
+// 예제1) 오름차순
 items.sort(function (a, b) {  // (a,b) => { 함수 내용 } 도 가능
   if (a.value > b.value) {
     return 1;
   }
   if (a.value < b.value) {
     return -1;
+  }
+  // a must be equal to b
+  return 0;
+});
+
+// 예제2) 내림차순
+items.sort(function (a, b) {
+  if (a.value > b.value) {
+    return -1;
+  }
+  if (a.value < b.value) {
+    return 1;
   }
   // a must be equal to b
   return 0;
