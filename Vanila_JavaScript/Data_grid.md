@@ -10,7 +10,8 @@
 
 ##  1. data-sort-key="name" 속성
     +  이 data-sort-key 라는 것은 저자가 만든 HTML 태그 임의의 속성인가? 구글에 찾아봐도 안나온다.
-  
+<br/>
+<br/>
 ##  2-1. 배열 or 배열변수.sort() 함수
     + sort() 메서드는 배열의 요소를 적절한 위치에 정렬한 후 그 배열을 반환한다. 기본 정렬 순서는 문자열의 유니코드 포인트를 따른다.
     + 즉, 아래의 결과가 나올 수 있다는 것이다.
@@ -26,14 +27,15 @@ months.sort();
 console.log(months);
 // expected output: Array ["Dec", "Feb", "Jan", "March"]
 ~~~
+<br/>
 ##  2-2. 배열 or 배열변수.sort(비교함수)
       + 매개변수인 비교함수는 선택사항이다.
       + 비교함수는 정렬 순서를 정의하는 함수이며, 생략하면 각 배열요소의 각 문자 유니코드 포인트 값에 따라 정렬된다.
- 
+<br/>
 ##  2-3. 반환값?
       + 원래 배열을 정렬한 배열을 반환한다. 복사본이 만들어 지는 것 아님 
       + 비교함수는 정렬 순서를 정의하는 함수이며, 생략하면 각 배열요소의 각 문자 유니코드 포인트 값에 따라 정렬된다.    
-      
+<br/>      
 ##  2-4. 비교함수 설명
       + 비교함수가 제공되지 않는 경우,
       + 배열 요소를 '문자열'로 변환하고 유니 코드 포인트 순서로
@@ -46,7 +48,7 @@ console.log(months);
       + 비교함수(a, b) 반환값 === 0 인 경우, a 와 b 그대로 유지
       + 비교함수(a, b) 반환값 > 0 인 경우, b가 a 보다 먼저 오도록 순서를 바꾼다.
       + 아래는 비교함수의 형식이다. 
-
+<br/>
 ~~~Java Script
 function compare(a, b) {
   if (a is less than b by some ordering criterion) { // 정렬 기준에 따라 a가 b보다 작다면
@@ -115,8 +117,9 @@ items.sort(function (a, b) {
   // a must be equal to b
   return 0;
 });
-~~~        
-      
+~~~     
+<br/>
+<br/>      
 ##  3. new RegExp(문자열 || 문자열을 담은 변수, "i");
     + RegExp 생성자 함수는 첫번째 매개변수로 받은 문자열과 두번째 플래그를 조합하여 정규표현식을 반환한다.
     + 생성자 함수를 사용할 경우, 보통의 문자열 이스케이프 규칙(특수문자를 문자열에 사용할 때 앞에 역빗금(\)을 붙이는 것)을 준수한다.
@@ -126,8 +129,8 @@ let re = /\w+/i  // console.log(re) =>  /\w+/i
 let re = new RegExp('\\w+', 'i') =>  /\w+/i           <- 역빗금을 붙임.
 // 둘을 콘솔로 출력하면 동일한 정규표현식을 보여준다.
 ~~~ 
-
-
+<br/>
+<br/>
 ##  4. filter(()=> {}) 함수
     + filter() 함수는 함수 내부에 주어진 함수의 조건을 통과하는 모든 요소를 모아 새로운 배열로 반환한다.
     + 어떤 요소도 조건을 통과하지 않으면 빈 배열을 반환
@@ -142,9 +145,11 @@ console.log(result);
 ~~~
   
 ##  5. document.querySelectorAll("th[data-sort-key]").forEach((th) =>
-  
+ <br/> 
+ <br/>
 ##  6. sort(th.getAttribute("data-sort-key"));
-    
+ <br/>
+ <br/>
 
 ~~~Java Script
 <!DOCTYPE html>
