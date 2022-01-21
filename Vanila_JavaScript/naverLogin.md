@@ -9,7 +9,8 @@
 
 ##  1. 0Auth 2.0 란?
     + 타사의 사이트에 대한 접근 권한을 얻고, 그 권한을 이용하여 개발할 수 있도록 도와주는 프레임워크이다.
-   * [출처: 작성자 pjok1122] [OAuth 2.0 란?](https://blog.naver.com/pjok1122/221583426424)
+   * [출처: 작성자 blog.naver.com/pjok1122/221583426424] [OAuth 2.0 란?](https://blog.naver.com/pjok1122/221583426424)
+   * [출처: 작성자 hwannny.tistory.com/92][OAuth 개념정리](https://hwannny.tistory.com/92)
 
 <br/>
 <br/>
