@@ -42,12 +42,32 @@ OAuth란, 타사의 사이트에 대한 접근 권한을 얻고, 그 권한을 �
     </head>
     <body>
         
-        <div id="google-signin-btn"></div>
+        <div id="google-signin-btn" style="display:none" onclick="onSignOut();">로그아웃</div>
         <script>
             gapi.signin2.render("google-signin-btn", { onsuccess: onSignIn});
             // 구글 로그인버튼이 생성되고, 로그인 성공시 호출할 콜백함수를 지정합니다.
 
-            function onSignIn(){}
+            function onSignIn(googleUser){
+                const profile = googleUser.getBasicProfile(); // 사용자 정보 가져오기
+                console.log("ID: " + profile.getId()); // 사용자 정보 가져오기
+                console.log("Full Name: " + profile.getName()); // 사용자 정보 가져오기
+                console.log("Given Name: " + profile.getGivenName()); // 사용자 정보 가져오기
+                console.log("Family Name: " + profile.getFamilyName()); // 사용자 정보 가져오기
+                console.log("Image URL: " + profile.getImageUrl()); // 사용자 정보 가져오기
+                console.log("Email: " + profile.getEmail()); // 사용자 정보 가져오기
+
+                const id_token = googleUser.getAuthResponse().id_token;
+                console.log("ID Token: " + id_Token);
+
+                document.getElementById("google-signin-btn").style.display = "none"; // 로그인 버튼 숨기기
+                document.getElementById("google-signout-btn").style.display = ""; // 로그아웃 버튼 보이기
+            }
+            function onSignOut(){
+
+                gapi.auth2.getAuthInstance().disconnect();
+                document.getElementById("google-signin-btn").style.display = ""; // 로그인 버튼 보이기
+                document.getElementById("google-signout-btn").style.display = "none"; // 로그인 버튼 숨기기
+            }
         </script>
     </body>
 </html>
