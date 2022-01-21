@@ -14,6 +14,13 @@
 
   * [401오류](https://wontree.tistory.com/entry/%EC%B9%B4%EC%B9%B4%EC%98%A4%ED%86%A1-API-%EC%97%B0%EB%8F%99%EC%8B%9C-401-Unauthorized-%EC%98%A4%EB%A5%98#:~:text=%EC%B9%B4%EC%B9%B4%EC%98%A4%ED%86%A1%20%EB%A1%9C%EA%B7%B8%EC%9D%B8%20%EA%B8%B0%EB%8A%A5%EC%97%90%EC%84%9C,%EC%A3%BC%EC%86%8C%20%EB%AF%B8%EB%93%B1%EB%A1%9D%EC%9D%B4%20%EC%9B%90%EC%9D%B8%EC%9D%B4%EC%97%88%EB%8B%A4.)
 
+- 왜 401 오류: invalid_client
+The OAuth client was not found 오류가 뜨는지? 
+-http://127.0.0.1:5500/googlelogin.html / 127.0.0.1 와 localhost는 동일한 것이 아닌가? 자꾸 API로 계정이 연동이 안되서 오류가 
+
+
+-[www와 비-www URL 중에서 선택하기](https://developer.mozilla.org/ko/docs/Web/HTTP/Basics_of_HTTP/Choosing_between_www_and_non-www_URLs)
+
 
 <br/>
 <br/>
