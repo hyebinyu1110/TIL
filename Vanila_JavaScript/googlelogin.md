@@ -18,7 +18,8 @@
 The OAuth client was not found 오류가 뜨는지? 
 -http://127.0.0.1:5500/googlelogin.html / 127.0.0.1 와 localhost는 동일한 것이 아닌가? 자꾸 API로 계정이 연동이 안되서 오류가 
 
-- URL에 localhost 쳐보기 집에서
+  * URL에 localhost 쳐보기 집에서
+  * [출처: 작성자 velog.io/@lky9303][127.0.0.1과 localhost의 차이점](https://velog.io/@lky9303/127.0.0.1-%EA%B3%BC-localhost%EC%9D%98-%EC%B0%A8%EC%9D%B4)
 
 
 -[www와 비-www URL 중에서 선택하기](https://developer.mozilla.org/ko/docs/Web/HTTP/Basics_of_HTTP/Choosing_between_www_and_non-www_URLs)
@@ -27,9 +28,10 @@ The OAuth client was not found 오류가 뜨는지?
 <br/>
 <br/>
 
-
-OAuth란, 타사의 사이트에 대한 접근 권한을 얻고, 그 권한을 이용하여 개발할 수 있도록 도와주는 프레임워크
-[출처] [OAuth] OAuth 2.0 개념 정리|작성자 pjok1122
+##  2. service URL/ callback URL 란?(PC웹 상)
+    + 서비스 URL: 웹 서비스에 접속할 URL을 입력합니다. 포트 번호와 프로토콜은 구분하지 않으므로 도메인 이름만 주의해서 입력하세요. www를 제외한 도메인을 입력하면 서브 도메인을 따로 입력할 필       요가 없습니다. 예를 들어 naver.com을 입력하면 map.naver.com와 dev.naver.com 같은 서브도메인은 입력할 필요가 없습니다
+    + 네이버 로그인 Callback URL: 네이버 로그인 인증이 완료되면 인증 성공 여부, 인증 코드 등을 반환할 콜백 URL을 입력합니다. 최대 5개까지 추가할 수 있습니다.
+    
 
 ~~~Java Script
 <!DOCTYPE html>
