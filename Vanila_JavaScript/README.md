@@ -15,5 +15,5 @@
 * [covertCurrencyFormat](https://github.com/hyebinyu1110/TIL/blob/main/Vanila_JavaScript/covertCurrencyFormat.md)
 * [Integer_Only_Available_Input](https://github.com/hyebinyu1110/TIL/blob/main/Vanila_JavaScript/Integer_Only_Available_Input_Field.md)
 * [i18n](https://github.com/hyebinyu1110/TIL/blob/main/Vanila_JavaScript/%EB%8B%A4%EA%B5%AD%EC%96%B4(i18n).md)
-* [Data_Grid](https://github.com/hyebinyu1110/TIL/blob/main/Vanila_JavaScript/Data_grid.md)
-* [Data_Grid%20with%20pagination](https://github.com/hyebinyu1110/TIL/blob/main/Vanila_JavaScript/Data_Grid%20with%20pagination.html)
+* [Data_Grid](https://github.com/hyebinyu1110/TIL/blob/main/Vanila_JavaScript/Data_grid.md) + [user_data.js](https://github.com/hyebinyu1110/TIL/blob/main/Vanila_JavaScript/user_data.js)
+* [Data_Grid%20with%20pagination](https://github.com/hyebinyu1110/TIL/blob/main/Vanila_JavaScript/Data_Grid%20with%20pagination.html) + [user_data.js](https://github.com/hyebinyu1110/TIL/blob/main/Vanila_JavaScript/user_data.js)
