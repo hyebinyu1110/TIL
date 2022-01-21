@@ -7,7 +7,8 @@
   ## 공부한 내용
 
 ##  1. JavaScript 키
-    + [카카오개발자센터](https://developers.kakao.com/)에 가입한 후, 개발 중인 어플리케이션에서 사용할 수 있는 JavaScript 앱 키를 발급받는다.
+    + [카카오개발자센터](https://developers.kakao.com/)에 가입한 후, 개발 중인 어플리케이션에서 사용할 수 있는 JavaScript 앱 키를 
+      발급받는다.
     + 네이비브 앱키, 자바스크립트 앱키, REST API 키, Admin키 가 있는데, 자바스크립트로 구현할 것이기에,  JavaScript키를 사용한다.
     + 앱키는 우리가 구현하고 있는 애플리케이션 내에서 카카오 로그인 기능을 사용할 때 인증을 위해 사용한다. 
 
@@ -19,13 +20,17 @@
 <br/>
 
 ##  3. 리다이렉트 URI 란?
-    + 카카오 로그인 화면에서 사용자가 '동의하고 계속하기' 버튼을 클릭했을 때 호출되는 카카오 서비스가 내가 개발하고 있는 애플리케이션 URI이다. 
-    + 여기에 등록된 Redirect URI를 통해 카카오 서비스에서 사용자의 기본정보를 보내주게 되고, 내가 개발하고 있는 애플리케이션 내에서 이 정보를 이용해서 로그인 처리를 진행한다.
-    + 책의 예제에 따라, kakaologin.html 파일을 만들어 카카오 로그인을 구현할 것이라서, Redirect URI는 http://localhost:5500/kakaologin.html 이라 등록한다.
+    + 카카오 로그인 화면에서 사용자가 '동의하고 계속하기' 버튼을 클릭했을 때 호출되는 카카오 서비스가 내가 개발하고 있는 
+      애플리케이션 URI이다. 
+    + 여기에 등록된 Redirect URI를 통해 카카오 서비스에서 사용자의 기본정보를 보내주게 되고, 내가 개발하고 있는 애플리케이션
+      내에서 이 정보를 이용해서 로그인 처리를 진행한다.
+    + 책의 예제에 따라, kakaologin.html 파일을 만들어 카카오 로그인을 구현할 것이라서, Redirect URI는
+      http://localhost:5500/kakaologin.html 이라 등록한다.
 <br/>
 
 ##  4. 카카오 JavaScript SDK 란?
-    + 카카오 로그인 컴포넌트를 구현하기에 앞서 카카오 로그인을 이용하기위해 카카오에서 제공하는 JavaScript SDK를 등록해야 한다.
+    + 카카오 로그인 컴포넌트를 구현하기에 앞서 카카오 로그인을 이용하기위해 카카오에서 제공하는 JavaScript SDK를 
+      등록해야 한다.
 ~~~Java Script
   <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
 ~~~
