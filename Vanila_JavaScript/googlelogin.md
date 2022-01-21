@@ -18,6 +18,8 @@
 The OAuth client was not found 오류가 뜨는지? 
 -http://127.0.0.1:5500/googlelogin.html / 127.0.0.1 와 localhost는 동일한 것이 아닌가? 자꾸 API로 계정이 연동이 안되서 오류가 
 
+- URL에 localhost 쳐보기 집에서
+
 
 -[www와 비-www URL 중에서 선택하기](https://developer.mozilla.org/ko/docs/Web/HTTP/Basics_of_HTTP/Choosing_between_www_and_non-www_URLs)
 
