@@ -62,35 +62,29 @@
 
             const station = ["영등포구청", "당산역", "합정역", "홍대입구역", "신촌역", "이대역", "아현역", "충정로역", "시청역", "을지로3가역", "을지로4가역", "동대문역사문화공원역", "신당역", "상왕십리역", "왕십리역", "한양대역", "뚝섬역", "성수역", "건대입구역", "구의역", "강변역", "잠실나루역", "잠실역", "종합운동장역", "삼성역", "선릉역", "역삼역", "강남역", "서초역", "방배역", "사당역", "낙성대역", "서울대입구역", "봉천역", "신림역", "신대방역", "구로디지털단지역", "대림역", "신도림역", "문래역"];
 
-            console.log(station);
-
             const num_of_station = station.length;
             const priceTable = { adult: 1250, teens: 720, child: 450 };
             let price = priceTable["adult"];
-            console.log(price);
-
-            
-
             function printProcedure(originStation, desStation, howManyStation, totalDistance, calculatedPrice){
 
                 $result.innerHTML = 
                 `출발역은 ${originStation}, 도착역은 ${desStation}입니다. <br/><br/>
                   총 ${howManyStation}개의 역을 승차했고, 총 거리는 ${totalDistance}입니다.<br/><br/>
                   총 요금은 W${Math.round(calculatedPrice)}입니다.`
-
             }
 
             function calculate() {
-                const originStationNum = $origin.selectedIndex;
-                console.log(originStationNum);
+                const originStationNum = $origin.selectedIndex; 
+                // selectedIndex는 0부터 시작,  originStationNum은 1이다. 왜냐면 출발역 select에 ==출발역을 선택해주세요==를 추가해서이다.
                 const destinationStationNum = $destination.selectedIndex; 
-                console.log(destinationStationNum);
-                const howManyStation = ((destinationStationNum+1) + (originStationNum +1)) - originStationNum ;
-                console.log(howManyStation);
+                const howManyStation = ((destinationStationNum + 1) + originStationNum)  - originStationNum;
+                // destionation의 index도 0부터 시작하기에 1을 더 해 주어야 한다. 
+                // 여기서 origin의 index를 더해주는 이유는 destination의 시작이 origin역을 빼고 시작하기 때문에 그 만큼 더해줘야 정확한 역의 역의 id 번호가 나옴
+                // originStationNum에 1을 더해주지 않는 이유는 위의 주석에서 설명함(const originStationNum = $origin.selectedIndex; )
        
                 const totalDistance = 3170 * howManyStation;
-        
                 let calculatedPrice;
+              
                 if (totalDistance <= 10000) {
                     calculatedPrice = price;
       
@@ -101,18 +95,13 @@
                     let every8km = totalDistance / 8000;
                     calculatedPrice =  price + every8km * 100;
                 }
-
                 printProcedure($origin.options[$origin.selectedIndex].textContent, $destination.options[$destination.selectedIndex].textContent, howManyStation, totalDistance, calculatedPrice);
-
             }
 
-
-            function chooseAge(event) {
-
+          function chooseAge(event) {
                 let age = event.target.value;
                 price = priceTable[`${age}`];
                 console.log(price);
-
             }
 
             function renderOriginSelect() {
@@ -129,8 +118,6 @@
             function renderDestinationSelect() {
 
                 let selectedOriginValue = $origin.selectedIndex; // $origin.options[$origin.selectedIndex].values는 해당 인덱스의 태그 전체 중 text를 반환
-
-                console.log(num_of_station);
                 array = [];
                 for (let i = selectedOriginValue +1; i <= num_of_station; i++) {
                     array.push(`<option value="station-${i}" id="station-${i}">`);
@@ -138,8 +125,6 @@
                     array.push("</option>");
                 }
                 $destination.innerHTML = array.join("");
-
-
             }
 
             window.addEventListener("load", renderOriginSelect);
