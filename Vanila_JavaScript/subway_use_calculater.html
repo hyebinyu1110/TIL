@@ -1,0 +1,126 @@
+<iDOCTYPE html>
+
+    <html>
+
+    <head>
+
+        <meta charset="UTF-8">
+        <title>지하철 요금 계산기</title>
+        <style>
+            select {
+
+                width: 200px;
+                height: 20px;
+            }
+
+            div#result {
+
+                width: 750px;
+                height: 300px;
+                border: 5px solid rgb(240, 182, 182);
+            }
+        </style>
+    </head>
+
+    <body>
+        <br />
+        <br />
+        <div id="display">
+            출발역:
+            <select name="" id="origin">
+                <option value="notSelected">==출발역을 선택해주세요==</option>
+            </select>
+            도착역:
+            <select name="" id="destination">
+            </select>
+            <input type="radio" name="age" value="adult" id="adult" checked />성인 일반
+            <input type="radio" name="age" value="teens" id="teens" />청소년
+            <input type="radio" name="age" value="child" id="child" />어린이
+
+
+            <br />
+            <br />
+            <button id="calculate">요금계산</button>
+            <br />
+            <br />
+            <div id="result"></div>
+        </div>
+        <script>
+            const $origin = document.getElementById("origin");
+            const $destination = document.getElementById("destination");
+            const $calculate = document.getElementById("calculate");
+            const $radio = document.getElementsByName("age");
+            const $result = document.getElementById("result");
+
+            const station = ["영등포구청", "당산역", "합정역", "홍대입구역", "신촌역", "이대역", "아현역", "충정로역", "시청역", "을지로3가역", "을지로4가역", "동대문역사문화공원역", "신당역", "상왕십리역", "왕십리역", "한양대역", "뚝섬역", "성수역", "건대입구역", "구의역", "강변역", "잠실나루역", "잠실역", "종합운동장역", "삼성역", "선릉역", "역삼역", "강남역", "서초역", "방배역", "사당역", "낙성대역", "서울대입구역", "봉천역", "신림역", "신대방역", "구로디지털단지역", "대림역", "신도림역", "문래역"];
+
+            const num_of_station = station.length;
+            const priceTable = { adult: 1250, teens: 720, child: 450 };
+            let price = priceTable["adult"];
+
+            function printProcedure(originStation, desStation, howManyStation, totalDistance, calculatedPrice){
+
+                $result.innerHTML = 
+                `출발역은 ${originStation}, 도착역은 ${desStation}입니다. <br/><br/>
+                  총 ${howManyStation}개의 역을 승차했고, 총 거리는 ${totalDistance}입니다.<br/><br/>
+                  총 요금은 W${Math.round(calculatedPrice)}입니다.`
+            }
+
+            function calculate() {
+                const orginStationNum = $origin.options[$origin.selectedIndex].value;
+                const destinationStationNum = $destination.options[$destination.selectedIndex].value;
+                const howManyStation = Number(destinationStationNum.replace(/(station-)(\d)/, "$2")) - Number(orginStationNum.replace(/(station-)(\d)/, "$2"));
+                const totalDistance = 3170 * howManyStation;
+                let calculatedPrice;
+                if (totalDistance <= 10000) {
+                    calculatedPrice = price;
+                } else if (totalDistance <= 50000) {
+                    let every5km = totalDistance / 5000;
+                    calculatedPrice =  price + every5km * 100;
+                } else if (totalDistance > 50000) {
+                    let every8km = totalDistance / 8000;
+                    calculatedPrice =  price + every8km * 100;
+                }
+                printProcedure($origin.options[$origin.selectedIndex].textContent, $destination.options[$destination.selectedIndex].textContent, howManyStation, totalDistance, calculatedPrice);
+            }
+            function chooseAge(event) {
+
+                let age = event.target.value;
+                price = priceTable[`${age}`];
+                console.log(price);
+            }
+
+            function renderOriginSelect() {
+
+                let array = [];
+                for (let i = 0; i < num_of_station; i++) {
+                    array.push(`<option value="station-${i + 1}" id="station-${i + 1}">`);
+                    array.push(`${station[i]}`);
+                    array.push("</option>");
+                }
+                $origin.innerHTML += array.join("");
+            }
+
+            function renderDestinationSelect() {
+
+                let selectedOriginValue = $origin.options[$origin.selectedIndex].value;
+                selectedOriginValue = Number(selectedOriginValue.replace(/(station-)(\d)/, "$2"));
+                array = [];
+                for (let i = selectedOriginValue + 1; i < num_of_station; i++) {
+                    array.push(`<option value="station-${i}" id="station-${i}">`);
+                    array.push(`${station[i]}`);
+                    array.push("</option>");
+                }
+                $destination.innerHTML = array.join("");
+            }
+            window.addEventListener("load", renderOriginSelect);
+            $origin.addEventListener("change", renderDestinationSelect);
+            $radio.forEach((el) => {
+                el.addEventListener("click", chooseAge);
+            })
+            $calculate.addEventListener("click", calculate);
+        </script>
+
+    </body>
+
+    </html>
