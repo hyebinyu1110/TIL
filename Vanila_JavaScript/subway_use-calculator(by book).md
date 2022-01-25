@@ -23,17 +23,18 @@
     + Element.scrollTop 속성으로 요소의 컨텐츠가 수직으로 스크롤될때의 픽셀의 수를 지정하거나 반환한다.
     + 요소의 scrollTop 속성값은 요소의 컨텐츠 시작으로터 컨텐츠 끝까지의 거리 측정값이다.  예를 들어, 요소의 컨텐츠가 수직 스크롤바를 생성하지 않는다면
      scrollTop의 속성값은 '0'이다.
-    + output.scrollTop = output.scrollHeight
+    + output.scrollTop = output.scrollHeight // 대입
 
 ##  4. Element.scrollHeight 속성
-    + Element.scrollHeight 속성은 요소컨텐츠의 총 높이를 나타낸다. 
+    + Element.scrollHeight 속성은 요소컨텐츠의 총 높이를 나타내고, 바깥으로 넘쳐서 보이지 않는 콘텐츠도 포함한다.
     + 즉, output.scrollTop = output.scrollHeight는 변수 output에 담긴 div태그 요소에 textContent가 늘어날때마다 요소컨텐츠의 총 높이도 커진다.
     + 그래서 scollTop속성에 scrollHeight의 값을 대입하면 변해가는 ScrollHeight의 값에따라 아래로 스크롤가능한 스크롤의 값이 커지는 것이다.  
+    + 이 내부 높이는 내부 여백을 포함하지만, 수평 스크롤바의 높이 경계선, 외부여백(margin)은 포함하지 않는다.
 
 ##  5. Element.clientHeight 속성
     + 읽기 전용 속성인 Element.clientHeight 속성은 요소 내부 높이를 픽셀로 반환한다.
     + 이 내부 높이는 내부 여백을 포함하지만, 수평 스크롤바의 높이 경계선, 외부여백(margin)은 포함하지 않는다.
-   ![Element.clientHeight](./images/Element.clientHeight.png)
+   ![Element.clientHeight](./images/Element.scrollTop_scrollHeight_clientHeight.png)
 
 
 ## 목표(결과물)
