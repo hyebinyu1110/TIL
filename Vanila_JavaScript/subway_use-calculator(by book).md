@@ -33,7 +33,7 @@
 ##  5. Element.clientHeight 속성
     + 읽기 전용 속성인 Element.clientHeight 속성은 요소 내부 높이를 픽셀로 반환한다.
     + 이 내부 높이는 내부 여백을 포함하지만, 수평 스크롤바의 높이 경계선, 외부여백(margin)은 포함하지 않는다.
-   ![Element.clientHeight](./images/clientHeight.png)
+   ![Element.clientHeight](./images/Element.clientHeight.png)
 
 
 ## 목표(결과물)
