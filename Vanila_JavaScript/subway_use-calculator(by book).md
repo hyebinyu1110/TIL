@@ -12,6 +12,13 @@
     + 'beforeend' - element안 가장 마지막 child 
     + 'afterend' - element 뒤에
     => text인자(두번째 변수)는 HTML 또는 XML로 해석될 수 있는 문자열이고, 자바스크립트로 html code와 (DOM)tree에 코드를 삽입가능하게 만든다.
+    + innerHTML보다 빠르다
+    => innerHTML처럼 이미 사용중인 element를 다시 파싱하지 않기때문에 (element 안에 존재하는 element를 건드리지 않는다) 작업이 덜 들어 빠르다
+    + HTML 혹은 XML 같은 특정 텍스트를 파싱하고, 특정 위치에 DOM tree안에 원하는 node를 추가한다.
+    
+## 이런 깊은 뜻이 있을 줄이야? 이래서 왜 사용되는지 한번 더 물음표를 던져야 하는구나? 그냥 지나쳤으면 왜 insertAdjacentHTML이 쓰이는지 모르고 넘어갈뻔 했음
+나도 element.innerHTML += 추가할 태그 를 사용한 적이 있기 때문이다.
+
 
 ##  2. document.getElementById('start').value
     + document.getElementById('start')는 HTML 코드에서 select태그 요소를 반환하는데, 하위태그 option태그의 index 번호를 반환한다.
