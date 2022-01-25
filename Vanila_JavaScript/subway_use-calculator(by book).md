@@ -57,6 +57,12 @@
 ##  6. 요소를 끝까지 스크롤했는지 판별하기
  + element.scrollHeight - element.scrollTop === element.clientHeight
 
+
+##  7. for (let idx in subwayList) 
+    + h.push(`<option value="${idx}">${subwayList[idx]}</option>`);
+    + 배열인 변수에서 idx에 배열요소를 차례대로 대입하면 idx는 인덱스 그 자체이며 subwayList[idx]가 배열요소의 값을 반환한다.
+    
+    
 ## 목표(결과물)
 + 지하철 2호선을 기준으로 한쪽 방향으로만 진행한다는 가정하에 출발역과 도착역을 선택하면 지하철요금을 계산하는 프로그램을
   작성한다.
