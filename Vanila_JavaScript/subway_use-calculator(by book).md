@@ -38,8 +38,10 @@
 
 ##  3 ~ 5. 결론
 
-> Element.scrollTop 속성: 이때까지 얼마나 스크롤했는지(스크롤의 위치)
+> Element.scrollTop 속성: 이때까지 얼마나 스크롤했는지(스크롤의 위치) / 이때 스크롤의 위치는 Element.clientHeight의 height를 포함하지 않는다
+
 > Element.scrollHeight 속성: 콘텐츠의 총 높이
+
 > Element.clientHeight 속성: 스크롤의 정해진 총 높이(height)
 
    ![Element.clientHeight](./images/Element.scrollTop_scrollHeight_clientHeight.png)
