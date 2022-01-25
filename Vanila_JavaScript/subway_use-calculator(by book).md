@@ -34,6 +34,14 @@
 ##  5. Element.clientHeight 속성
     + 읽기 전용 속성인 Element.clientHeight 속성은 요소 내부 높이를 픽셀로 반환한다.
     + 이 내부 높이는 내부 여백을 포함하지만, 수평 스크롤바의 높이 경계선, 외부여백(margin)은 포함하지 않는다.
+
+
+=> 결과적으로 무슨 말이냐
+
+> Element.scrollTop 속성: 이때까지 얼마나 스크롤했는지(스크롤의 위치)
+> Element.scrollHeight 속성: 콘텐츠의 총 높이
+> Element.clientHeight 속성: 스크롤의 정해진 총 높이(height)
+
    ![Element.clientHeight](./images/Element.scrollTop_scrollHeight_clientHeight.png)
 
 
