@@ -26,14 +26,14 @@
     + output.scrollTop = output.scrollHeight // 대입
 
 ##  4. Element.scrollHeight 속성
-+ Element.scrollHeight 속성은 요소컨텐츠의 총 높이를 나타내고, 바깥으로 넘쳐서 보이지 않는 콘텐츠도 포함한다.
-+ 즉, output.scrollTop = output.scrollHeight는 변수 output에 담긴 div태그 요소에 textContent가 늘어날때마다 요소컨텐츠의 총 높이도 커진다.
-+ 그래서 scollTop속성에 scrollHeight의 값을 대입하면 변해가는 ScrollHeight의 값에따라 아래로 스크롤가능한 스크롤의 값이 커지는 것이다.  
-+ 이 내부 높이는 내부 여백을 포함하지만, 수평 스크롤바의 높이 경계선, 외부여백(margin)은 포함하지 않는다.
+    + Element.scrollHeight 속성은 요소컨텐츠의 총 높이를 나타내고, 바깥으로 넘쳐서 보이지 않는 콘텐츠도 포함한다.
+    + 즉, output.scrollTop = output.scrollHeight는 변수 output에 담긴 div태그 요소에 textContent가 늘어날때마다 요소컨텐츠의 총 높이도 커진다.
+    + 그래서 scollTop속성에 scrollHeight의 값을 대입하면 변해가는 ScrollHeight의 값에따라 아래로 스크롤가능한 스크롤의 값이 커지는 것이다.  
+    + 이 내부 높이는 내부 여백을 포함하지만, 수평 스크롤바의 높이 경계선, 외부여백(margin)은 포함하지 않는다.
 
 ##  5. Element.clientHeight 속성
-+ 읽기 전용 속성인 Element.clientHeight 속성은 요소 내부 높이를 픽셀로 반환한다.
-+ 이 내부 높이는 내부 여백을 포함하지만, 수평 스크롤바의 높이 경계선, 외부여백(margin)은 포함하지 않는다.
+    + 읽기 전용 속성인 Element.clientHeight 속성은 요소 내부 높이를 픽셀로 반환한다.
+    + 이 내부 높이는 내부 여백을 포함하지만, 수평 스크롤바의 높이 경계선, 외부여백(margin)은 포함하지 않는다.
 
 
 ##  3 ~ 5. 결론
@@ -46,10 +46,11 @@
 
 
 ##  6. 요소를 끝까지 스크롤했는지 판별하기
-+ element.scrollHeight - element.scrollTop === element.clientHeight
+ + element.scrollHeight - element.scrollTop === element.clientHeight
 
 ## 목표(결과물)
-+ 현재 날짜를 지정한 날짜 포맷으로 반환한다.
++ 지하철 2호선을 기준으로 한쪽 방향으로만 진행한다는 가정하에 출발역과 도착역을 선택하면 지하철요금을 계산하는 프로그램을
+  작성한다.
 
 ## 주어진 함수 코드
 ~~~Java Script
