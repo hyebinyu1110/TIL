@@ -241,100 +241,103 @@
                 const $total = document.getElementById("total");
                 let total = 0;
 
-
-
-
                 const menu_List = {
 
                     salad: {
                         name: "무제한 샐러드바",
-                        price: 25000
+                        price: 25000,
+                        peice: 1,
                     },
 
                     sirloin_steak: {
                         name: "안심 스테이크(150g)",
-                        price: 35500
+                        price: 35500,
+                        peice: 1,
                     },
 
                     ripeye_steak: {
                         name: "립아이 스테이크(210g)",
-                        price: 22500
+                        price: 22500,
+                        peice: 1,
                     },
 
                     tenderloin_steak: {
                         name: "채끝 등심 스테이크(210g)",
-                        price: 30500
+                        price: 30500,
+                        peice: 1,
                     },
 
                     grapefruit_ade: {
                         name: "자몽에이드",
-                        price: 35500
+                        price: 35500,
+                        peice: 1,
                     },
 
                     applemango_ade: {
                         name: "애플망고에이드",
-                        price: 35500
+                        price: 35500,
+                        peice: 1,
                     },
 
                     draft_beer: {
                         name: "생맥주",
-                        price: 4000
+                        price: 4000,
+                        peice: 1,
                     },
 
                 }
 
-                const order_List = {
 
-                    salad: { peice: 0 },
-
-                    sirloin_steak: { peice: 0 },
-
-                    ripeye_steak: { peice: 0 },
-
-                    tenderloin_steak: { peice: 0 },
-
-                    grapefruit_ade: { peice: 0 },
-
-                    applemango_ade: { peice: 0 },
-
-                    draft_beer: { peice: 0 },
-
-                }
-
-
+                console.log($tbody);
 
                 function addMenuInTable(event) {
 
-                    let salad, sirloin_steak, ripeye_steak, tenderloin_steak, grapefruit_ade, applemango_ade, draft_beer = 0;
 
                     let array = [];
                     let menuName = event.target.getAttribute("id");
 
-                    array.push("<tr>");
-                    array.push(`<td>${menu_List[menuName].name}</td>`); // menuName과 name 둘 다 브라켓 쒸우니 undefined가 나옴. [menuName].name 해야 바르게 치환됨
-                    array.push(`<td>${menu_List[menuName].price}</td>`); //[menuName]같이 브라켓으로 쒸어주니 변수가 치환이 된다. '.' 점으로 했을때는 치환이 되지 않았다.
-                    array.push(`<td><input type="text" value="1" /></td>`);
-                    array.push(`<td><input type="text" value="${menu_List[menuName].price}" /></td>`);
-                    array.push("</tr>");
-                    document.getElementById("tbody").innerHTML += array.join("");
+                    if()
 
-
-                    total += menu_List[menuName].price;
-
-                    $total.textContent = total;
-
-
-                    // document.getElementById("tbody").insertAdjacentHTML("beforeend", array.join(""));
-                    // 여기에 메뉴를 제거하는 기능도 추가 하고 싶다.     
-                }
+                
 
 
 
+                        
 
-                $buttons.forEach((button) => {
+                        /*$tbody.foreach((td) => {
+                            return td.getAttribute("id") === menuName;
 
-                    button.addEventListener("click", addMenuInTable);
-                });
+                        });
+                    }
+                    */ // forEach문은 배열에만 사용한다는것을 기억할것
+
+
+                 
+
+                            array.push(`<tr id =${menu_List[menuName]}>`);
+                            array.push(`<td>${menu_List[menuName].name}</td>`); // menuName과 name 둘 다 브라켓 쒸우니 undefined가 나옴. [menuName].name 해야 바르게 치환됨
+                            array.push(`<td>${menu_List[menuName].price}</td>`); //[menuName]같이 브라켓으로 쒸어주니 변수가 치환이 된다. '.' 점으로 했을때는 치환이 되지 않았다.
+                            array.push(`<td><input type="text" value="1" /></td>`);
+                            array.push(`<td><input type="text" value="${menu_List[menuName].price}" /></td>`);
+                            array.push("</tr>");
+                            document.getElementById("tbody").innerHTML += array.join("");
+
+
+                            total += menu_List[menuName].price * menu_List[menuName].peice;
+
+                            $total.textContent = total;
+
+ 
+                        }
+
+                        // document.getElementById("tbody").insertAdjacentHTML("beforeend", array.join(""));
+                        // 여기에 메뉴를 제거하는 기능도 추가 하고 싶다.     
+                
+
+                    $buttons.forEach((button) => {
+
+                        button.addEventListener("click", addMenuInTable);
+                    });
 
 
                 /*for(let menu in $buttons){
@@ -344,7 +347,7 @@
  
                  */ // 와우 이 케이스는 객체의 셀수 없는 모든 속성을 순서대로 변수에 대입한다.
 
-
+                 // gitbash로 폴더 이름 변경하는법 찾아보기
 
             </script>
     </body>
