@@ -1,4 +1,3 @@
-~~~Java Script
 <iDOCTYPE html>
     <html>
 
@@ -16,11 +15,12 @@
 
             div#menu,
             div#selected_menu,
-            div#discount {
+            div#discount,
+            div#message {
 
-                font-size: 30px;
+                font-size: 20px;
                 font-weight: bold;
-                margin-top: 10px;
+                margin-top: 20px;
 
             }
 
@@ -32,6 +32,7 @@
                 padding: 15px;
                 border: 1px solid #999;
                 background-color: aliceblue;
+                font-size: 30px;
 
             }
 
@@ -40,18 +41,29 @@
             div#discount_option {
 
                 width: 755px;
-                margin: 5px;
+                margin: 20px 20px 5px 5px;
                 padding: 15px;
                 border: 1px solid #999;
                 background-color: aliceblue;
 
             }
 
-            div#discount_option select{
+            div#discount_option select {
 
                 width: 100%;
                 height: 25px;
                 margin-bottom: 5px;
+            }
+
+            div#message {
+
+                width: 755px;
+                height: 200px;
+                margin: 10px 120px 5px 5px;
+                padding: 15px;
+                border: 1px solid #999;
+                background-color: aliceblue;
+
             }
 
 
@@ -78,7 +90,7 @@
 
             }
 
-       
+
 
             table td:nth-of-type(1),
             table td:nth-of-type(3),
@@ -112,13 +124,6 @@
 
                 text-align: left;
             }
-
-
-
-
-
-
-
         </style>
 
     </head>
@@ -167,131 +172,144 @@
                 </div>
             </div>
             <div id="discount">
-                제휴/할인카드/쿠폰
+                제휴/할인카드/쿠폰/OK 캐쉬백 목록(중복 할인 가능한 쿠폰 외 할인 불가)
                 <br />
                 <div id="discount_option">
                     <table>
-                    <select name="" id="card">
-                      <option value="1">CJ ONE 삼성카드</option>
-                      <option value="2">CJ ONE 신한카드</option>
-                      <option value="3">The CJ 카드</option>
-                      <option value="4">삼성 6 V4카드</option>
-                      <option value="5">신한 Lady 카드</option>
-                      <option value="6">삼성 SFC</option>
-                      <option value="7">삼성 S클래스</option>
-                      <option value="8">이마트 KB카드</option>
-                    </select>
-                </br>
-                    <select name="" id="telecom_compay">
-                        <option value="9">KT 멤버쉽 일반 할인</option>
-                        <option value="10">KT 멤버쉽 VIP 할인</option>
-                        <option value="11">T 멤버쉽 실버 할인</option>
-                        <option value="12">T 멤버쉽 VIP/골드 할인</option>
-                    </select>
-                </br> 
-                    <select name="" id="point">
-                        <option value="14">삼성카드 포인트</option>
-                        <option value="15">현대카드 M</option>  
-                        <option value="16">신한 Hi-Point 카드</option>
-                    </select>
-                </br>
-                    <select name="" id="OK_cashback">
-                        <option value="13">OK 캐쉬백</option>
-                    </select>
-                </br>
-                    <select name="" id="coupon">
-                        <option value="1">5% 할인쿠폰(중복할인 가능)</option>
-                        <option value="2">10% 할인쿠폰(중복할인 가능)</option>
-                        <option value="3">15% 할인쿠폰(중복할인 가능)</option>
-                        <option value="4">5000원 할인쿠폰(중복할인 가능)</option>
-                        <option value="5">10,000원 할인쿠폰(중복할인 가능)</option>
-                        <option value="6">20,000원 할인쿠폰(중복할인 가능)</option>
-                        <option value="7">5% 할인쿠폰(중복할인 불가능)</option>
-                        <option value="8">10% 할인쿠폰(중복할인 불가능)</option>
-                        <option value="9">15% 할인쿠폰(중복할인 불가능)</option>
-                        <option value="10">5000원 할인쿠폰(중복할인 불가능)</option>
-                        <option value="11">10,000원 할인쿠폰(중복할인 불가능)</option>
-                        <option value="12">20,000원 할인쿠폰(중복할인 불가능)</option>
-                    </select>
-                </br>
-            </table>
+                        <select name="" id="card">
+                            <option value="0">할인받을 카드 종류 선택하세요.</option>
+                            <option value="1">CJ ONE 삼성카드</option>
+                            <option value="2">CJ ONE 신한카드</option>
+                            <option value="3">The CJ 카드</option>
+                            <option value="4">삼성 6 V4카드</option>
+                            <option value="5">신한 Lady 카드</option>
+                            <option value="6">삼성 SFC</option>
+                            <option value="7">삼성 S클래스</option>
+                            <option value="8">이마트 KB카드</option>
+                        </select>
+                        </br>
+                        <select name="" id="telecom_compay">
+                            <option value="0">할인받을 통신사 할인혜택 선택하세요.</option>
+                            <option value="9">KT 멤버쉽 일반 할인</option>
+                            <option value="10">KT 멤버쉽 VIP 할인</option>
+                            <option value="11">T 멤버쉽 실버 할인</option>
+                            <option value="12">T 멤버쉽 VIP/골드 할인</option>
+                        </select>
+                        </br>
+                        <select name="" id="point">
+                            <option value="0">할인받을 포인트 결제 선택하세요.</option>
+                            <option value="14">삼성카드 포인트</option>
+                            <option value="15">현대카드 M</option>
+                            <option value="16">신한 Hi-Point 카드</option>
+                        </select>
+                        </br>
+                        <select name="" id="OK_cashback">
+                            <option value="0">할인받을 OK 캐쉬백 선택하세요.</option>
+                            <option value="13">OK 캐쉬백</option>
+                        </select>
+                        </br>
+                        <select name="" id="coupon">
+                            <option value="0">할인받을 쿠폰 선택하세요.</option>
+                            <option value="1">5% 할인쿠폰(중복할인 가능)</option>
+                            <option value="2">10% 할인쿠폰(중복할인 가능)</option>
+                            <option value="3">15% 할인쿠폰(중복할인 가능)</option>
+                            <option value="4">5000원 할인쿠폰(중복할인 가능)</option>
+                            <option value="5">10,000원 할인쿠폰(중복할인 가능)</option>
+                            <option value="6">20,000원 할인쿠폰(중복할인 가능)</option>
+                            <option value="7">5% 할인쿠폰(중복할인 불가능)</option>
+                            <option value="8">10% 할인쿠폰(중복할인 불가능)</option>
+                            <option value="9">15% 할인쿠폰(중복할인 불가능)</option>
+                            <option value="10">5000원 할인쿠폰(중복할인 불가능)</option>
+                            <option value="11">10,000원 할인쿠폰(중복할인 불가능)</option>
+                            <option value="12">20,000원 할인쿠폰(중복할인 불가능)</option>
+                        </select>
+                        </br>
+                    </table>
                 </div>
 
-
-
-
-
-
             </div>
+
+            메시지
+            <div id="message"></div>
+
+
+            <div id="total_amount">최종 결제 금액 : <span></span></div>
 
             <script>
                 const $buttons = document.querySelectorAll("button");
                 const $tbody = document.getElementById("tbody");
                 const $total = document.getElementById("total");
-                let total =0;
-
-              
+                let total = 0;
 
 
-                const menu_List = { 
-                    
-               salad : {
-               name: "무제한 샐러드바",
-               price: 25000 },
 
-               sirloin_steak :{ 
-                name: "안심 스테이크(150g)",   
-                price: 35500},
- 
-               ripeye_steak:  { 
-                name: "립아이 스테이크(210g)",
-                price: 22500},
 
-               tenderloin_steak: { 
-                name: "채끝 등심 스테이크(210g)",   
-                price: 30500},
+                const menu_List = {
 
-               grapefruit_ade: { 
-                name:  "자몽에이드",
-                price: 35500},
+                    salad: {
+                        name: "무제한 샐러드바",
+                        price: 25000
+                    },
 
-               applemango_ade:{ 
-                name:  "애플망고에이드",
-                price: 35500},
+                    sirloin_steak: {
+                        name: "안심 스테이크(150g)",
+                        price: 35500
+                    },
 
-               draft_beer: { 
-                name: "생맥주",
-                price: 4000},
-            
+                    ripeye_steak: {
+                        name: "립아이 스테이크(210g)",
+                        price: 22500
+                    },
+
+                    tenderloin_steak: {
+                        name: "채끝 등심 스테이크(210g)",
+                        price: 30500
+                    },
+
+                    grapefruit_ade: {
+                        name: "자몽에이드",
+                        price: 35500
+                    },
+
+                    applemango_ade: {
+                        name: "애플망고에이드",
+                        price: 35500
+                    },
+
+                    draft_beer: {
+                        name: "생맥주",
+                        price: 4000
+                    },
+
                 }
 
-                const order_List = { 
-                    
-                    salad : { peice: 0 },
-     
-                    sirloin_steak :{ peice: 0 },
-      
+                const order_List = {
+
+                    salad: { peice: 0 },
+
+                    sirloin_steak: { peice: 0 },
+
                     ripeye_steak: { peice: 0 },
-     
+
                     tenderloin_steak: { peice: 0 },
-     
+
                     grapefruit_ade: { peice: 0 },
-     
-                    applemango_ade:{ peice: 0 },
-     
+
+                    applemango_ade: { peice: 0 },
+
                     draft_beer: { peice: 0 },
-                 
-                     }
 
-              
-  
-                function addMenuInTable(event){
+                }
 
-                    let  salad, sirloin_steak, ripeye_steak, tenderloin_steak, grapefruit_ade, applemango_ade, draft_beer = 0;
+
+
+                function addMenuInTable(event) {
+
+                    let salad, sirloin_steak, ripeye_steak, tenderloin_steak, grapefruit_ade, applemango_ade, draft_beer = 0;
 
                     let array = [];
-                    let menuName = event.target.getAttribute("id");  
-         
+                    let menuName = event.target.getAttribute("id");
+
                     array.push("<tr>");
                     array.push(`<td>${menu_List[menuName].name}</td>`); // menuName과 name 둘 다 브라켓 쒸우니 undefined가 나옴. [menuName].name 해야 바르게 치환됨
                     array.push(`<td>${menu_List[menuName].price}</td>`); //[menuName]같이 브라켓으로 쒸어주니 변수가 치환이 된다. '.' 점으로 했을때는 치환이 되지 않았다.
@@ -304,27 +322,27 @@
                     total += menu_List[menuName].price;
 
                     $total.textContent = total;
-                    
 
-                   // document.getElementById("tbody").insertAdjacentHTML("beforeend", array.join(""));
-                  // 여기에 메뉴를 제거하는 기능도 추가 하고 싶다.     
+
+                    // document.getElementById("tbody").insertAdjacentHTML("beforeend", array.join(""));
+                    // 여기에 메뉴를 제거하는 기능도 추가 하고 싶다.     
                 }
 
 
 
 
-                $buttons.forEach((button)=> {
+                $buttons.forEach((button) => {
 
                     button.addEventListener("click", addMenuInTable);
                 });
 
 
-               /*for(let menu in $buttons){
-
-                    menu.addEventListener("click", addMenuInTable);
-                }
-
-                */ // 와우 이 케이스는 객체의 셀수 없는 모든 속성을 순서대로 변수에 대입한다.
+                /*for(let menu in $buttons){
+ 
+                     menu.addEventListener("click", addMenuInTable);
+                 }
+ 
+                 */ // 와우 이 케이스는 객체의 셀수 없는 모든 속성을 순서대로 변수에 대입한다.
 
 
 
@@ -332,4 +350,3 @@
     </body>
 
     </html>
-~~~
