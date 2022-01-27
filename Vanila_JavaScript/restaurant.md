@@ -1,3 +1,11 @@
+
+
+[button누르면 value가 초기화 되는 이유](https://nykim.work/96)
+[childNodes, child](https://ko.javascript.info/dom-navigation)
+[querySelector 요소로 검색](https://ko.javascript.info/searching-elements-dom)
+[객체 접근법](https://developer.mozilla.org/ko/docs/Learn/JavaScript/Objects/Basics)
+[for...in](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/for...in)
+[element.getAttribute()](https://developer.mozilla.org/en-US/docs/Web/API/Element/getAttribute)
 <iDOCTYPE html>
     <html>
 
