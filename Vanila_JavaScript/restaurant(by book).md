@@ -80,7 +80,7 @@
                     </tr>
                 </thead>
 
-                <tbody id="selectedMenusTo"></tbody>
+                <tbody id="selectedMenusTb"></tbody>
                 <tfoot id="selectedMenuTotal">
                     <tr>
                         <td colspan="3" style="text-align: right">합계</td>
@@ -437,7 +437,7 @@
                     doubleDiscount: false,
                     discountType: "",
                 },
-            ]
+            ];
 
             let total = 0;
 
@@ -560,7 +560,7 @@
                     h.push(`<option value =${coupon.couponId}">${coupon.title}</option>`);
                 }
 
-                document.getElementById("selCoupons").innerHTML = h.join("");
+                document.getElementById("selCOUPONS").innerHTML = h.join("");
             }
 
 
@@ -588,10 +588,10 @@
                     }
                 }
 
-                let couponId = document.getElementById("selCoupons").value;
+                let couponId = document.getElementById("selCOUPONS").value;
                 let coupon = null;
                 if (couponId != "") {
-                    coupon.coupons.filter((c) => c.couponId === couponId)[0];
+                    coupon = coupons.filter((c) => c.couponId === couponId)[0];
                 }
 
                 if (coupon != null && coupon.doubleDiscount) {
@@ -608,7 +608,6 @@
                     realTotal = realTotal - discountAmount;
 
                     if (discount > 0) {
-
                         realTotal = realTotal - Math.round(realTotal * (discount / 100));
 
                     } else {
@@ -630,7 +629,7 @@
                     }
                 }
 
-                document.getElementById("realTotal").innerText = realTotal + "?";
+                document.getElementById("realTotal").innerText = realTotal + "Won";
                 document.getElementById("divRealTotal").style.display = "";
             }
 
