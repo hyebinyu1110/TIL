@@ -8,7 +8,7 @@
 
 ##  1. Element.className 
     + 특정요소의 클래스의 값을 설정하거나 가져올수 있다.
-    + 아래의 코드에서 참조한 예시 
+    + 책의 예제 코드에서 참조한 예시 
     1) document.getElementById("btnDrink" + drink.drinkId).className ="drink active"
     2) document.getElementById("btnDrink" + item.drinkId).className = "drink"
     + 보통은 Element.classList.add('추가할 클래스 이름')으로 클래스를 추가 했다.
