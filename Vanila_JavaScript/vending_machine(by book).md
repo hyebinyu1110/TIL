@@ -14,11 +14,14 @@
     + 보통은 Element.classList.add('추가할 클래스 이름')으로 클래스를 추가 했다.
     + 하지만 위의 예시와 같이 그냥 클래스 네임으로 대입하는 형식으로 클래스가 설정이 가능 하다.
     + 또한, 아래와 같이 클래스의 값을 가져올 수 있다.
-    + const whatIsClassName = document.getElementById("btnDrink" + drink.drinkId).className;
-    + 출력된 결과로는 'drink' 나 'drink active' 가 나올 것이다(위의 예시에 따라)
+    + 콘솔 상 결과(아래 예시)
+    + const whatIsClassName = document.getElementById("btnDrink" + 1).className;
+    + undefined
+    + whatIsClassName
+    + 'drink active'
 
 ##  2. Element.classList (Element.className 과 비슷한, 그러나 유용한 많은 메서드를 가지고 있는)
-    + MDN에는 요소의 클래스 속성의 콜렉션인 활성 DOMTokenList를 반환하는 읽기 전용 속성이라고 한다.
+    + MDN에는 Element.classList가 요소의 클래스 속성의 콜렉션인 활성 DOMTokenList를 반환하는 읽기 전용 속성이라고 한다.
     + 콘솔에 이렇게만 작성하여 결과를 보면 document.getElementById("btnDrink" + 1).classList;
     + DOMTokenList(2) ['drink', 'active', value: 'drink active']
       0: "drink"
@@ -27,19 +30,25 @@
       value: "drink active"
       [[Prototype]]: DOMTokenList
      + 배열처럼 보이지만 배열이 아닌 DOMTokenList라고 리스트 형식으로 나온다. 
-     +classList는 DOMTokenList 형식을 가지고 있기에 다양한 메서드가 사용가능하다.
+     + classList는 DOMTokenList 형식을 가지고 있기에 아래와 같이 다양한 메서드가 사용가능하다.
+     
+     
 ##  3. Element.classList.add(추가할 클래스 문자열, ...여러개 가능)   
     + add 메서드를 사용해 클래스 값을 추가한다.
+    
     
 ##  4. Element.classList.remove(제거하고픈 클래스 문자열, ...여러개 가능)   
     + 존재하지 않는 클래스를 제거하는 것은 `오류를 발생시키지 않는다`라고 한다.
     
+    
 ##  5. Element.classList.item(숫자)
     + DOMTokenList 요소 중 인덱스 번호를 이용하여 인덱스 번호에 해당하는 클래스 속성값 반환
+
 
 ##  6. Element.classList.toggle( 문자열 [, force] )
     + 토글뒤에 지정된 클래스 값이 없으면 삽입하고 있으면 제거한다.
     + 옵션인 두번째 인자가 true로 판단되면, 첫번째 인자를 추가하고, false로 판단되면 제거한다.
+
 
 ##  7. Element.classList.contains(문자열)
     + 문자열과 동일한 클래스 값이 있는지 확인 후 , 존재하면 true, 존재하지 않으면 false 반환
