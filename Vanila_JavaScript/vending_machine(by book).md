@@ -29,7 +29,8 @@
      + 배열처럼 보이지만 배열이 아닌 DOMTokenList라고 리스트 형식으로 나온다. 
      +classList는 DOMTokenList 형식을 가지고 있기에 다양한 메서드가 사용가능하다.
 ##  3. Element.classList.add(추가할 클래스 문자열, ...여러개 가능)   
-
+    + add 메서드를 사용해 클래스 값을 추가한다.
+    
 ##  4. Element.classList.remove(제거하고픈 클래스 문자열, ...여러개 가능)   
     + 존재하지 않는 클래스를 제거하는 것은 `오류를 발생시키지 않는다`라고 한다.
     
@@ -38,7 +39,7 @@
 
 ##  6. Element.classList.toggle( 문자열 [, force] )
     + 토글뒤에 지정된 클래스 값이 없으면 삽입하고 있으면 제거한다.
-    + 옵션인 두번째 인자에 true로 판단되면, 첫번째 인자를 추가하고, false로 판단되면 제거한다.
+    + 옵션인 두번째 인자가 true로 판단되면, 첫번째 인자를 추가하고, false로 판단되면 제거한다.
 
 ##  7. Element.classList.contains(문자열)
     + 문자열과 동일한 클래스 값이 있는지 확인 후 , 존재하면 true, 존재하지 않으면 false 반환
