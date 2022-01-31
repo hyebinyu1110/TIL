@@ -21,3 +21,5 @@
     2) SAMEORIGIN - 같은 도메인 상에서만 참조를 가능하게 함. 예를 들어 구글에선 구글 내에서만 참조가 가능하도록
 
 
+내용 참조: [X-Frame-Options이란? (에러 - it set 'X-Frame-Options' to 'sameorigin')](https://meaownworld.tistory.com/171)
+
