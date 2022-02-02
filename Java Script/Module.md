@@ -19,7 +19,7 @@
     
     + import - import 지시자를 사용해서 다른 외부 모듈을 가져와서 사용할 수 있다.
     
-~~~Java Script
+  ~~~Java Script
 
 export function log(message){ // 외부에서 사용할 수 있도록 import키워드가 사용됨
   console.log(message);
