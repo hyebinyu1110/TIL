@@ -240,8 +240,7 @@ test.html:75 hello
     + Async/Await는 Promise의 가독성을 높이는 버전이라 하겠다. 
     
     
-    
-    
++ 참조 [자바스크립트 Promise 쉽게 이해하기](https://joshua1988.github.io/web-development/javascript/promise-for-beginners/)
     
     
     
