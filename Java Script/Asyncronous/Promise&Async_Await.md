@@ -68,9 +68,9 @@ function getData() {
  
  console.log("다음 코드를 실행합니다.");
  ~~~
- 
+ ~~~Java Script
  <위 코드 콘솔창 결과>
-~~~Java Script
+
 undefined
 test.html:195 다음 코드를 실행합니다.
 test.html:181 {userId: 1, id: 1, title: 'sunt aut facere repellat provident occaecati excepturi optio reprehenderit', 
@@ -119,9 +119,10 @@ getDataPromise().then((res) =>{
     console.log(res); // 서버응답이 완료된 후 코드가 실행됨
     console.log("다음 코드를 실행합니다.");
 });
-
-<위 코드 콘솔창 결과>
+~~~
 ~~~Java Script
+<위 코드 콘솔창 결과>
+
 {userId: 1, id: 1, title: 'sunt aut facere repellat provident occaecati excepturi optio reprehenderit', 
 body: 'quia et suscipit\nsuscipit recusandae consequuntur …strum rerum est autem sunt rem eveniet architecto'}
 test.html:171 다음 코드를 실행합니다.
