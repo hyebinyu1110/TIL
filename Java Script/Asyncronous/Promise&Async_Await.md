@@ -120,9 +120,9 @@ getDataPromise().then((res) =>{
     console.log("다음 코드를 실행합니다.");
 });
 ~~~
-~~~Java Script
-<위 코드 콘솔창 결과>
 
+<위 코드 콘솔창 결과>
+~~~Java Script
 {userId: 1, id: 1, title: 'sunt aut facere repellat provident occaecati excepturi optio reprehenderit', 
 body: 'quia et suscipit\nsuscipit recusandae consequuntur …strum rerum est autem sunt rem eveniet architecto'}
 test.html:171 다음 코드를 실행합니다.
@@ -219,6 +219,16 @@ async function myFunction(){
 
 myFunction();
 console.log("hello");
+~~~
+
+<위 코드 콘솔창 결과>
++ Async/Await의 내용이 모두 처리 되야 마지막 코드인 hello 출력이 된다.
+
+~~~Java Script
+{userId: 1, id: 1, title: 'sunt aut facere repellat provident occaecati excepturi optio reprehenderit',
+body: 'quia et suscipit\nsuscipit recusandae consequuntur …strum rerum est autem sunt rem eveniet architecto'}
+test.html:74 {id: 1, title: 'foo', body: 'bar', userId: 1}
+test.html:75 hello
 ~~~
 
 ##  5. 여기까지 공부하며 깨달은 점
