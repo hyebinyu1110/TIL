@@ -65,11 +65,11 @@ log("log로 메시지 출력");
     + 프론트 엔드 프레임 워크인 Vue.js, React, Angular와 Node.js 개발 시에 모듈이 굉장히 많이 사용되기 때문에
       모듈에 대해서 반드시 이해할 필요가 있다.
     
-  ~~~Java Script
+~~~Java Script
 
 import {log} from "log.js"; // Error!
 // "./log.js"와 같이 경로 정보를 지정해주어야 함.
-
+~~~
 
     
     
