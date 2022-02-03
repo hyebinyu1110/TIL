@@ -38,4 +38,5 @@
 ~~~
 
 ![postman에서 GET하는 과정](./images/postman.png)
++참조: 유튜버 우리밋_woorimIT [서버 API 테스트 도구 | Postman | curl](https://www.youtube.com/watch?v=0veQoK9V07k)
     
