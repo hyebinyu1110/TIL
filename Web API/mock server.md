@@ -37,5 +37,5 @@
         .then((json) => console.log(json));
 ~~~
 
-![postman에서 GET하는 과정](/images/postman.png)
+![postman에서 GET하는 과정](./images/postman.png)
     
