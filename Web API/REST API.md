@@ -52,5 +52,5 @@
 + 참조: [[네트워크] REST API란? REST, RESTful이란?](https://khj93.tistory.com/entry/%EB%84%A4%ED%8A%B8%EC%9B%8C%ED%81%AC-REST-API%EB%9E%80-REST-RESTful%EC%9D%B4%EB%9E%80)
 
 
-##  3-3. json-server 라이브러리를 다운받아 json파일을 만들어 간단히 시뮬레이션 하는 법
+##  3-3. json-server 라이브러리를 다운받아 json파일을 만들어 간단히 시뮬레이션 하는 법(JSON 서버를 활용해서 CRUD 테스트)
 + 참조: poiemaweb.com [14.3 JSON Server](https://poiemaweb.com/json-server#:~:text=json%2Dserver%EB%8A%94%20json%20%ED%8C%8C%EC%9D%BC,%ED%95%A0%20%EC%88%98%20%EC%9E%88%EB%8A%94%20%ED%88%B4%EC%9D%B4%EB%8B%A4.)
