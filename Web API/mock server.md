@@ -40,4 +40,4 @@
 ![postman에서 GET하는 과정](./images/postman.png)
 + 말보다는 직접 눈으로 보는게 낫다. 아래의 동영상 참조
 + 참조: 유튜버 우리밋_woorimIT 동영상 [서버 API 테스트 도구 | Postman | curl](https://www.youtube.com/watch?v=0veQoK9V07k)
-    
++ 참조: 개발자 https://poiemaweb.com/님 [Json Server](https://poiemaweb.com/json-server#:~:text=json%2Dserver%EB%8A%94%20json%20%ED%8C%8C%EC%9D%BC,%ED%95%A0%20%EC%88%98%20%EC%9E%88%EB%8A%94%20%ED%88%B4%EC%9D%B4%EB%8B%A4.)
