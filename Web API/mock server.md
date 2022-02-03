@@ -16,7 +16,7 @@
     + 개발된 API를 테스트, 모니터링, 공유하여 API개발의 생산성을 높여준다.
     + Postman에서 제공하는 아주 유용한 기능 중의 하나가 바로 Mock 서버이다.
     + 실제로 사용해보니, 코드로 하나씩 적어야 했던 것을 GUI로 직관적으로 사용 가능하다. 
-    
++ PUT 하기 위해 아래와 같이 코드를 적어야 했던 것을 
  ~~~Java Script
  
   fetch("http://localhost:3000/posts/2", {
@@ -36,8 +36,9 @@
         .then((response) => response.json())
         .then((json) => console.log(json));
 ~~~
-
++ 아래의 사진처럼 GUI로 직관적으로 처리할 수 있으니 편리한게 당연하듯 하다
 ![postman에서 GET하는 과정](./images/postman.png)
+
 + 말보다는 직접 눈으로 보는게 낫다. 아래의 동영상 참조
 + 참조: 유튜버 우리밋_woorimIT 동영상 [서버 API 테스트 도구 | Postman | curl](https://www.youtube.com/watch?v=0veQoK9V07k)
 + 참조: 개발자 https://poiemaweb.com/님 [Json Server](https://poiemaweb.com/json-server#:~:text=json%2Dserver%EB%8A%94%20json%20%ED%8C%8C%EC%9D%BC,%ED%95%A0%20%EC%88%98%20%EC%9E%88%EB%8A%94%20%ED%88%B4%EC%9D%B4%EB%8B%A4.)
