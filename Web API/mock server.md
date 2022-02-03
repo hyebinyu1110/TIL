@@ -38,5 +38,6 @@
 ~~~
 
 ![postman에서 GET하는 과정](./images/postman.png)
-+참조: 유튜버 우리밋_woorimIT 동영상 [서버 API 테스트 도구 | Postman | curl](https://www.youtube.com/watch?v=0veQoK9V07k)
++ 말보다는 직접 눈으로 보는게 낫다. 아래의 동영상 참조
++ 참조: 유튜버 우리밋_woorimIT 동영상 [서버 API 테스트 도구 | Postman | curl](https://www.youtube.com/watch?v=0veQoK9V07k)
     
