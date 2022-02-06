@@ -17,4 +17,4 @@
 + 참조: velog.io/@ansrjsdn님 블로그[https://velog.io/@ansrjsdn/%ED%94%84%EB%A1%A0%ED%8A%B8%EC%97%94%EB%93%9C-%EC%B6%94%EC%B2%9C-%EC%9E%90%EB%A3%8C-%EB%AA%A8%EC%9D%8C](https://velog.io/@ansrjsdn/%ED%94%84%EB%A1%A0%ED%8A%B8%EC%97%94%EB%93%9C-%EC%B6%94%EC%B2%9C-%EC%9E%90%EB%A3%8C-%EB%AA%A8%EC%9D%8C)
 + 참조: 제로초 웹사이트 [제로초 웹사이트](https://www.zerocho.com/profile) 
 + 참조: https://marshallku.com/ [https://marshallku.com/](https://marshallku.com/)
-+ 참조: velog를 만든 veloport님 [https://velog.io/@velopert](https://velog.io/@velopert)
++ 참조: velog를 만든 veloport님 vleog 블로그 [https://velog.io/@velopert](https://velog.io/@velopert) /velog를 만든 veloport님 웹사이트 [elog를 만든 veloport님 웹사이트](https://velopert.com/)
