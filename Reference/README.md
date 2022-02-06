@@ -8,6 +8,7 @@
 
 # 블로그 만들기 참조 글
 
++ 참조: stackoverflow 답글 [https://stackoverflow.com/questions/19768969/how-to-create-e-commerce-website](https://stackoverflow.com/questions/19768969/how-to-create-e-commerce-website)
 + 참조: Okky 착하게 살아라님 글 [https://okky.kr/article/489451](https://okky.kr/article/489451)
 + 참조: awesome-devblo님 깃헙블로그 [https://github.com/awesome-devblog/awesome-devblog](https://github.com/awesome-devblog/awesome-devblog)
 
@@ -15,4 +16,4 @@
 + 참조: drawyourmind님 개인 블로그 [drawyourmind님 개인 블로그](https://blog.drawyourmind.com/entry/%EA%B0%9C%EB%B0%9C%EC%9E%90-%ED%8F%AC%ED%8A%B8%ED%8F%B4%EB%A6%AC%EC%98%A4-%ED%99%88%ED%8E%98%EC%9D%B4%EC%A7%80-%EB%A7%8C%EB%93%A4%EB%8B%A4)
 + 참조: velog.io/@ansrjsdn님 블로그[https://velog.io/@ansrjsdn/%ED%94%84%EB%A1%A0%ED%8A%B8%EC%97%94%EB%93%9C-%EC%B6%94%EC%B2%9C-%EC%9E%90%EB%A3%8C-%EB%AA%A8%EC%9D%8C](https://velog.io/@ansrjsdn/%ED%94%84%EB%A1%A0%ED%8A%B8%EC%97%94%EB%93%9C-%EC%B6%94%EC%B2%9C-%EC%9E%90%EB%A3%8C-%EB%AA%A8%EC%9D%8C)
 + 참조: 제로초 웹사이트 [제로초 웹사이트](https://www.zerocho.com/profile) 
-+ 
++ 참조: https://marshallku.com/ [https://marshallku.com/](https://marshallku.com/)
