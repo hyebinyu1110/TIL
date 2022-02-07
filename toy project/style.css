@@ -16,7 +16,7 @@ list-style: none;
 /*header*/
 header{
     width: 100%;
-    border-bottom: 1px solid #ddd;
+  
 }
 
 header .header-inner{
@@ -42,19 +42,23 @@ header .header-inner h1 a{
 section{
 
     width: 100%;
+    margin-top: 100px;
     border-bottom: 1px solid #ddd;
 }
 
 section .sec-inner{
 
-    width: 800px;
-    height: 100px;
-     margin: 0px auto;
-     position: realve
+    width: 768px;
+    margin-left: auto;
+    margin-right: auto;
 
 
 }
 
+section .sec-inner h1{
+
+    font: bold 24px/1 "arial"; /*font 축약형*/
+}
 
 
 
