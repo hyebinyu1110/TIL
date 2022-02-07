@@ -1,0 +1,177 @@
+@import url('https://fonts.googleapis.com/css2?family=Lobster&display=swap');
+
+
+*{
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+}
+
+ul,ol{
+
+list-style: none;
+
+}
+
+/*header*/
+header{
+    width: 100%;
+    border-bottom: 1px solid #ddd;
+}
+
+header .header-inner{
+    width: 1180px;
+    height: 100px;
+    margin: 0px auto;
+    position: relative; /*자식 absolute요소의 기준점 설정*/
+}
+
+header .header-inner h1{
+
+    position: absolute;
+    left: 0px;
+    bottom: 15px;
+}
+
+header .header-inner h1 a{
+
+    font: bold 24px/1 "arial"; /*font 축약형*/
+    color: #444;
+}
+
+section{
+
+    width: 100%;
+    border-bottom: 1px solid #ddd;
+}
+
+section .sec-inner{
+
+    width: 800px;
+    height: 100px;
+     margin: 0px auto;
+     position: realve
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+a , a:visited, a:hover, a:active{
+    text-decoration: none; 
+    color: inherit;
+}
+
+header .header-inner #menu{
+
+    position: absolute;
+    bottom: 0px;
+    right: 0px;
+}
+header .header-inner #menu li{
+
+    float: left;
+}
+
+header .header-inner #menu li a{
+
+    display: block; /*인라인요소는 block을 설정하여 크기 조절 가능*/
+    font: bold 15px/1 "arial";
+    padding: 20px 40px;
+    transition: all 0.5s;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+a i{
+
+    width: 30px;
+    height: 30px;
+    font-size: 25;
+    margin-right: 3px;
+   background-color: lightgray;
+   border-radius: 10px;
+   color: black;
+   text-align: center;
+}
+.home{
+    font-family: 'Lobster', cursive;
+    font-size: 30px;
+}
+div#search{
+
+    display: flex;
+    border: 1px solid #777;
+    width: 210px;
+    height: 30px;
+    box-sizing: border-box;
+    padding: 5px;
+}
+
+
+input.search_content{
+
+    margin-left: 5px;
+    border: none;
+}
