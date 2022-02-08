@@ -1,4 +1,8 @@
 
+# 롤모델 공부법
+
++ [기계인간 이종립 개인 깃헙 위키](https://johngrib.github.io/)/ [OKKY 미니세미나 <비전공 학원출신 SI개발자, 유명스타트업 들어간.ssul> 참석 후기](https://okky.kr/article/425700) /[OKKY 발표 내용](https://jojoldu.tistory.com/247) / 
+
 # 취업 참조 블로그
 
 + 참조: codingc 블로그 [웹개발 기술 블로그 + 프론트앤드 개발자 되려면/ 취업면접 후기](https://m.blog.naver.com/codingc/221728769184)
@@ -18,3 +22,6 @@
 + 참조: 제로초 웹사이트 [제로초 웹사이트](https://www.zerocho.com/profile) 
 + 참조: https://marshallku.com/ [https://marshallku.com/](https://marshallku.com/)
 + 참조: velog를 만든 veloport님 vleog 블로그 [https://velog.io/@velopert](https://velog.io/@velopert) / [velog를 만든 veloport님 웹사이트](https://velopert.com/)
+
+
+
