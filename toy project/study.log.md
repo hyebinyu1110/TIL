@@ -7,7 +7,9 @@
     이해가 조금씩 되기 시작하면서 지적인 쾌감이 느껴짐. 원래 50페이지까지 읽을려고 하다가 60페이지 까지 읽음 오전 9시 10분 부터
     11시 50분까지 약 35페이지 정도 읽음. 느리다 아직은
 
-    2. [Node.js-46.App 제작-입력정보에 대한 보안](https://www.youtube.com/watch?v=xZztZWYuoo0&list=PLuHgQVnccGMA9QQX5wqj6ThK7t2tsGxjm&index=56)(4:11)
+    2. 
+   [Node.js-46.App 제작-입력정보에 대한 보안](https://www.youtube.com/watch?v=xZztZWYuoo0&list=PLuHgQVnccGMA9QQX5wqj6ThK7t2tsGxjm&index=56)(4:11)
+    
     - nodejs path parse 
 
     3. sanitizeHTML 을 애플리케이션에 적용, 보안과 관련하여 굉장히 중요하게 여길것!
@@ -16,7 +18,8 @@
     4. nodejs는 JS로 만들어짐 -> 자바스크립트의 고향인 웹브라우저를 자바스크립트로 제어하는 방법을 배워보라
     - 사용자에게 보여지는 클라이언트 쪽 부분과 서버 내 데이터를 처리하는 서버 측 부분 모두를 하나의 단일 언어인 JS 로 구현하게 된다.
     - 데이터 베이스 공부하기
-    - 이거 다시 보기 [Node.js-49.수업을마치며](https://www.youtube.com/watch?v=Cj-TvOwlMpA&list=PLuHgQVnccGMA9QQX5wqj6ThK7t2tsGxjm&index=61)
+    - 이거 다시 보기 
+   [Node.js-49.수업을마치며](https://www.youtube.com/watch?v=Cj-TvOwlMpA&list=PLuHgQVnccGMA9QQX5wqj6ThK7t2tsGxjm&index=61)
    
 
     5. 파일 수정, 추가하는 어떠한 기능이 들어가는 경우에는 프로세스가 꺼졌다 켜지지 않도록 해야함. 또한 꺼졌다 켜지는 지도 확인해봐야함,
