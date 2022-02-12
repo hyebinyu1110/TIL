@@ -7,15 +7,14 @@
     이해가 조금씩 되기 시작하면서 지적인 쾌감이 느껴짐. 원래 50페이지까지 읽을려고 하다가 60페이지 까지 읽음 오전 9시 10분 부터
     11시 50분까지 약 35페이지 정도 읽음. 느리다 아직은
 
-    2. 
-   [Node.js-46.App 제작-입력정보에 대한 보안](https://www.youtube.com/watch?v=xZztZWYuoo0&list=PLuHgQVnccGMA9QQX5wqj6ThK7t2tsGxjm&index=56)(4:11)
+   2. [Node.js-46.App 제작-입력정보에 대한 보안](https://www.youtube.com/watch?v=xZztZWYuoo0&list=PLuHgQVnccGMA9QQX5wqj6ThK7t2tsGxjm&index=56)(4:11)
     
-    - nodejs path parse 
+   - nodejs path parse 를 구글 검색창에서 찾기
 
     3. sanitizeHTML 을 애플리케이션에 적용, 보안과 관련하여 굉장히 중요하게 여길것!
     - 들어오는 정보(예, XSS)와, 나가는 정보(내가 가지고 있는 password파일 출력될 수 도 있음)
 
-    4. nodejs는 JS로 만들어짐 -> 자바스크립트의 고향인 웹브라우저를 자바스크립트로 제어하는 방법을 배워보라
+   4. nodejs는 JS로 만들어짐 -> 자바스크립트의 고향인 웹브라우저를 자바스크립트로 제어하는 방법을 배워보라
     - 사용자에게 보여지는 클라이언트 쪽 부분과 서버 내 데이터를 처리하는 서버 측 부분 모두를 하나의 단일 언어인 JS 로 구현하게 된다.
     - 데이터 베이스 공부하기
     - 이거 다시 보기 
@@ -30,8 +29,8 @@
 
 
 
-    - 오늘 한 것:HTTP 완벽가이드 독서(27-60), 생활코딩 node.js 강의 54- 63 까지 들음
-    - 내일 할 것: 54-63 강의 다 듣기, 내 블로그 node.js 사용하여 수정하기
+   - 오늘 한 것:HTTP 완벽가이드 독서(27-60), 생활코딩 node.js 강의 54- 63 까지 들음
+   - 내일 할 것: 54-63 강의 다 듣기, 내 블로그 node.js 사용하여 수정하기
 
 
 ## 2022-02-11
