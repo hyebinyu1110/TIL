@@ -5,7 +5,8 @@
 ## 2022-02-14
 
 1. 조급해하지말고, 지금 내가 하는 공부를 재미있게 공부할 것
-2.  main.js 코드를 다시 보고, node.js 공홈에 들어가서 코드를 분석함. (참조) [module.md](https://github.com/hyebinyu1110/TIL/blob/main/node.js/module.md)
+2.  main.js 코드를 다시 보고, node.js 공홈에 들어가서 코드를 분석함. TIL/node.js/module.md
+(참조) [module.md](https://github.com/hyebinyu1110/TIL/blob/main/node.js/module.md)
 
 
 
