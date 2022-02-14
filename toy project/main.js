@@ -7,12 +7,12 @@ var path = require('path');
 var sanitizeHtml = require('sanitize-html');
 
 var app = http.createServer(function (request, response) {
-  var _url = request.url;
+  var _url = request.url; // request 객체의 url 속성값 을 대입
   var queryData = url.parse(_url, true).query;
   var pathname = url.parse(_url, true).pathname;
 
-  if (pathname === "/") {
-    if (queryData.id === undefined) {
+  if (pathname === "/") { // URL뒤 상세경로의 pathname이 '/' 이면, 
+    if (queryData.id === undefined) {// 만약 queryString이 없으면(즉 메인 페이지 이면)
       fs.readdir('./data', function (error, filelist) {
         var title = 'welcome';
         var description = 'Hello, node.js'
@@ -25,7 +25,7 @@ var app = http.createServer(function (request, response) {
       });
     } else {
       fs.readdir('./data', function (error, filelist) {
-        var filteredId = path.parse(queryData.id).base;
+        var filteredId = path.parse(queryData.id).base; // 보안을 위해 파일경로의 파일이름만 필터하여 filteredId로 대입
         fs.readFile(`data/${filteredId}`, 'utf8', function (err, description) {
           var title = queryData.id;
           var sanitizedTitle = sanitizeHtml(title);
