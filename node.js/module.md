@@ -51,6 +51,8 @@
 ## 8. path.parse(queryData.id).base
     - The path.parse() method returns an object whose properties represent significant elements of the path. Trailing directory separators are ignored, see path.sep.
     - path.parse()메서드는 path의 중요한 요소를 가지고 있는 객체를 반환한다. 후행 디렉토리 구분 기호는 무시됩니다(path.sep 참조)
+
+~~~Java Script
 - path.parse('/home/user/dir/file.txt');
 // Returns:
 // { root: '/',
@@ -65,7 +67,7 @@
 "  /    home/user/dir / file  .txt "
 └──────┴──────────────┴──────┴─────┘
 (All spaces in the "" line should be ignored. They are purely for formatting.)
-    
+~~~   
     
 ##  9. fs.readFile(path[, options], callback)
     - 비동기적으로 파일의 전체 내용을 읽어들인다. 
@@ -99,6 +101,15 @@ readFile('/etc/passwd', 'utf8', callback);
     - sanitizeHtml 모듈은 카피앤패이스트한 단어에 원하지않는 CSS요소를 제거하는데 유용하다.
     - sanitizeHtml 모듈은 사용자로부터 사용할수 있는 태그를 지정하여 오직 허락된 속성만 사용하도록 하게 한다.
     
+##  11. request.on('data', function (data) {
+
+##  12.  request.on('end', function () {
+
+##  13. fs.writeFile(`data/${title}`, description, 'utf8', function (err) {
+
+##  14. var post = qs.parse(body);
+
+##  15.  fs.rename(`data/${id}`, `data/${title}`, function (error) {
 
     
     
