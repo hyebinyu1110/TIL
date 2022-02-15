@@ -109,7 +109,7 @@ readFile('/etc/passwd', 'utf8', callback);
     - sanitizeHtml 모듈은 사용자로부터 사용할수 있는 태그를 지정하여 입력창에 오직 허락된 속성(예: <h1>, <a>)만 사용하도록 하게 한다.
     
 ##  11. request.on('data', function (data) {
-- 참조: [Event](https://nodejs.org/api/events.html#eventsonceemitter-name-options)
+- 참조: [node.js 공홈 Event 모듈 글](https://nodejs.org/api/events.html#eventsonceemitter-name-options)
        
         - Node.js 의 핵심 API는 대부분 관용적인 비동기적 이벤트 구동 아키텍쳐라고 한다. 이 말은, 어떤 특정 종류의 객체(이른바 emitter)는 
        명명된 이벤트를 방출하는데, 이 이벤트는 함수 객체가 호출되도록 야기한다. (node.js 공홈 내용)
