@@ -1,0 +1,21 @@
+## 1. path.parse(queryData.id).base
+    - The path.parse() method returns an object whose properties represent significant elements of the path. 
+     Trailing directory separators are ignored, see path.sep.
+    - path.parse()메서드는 path의 중요한 요소를 가지고 있는 객체를 반환한다. 후행 디렉토리 구분 기호는 무시된다(path.sep 참조)
+
+~~~Java Script
+- path.parse('/home/user/dir/file.txt');
+// Returns:
+// { root: '/',
+//   dir: '/home/user/dir',
+//   base: 'file.txt',
+//   ext: '.txt',
+//   name: 'file' }
+┌─────────────────────┬────────────┐
+│          dir        │    base    │
+├──────┬              ├──────┬─────┤
+│ root │              │ name │ ext │
+"  /    home/user/dir / file  .txt "
+└──────┴──────────────┴──────┴─────┘
+(All spaces in the "" line should be ignored. They are purely for formatting.)
+~~~   
