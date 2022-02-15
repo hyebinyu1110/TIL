@@ -14,7 +14,7 @@
     - http.serverResponse 객체는 http 서버에 의해 내부적으로 생성되며(사용자에 의해서가 아니라,), 
       request(요청) 이벤트의 2번째 인자로 전달된다.
 
-## 3. url.parse(urlString[, parseQueryString[, slashesDenoteHost]])   
+## 3. url.parse(urlString[, parseQueryString[, slashesDenoteHost]]) { }  
     - urlString은 구문분석(parse)할 URL 문자열이다.
     - parseQueryString의 자리에 오는 값은 true 또는 false를 사용하는데, 만약 true를 쓰면, query 속성이 querystring 모듈의 
       parse메서드에 의해 반환된 객체에 항상 포함된다. 
@@ -32,14 +32,14 @@
       payload를 따로 구문분석하고 내보내기 위해 각각 생성된다.
 
 
-## 5. response.writeHead(statusCode, [statusMessage], [headers])
+## 5. response.writeHead(statusCode, [statusMessage], [headers]){ }  
     - statusCode는 200과 같은 응답 코드
     - statusMessage는 사람이 읽을 수 있는 응답메시지이다. 200의 의미로 OK를 적음
     - headers는 응답헤더이다.
     - response.end(인자)메서드가 호출되기 전에 호출되어야 한다.
     
 
-## 6. response.end([data[, encoding]][, callback])
+## 6. response.end([data[, encoding]][, callback]){ }  
     - 이 메서드는 모든 응답헤더와 바디가 보내어졌음을 서버에게 신호를 보내는 의미다.
     - response.end()메서드는  각각의 응답마다 마지막에 반드시 호출되어야 한다.
     - 만약 data와 encoding인자가 주어졌다면 data가 웹브라우저에 선택된 인코딩 방식으로 렌더링 되어 보여진다.
@@ -53,7 +53,7 @@
     - callback함수는 (err, files) 두 인자를 받는데, files인자는 '.' 과'..'을 제외한  다이렉터리 내  파일들의 이름의 배열을 가지고 있다.
    
    
-## 8. path.parse(queryData.id).base
+## 8. path.parse(queryData.id).base 
     - The path.parse() method returns an object whose properties represent significant elements of the path. 
      Trailing directory separators are ignored, see path.sep.
     - path.parse()메서드는 path의 중요한 요소를 가지고 있는 객체를 반환한다. 후행 디렉토리 구분 기호는 무시된다(path.sep 참조)
@@ -75,7 +75,7 @@
 (All spaces in the "" line should be ignored. They are purely for formatting.)
 ~~~   
     
-##  9. fs.readFile(path[, options], callback)
+##  9. fs.readFile(path[, options], callback){ }  
     - 비동기적으로 파일의 전체 내용을 읽어들인다. 
     - path는 파일이름이나 파일 경로이다.
     - option은 파일 인코딩 방식 등 올 수 있다.
@@ -108,7 +108,7 @@ readFile('/etc/passwd', 'utf8', callback);
     - sanitizeHtml 모듈은 카피앤패이스트한 단어에 원하지않는 CSS요소를 제거하는데 유용하다.
     - sanitizeHtml 모듈은 사용자로부터 사용할수 있는 태그를 지정하여 입력창에 오직 허락된 속성(예: <h1>, <a>)만 사용하도록 하게 한다.
     
-##  11. request.on('data', function (data) {
+##  11. request.on('data', function (data) { }  
 - 참조: [node.js 공홈 Event 모듈 글](https://nodejs.org/api/events.html#eventsonceemitter-name-options)
        
         - Node.js 의 핵심 API는 대부분 관용적인 비동기적 이벤트 구동 아키텍쳐라고 한다. 이 말은, 어떤 특정 종류의 객체(이른바 emitter)는 
@@ -141,15 +141,15 @@ myEmitter.on('event', () => {
 myEmitter.emit('event');
 ~~~  
 
-##  11-1. 객체.on('data', function (data) { 
+##  11-1. 객체.on('data', function (data) { }   
     - 위의 11번의 설명을 토대로 
     - request 라는 객체에 data 라는 이벤트가 발생시 실행시킬 함수를 추가한다. 
 
-##  11-2. 객체.on('end', function () {
+##  11-2. 객체.on('end', function () { }  
     - 위의 11번의 설명을 토대로 
     - request 라는 객체에 end 라는 이벤트가 발생시 실행시킬 함수를 추가한다. 
 
-##  13. fs.writeFile(file, data[, options], callback)
+##  13. fs.writeFile(file, data[, options], callback){ }  
     - file: filename 이나 file descriptor 명시
     - data: 파일에 적힐 내용
     - options: 생략가능하며, 파일 인코딩 방식 등이 올 수 있다. (utf8)(데이터가 버퍼 면 생략)
@@ -157,7 +157,7 @@ myEmitter.emit('event');
     - 예시: fs.writeFile(`data/${title}`, description, 'utf8', function (err) { }
     - 파일명이 존재하면 파일 내용(description)응 수정하고, 파일명이 없으면, 새로 파일 생성하여 파일 내용을 적는다. 
 
-##  12. querystring.parse(str[, sep[, eq[, options]]]){}
+##  12. querystring.parse(str[, sep[, eq[, options]]]){ }
     - querystring.parse() method 는 URL query 문자열을 key와 value 값을 가진 쌍으로 구문분석하기 위해 쓰인다. 
     => 구문분석한 쌍을 key와 value를 가진 객체로 반환
     - str: 구문분석할 URL 문의 문자열(query string)
