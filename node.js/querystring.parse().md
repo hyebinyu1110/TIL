@@ -1,0 +1,14 @@
+##  1. querystring.parse(str[, sep[, eq[, options]]]){}
+    - querystring.parse() method 는 URL query 문자열을 key와 value 값을 가진 쌍으로 구문분석하기 위해 쓰인다. 
+    => 구문분석한 쌍을 key와 value를 가진 객체로 반환
+    - str: 구문분석할 URL 문의 문자열(query string)
+    - sep: str(URL 문의 문자열) 중 key와 value를 가진 한 쌍을 다른 한 쌍과 구분짓는 데 쓰이는 쓰는 문자열(예: &)
+    - eq: str(URL 문의 문자열) 중 key와 value를 한 쌍으로 만드는 범위를 짓기위해 쓰는 문자열(예: =)
+    - 예를들면, the query string 
+    'foo=bar&abc=xyz&abc=123' 는 아래와 같이 구문분석 될 것이다.
+
+~~~Java Script
+{
+  foo: 'bar',
+  abc: ['xyz', '123']
+}
