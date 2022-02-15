@@ -11,7 +11,8 @@
 ## 2. function (request, response) {} 
     - 익명함수의 인자 request는 객체로서 http통신으로 받은 요청메세지에 대한 객체이다. 
     - http.clientRequest 객체는 http.request()로부터 반환된 내부적으로 생성된 객체이다.
-    - http.serverResponse 객체는 http 서버에 의해 내부적으로 생성되며(사용자에 의해서가 아니라,), request(요청) 이벤트의 2번째 인자로 전달된다.
+    - http.serverResponse 객체는 http 서버에 의해 내부적으로 생성되며(사용자에 의해서가 아니라,), 
+      request(요청) 이벤트의 2번째 인자로 전달된다.
 
 ## 3. url.parse(urlString[, parseQueryString[, slashesDenoteHost]])   
     - urlString은 구문분석(parse)할 URL 문자열이다.
@@ -23,8 +24,12 @@
     - 예를 들면 호스트이름 spoofing이나 부정확한 사용자 이름과 비밀번호로 사용자 신원확인을 할 수 있다.
 
 
-## 4. url.parse(urlString[, parseQueryString[, slashesDenoteHost]])
-
+## 4. http.IncomingMessage 객체
+    - IncomingMessage 객체는 http.Server 와 http.ClientRequest 에 의해 생성되고, request와 response 이벤트의 첫번째 인자로 각각 전달 된다. 
+      또한 응답 상태(예: 200), 헤더, 데이터에 접근하기 위해사용된다.
+    - <stream.Duplex>의 하위 클래스인 socket value와 다른 점은  IncomingMessage 자체가 <stream.Readable>를 확장한다는 것이다. 
+      또한 IncomingMessage 객체는 keep-alive 옵션의 경우, 밑의 기반이 되는 소켓이 여러 번 재사용 될 때에, 들어오는 HTTP 헤더와 payload를 
+      따로 구문분석하고 내보내기 위해 각각 생성된다.
 
 
 ## 5. response.writeHead(statusCode, [statusMessage], [headers])
@@ -49,8 +54,9 @@
    
    
 ## 8. path.parse(queryData.id).base
-    - The path.parse() method returns an object whose properties represent significant elements of the path. Trailing directory separators are ignored, see path.sep.
-    - path.parse()메서드는 path의 중요한 요소를 가지고 있는 객체를 반환한다. 후행 디렉토리 구분 기호는 무시됩니다(path.sep 참조)
+    - The path.parse() method returns an object whose properties represent significant elements of the path. 
+     Trailing directory separators are ignored, see path.sep.
+    - path.parse()메서드는 path의 중요한 요소를 가지고 있는 객체를 반환한다. 후행 디렉토리 구분 기호는 무시된다(path.sep 참조)
 
 ~~~Java Script
 - path.parse('/home/user/dir/file.txt');
@@ -97,19 +103,59 @@ readFile('/etc/passwd', 'utf8', callback);
  ~~~     
 
 ##  10. sanitizeHtml 모듈
-    - npm install -S sanitize-html을 다운로드 받아야 모듈 사용가능하다. (-S 옵션은 오직 전역이 아니 이 포트에서만 사용가능하도록 하게 한다.)
+    - npm install -S sanitize-html을 다운로드 받아야 모듈 사용가능하다. 
+    (-S 옵션은 오직 (전역이 아닌) 이 포트(3000)에서만 사용가능하도록 하게 한다.)
     - sanitizeHtml 모듈은 카피앤패이스트한 단어에 원하지않는 CSS요소를 제거하는데 유용하다.
-    - sanitizeHtml 모듈은 사용자로부터 사용할수 있는 태그를 지정하여 오직 허락된 속성만 사용하도록 하게 한다.
+    - sanitizeHtml 모듈은 사용자로부터 사용할수 있는 태그를 지정하여 입력창에 오직 허락된 속성(예: <h1>, <a>)만 사용하도록 하게 한다.
     
 ##  11. request.on('data', function (data) {
+- 참조: [Event](https://nodejs.org/api/events.html#eventsonceemitter-name-options)
+       
+        - Node.js 의 핵심 API는 대부분 관용적인 비동기적 이벤트 구동 아키텍쳐라고 한다. 이 말은, 어떤 특정 종류의 객체(이른바 emitter)는 
+       명명된 이벤트를 방출하는데, 이 이벤트는 함수 객체가 호출되도록 야기한다. (node.js 공홈 내용)
+     => 나의 짧은 자바스크립트 지식을 바탕으로 이해한바로는 '관용적인' 이라는 말은 (네이버 영어사전 :언어 표현이 모국어 사용자가 쓰는 
+       것같이) 자연스럽게, 까다로운 문법 방식이 아니라, 편하게 함수를 추가 할수 있다고 이야기 하는 것 같다. 가령 이벤트 발생시
+       콜백 함수 추가를 편하게 on을 써서 할 수 있다.
+       
+      - 예를들면, fs.ReadStream는 파일이 열릴때 이벤트를 발생시키고, stream은 데이터가 읽기가 가능하다면 언제든지 이벤트를 발생시킨다. 
+      - 또한, 이벤트를 발생시키는 모든 객체는 EventEmitter class 의 자식들이다. 따라서 이러한 객체들은 eventEmitter.on() 의 형태로  
+        객체에 의해 발생한 명명된 이벤트에(예를 들면 'data' 이벤트에) 한 개 이상의 이벤트 함수를 추가 할 수 있다.
+        (이벤트 발생시 호출되는 함수)
+        
+    => 이 말은 JS에서 object.addEventLister('click', function); 식으로 이벤트 리스너 함수 추가 하는것과 같이 onclick=function(){})
+      으로 함수 추가 할수 있다고 이야기하는것과 비슷한 맥락인거 같다. 자유롭게 함수가 추가 가능하다!
+      
+      - 또한 EventEmitter 객체가 이벤트를 방출할때, 이 특정 이벤트에 연결된 모든 함수들이 동기적으로 호출된다. 
+      또한 호출된 리스너(콜백함수)에 의해 반환된 values들은 무시되고, 버려진다.
+      - 아래의 예시는 하나의 리스너를 가진 간단한 EventEmitter instance 의 형태이다. eventEmitter.on() 메서드는 리스너를 추가하는데 
+      쓰이고, eventEmitter.emit()는 함수를 trigger 시키는데 쓰인다. (공홈 내용 참조)
 
-##  12.  request.on('end', function () {
+~~~Java Script
+const EventEmitter = require('events');
+class MyEmitter extends EventEmitter {}
 
-##  13. fs.writeFile(`data/${title}`, description, 'utf8', function (err) {
+const myEmitter = new MyEmitter();
+myEmitter.on('event', () => {
+  console.log('an event occurred!');
+});
+myEmitter.emit('event');
+~~~  
 
-##  14. var post = qs.parse(body);
+##  11-1. 객체.on('data', function (data) { 
+          - 위의 11번의 설명을 토대로 
+          - request 라는 객체에 data 라는 이벤트가 발생시 실행시킬 함수를 추가한다. 
 
-##  15.  fs.rename(`data/${id}`, `data/${title}`, function (error) {
+##  11-2. 객체.on('end', function () {
+          - 위의 11번의 설명을 토대로 
+          - request 라는 객체에 end 라는 이벤트가 발생시 실행시킬 함수를 추가한다. 
+
+##  14. fs.writeFile(`data/${title}`, description, 'utf8', function (err) {
+   또한 EventEmitter 객체가 이벤트를 방출할때, 이 특정 이벤트에 연결된 모든 함수들이 동기적으로 호출된다. 
+      또한 호출된 리스너(콜백함수)에 의해 반환된 values들은 무시되고, 버려진다.
+
+##  15. var post = qs.parse(body);
+
+##  16.  fs.rename(`data/${id}`, `data/${title}`, function (error) {
 
     
     
