@@ -157,7 +157,7 @@ myEmitter.emit('event');
     - 예시: fs.writeFile(`data/${title}`, description, 'utf8', function (err) { }
     - 파일명이 존재하면 파일 내용(description)응 수정하고, 파일명이 없으면, 새로 파일 생성하여 파일 내용을 적는다. 
 
-##  14. querystring.parse(str[, sep[, eq[, options]]]){}
+##  12. querystring.parse(str[, sep[, eq[, options]]]){}
     - querystring.parse() method 는 URL query 문자열을 key와 value 값을 가진 쌍으로 구문분석하기 위해 쓰인다. 
     => 구문분석한 쌍을 key와 value를 가진 객체로 반환
     - str: 구문분석할 URL 문의 문자열(query string)
@@ -172,7 +172,7 @@ myEmitter.emit('event');
   abc: ['xyz', '123']
 }
 ~~~
-##  15.  fs.rename(oldPath, newPath, callback) { }
+##  13.  fs.rename(oldPath, newPath, callback) { }
     - 비동기적으로 oldPath에 있는 파일을 newPath에 제공된 pathname으로 변경한다. newPath가 이미 존재 한다면, 파일 이름이 겹쳐 쓰일 것이다. 
     - newPath에 있는게 다이렉터리라면, 에러가 대신 발생할 것이다. 
     - 가능한 예외(err)가 아닌 어떠한 인자도 fs.rename 함수가 수행된 후 호출되는 컬백함수에 제공되지 않는다.
@@ -187,7 +187,7 @@ rename('oldFile.txt', 'newFile.txt', (err) => {
 });
 ~~~
 
- ##  16.  fs.unlink(path, callback) { }
+ ##  14.  fs.unlink(path, callback) { }
      - 인자인 path에 위치한 파일이나 심볼릭 링크를 비동기적으로 삭제한다. 
      - 가능한 예외(err)가 아닌 어떠한 인자도 fs.unlink 함수가 수행된 후 호출되는 컬백함수에 제공되지 않는다.
      - fs.unlink() 는 다이렉터리 삭제에는 적용되지 않고(비어있는 다이렉터라 하더라도), 대신 다이렉터리 삭제의 경우 fs.rmdir()를 사용한다. 
