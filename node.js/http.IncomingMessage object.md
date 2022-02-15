@@ -1,0 +1,6 @@
+## 1. http.IncomingMessage 객체
+    - IncomingMessage 객체는 http.Server 와 http.ClientRequest 에 의해 생성되고, request와 response 이벤트의 첫번째 인자로 
+      각각 전달 된다. 또한 응답 상태(예: 200), 헤더, 데이터에 접근하기 위해사용된다.
+    - <stream.Duplex>의 하위 클래스인 socket value와 다른 점은  IncomingMessage 자체가 <stream.Readable>를 확장한다는 것이다. 
+      또한 IncomingMessage 객체는 keep-alive 옵션의 경우, 밑의 기반이 되는 소켓이 여러 번 재사용 될 때에, 들어오는 HTTP 헤더와
+      payload를 따로 구문분석하고 내보내기 위해 각각 생성된다.
