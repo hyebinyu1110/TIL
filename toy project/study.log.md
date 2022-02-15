@@ -1,14 +1,24 @@
 
 # study log를 토이프로젝트를 시작한 이후로 하루 하루 짧게나마라도 배운것을 적어나가고자 한다.
 
+## 2022-02-15
+
+    1. 조급해하지말고, 지금 내가 하는 공부를 재미있게 공부할 것
+    2.  main.js 코드를 다시 보고, node.js 공홈에 들어가서 코드를 분석함. TIL/node.js/module.md
+
+
+    - 오늘 한 것: HTTP 완벽가이드 독서(111-140), 
+    - 내일 할 것: 
 
 ## 2022-02-14
 
-1. 조급해하지말고, 지금 내가 하는 공부를 재미있게 공부할 것
-2.  main.js 코드를 다시 보고, node.js 공홈에 들어가서 코드를 분석함. TIL/node.js/module.md
+    1. 조급해하지말고, 지금 내가 하는 공부를 재미있게 공부할 것
+    2.  main.js 코드를 다시 보고, node.js 공홈에 들어가서 코드를 분석함. TIL/node.js/module.md
 
 (참조) [module.md](https://github.com/hyebinyu1110/TIL/blob/main/node.js/module.md)
 
+
+## 2022-02-14(독서하며 Baira와 브런치 먹고 쉰 날~)
 
 
 ## 2022-02-12
@@ -35,8 +45,6 @@
     -  안그러면 내가 기대했던 것과 다르게 기능할 수 있음. 
     - pm2 start main.js --watch --ignore-watch="/data/*" --no-daemon 할 것(여러개 디렉터리를 관리하고 싶다고 하면 
     - --ignore-watch="/data/*"에서 띄어써서  --ignore-watch="/data/* sessions/*"해서 실행하면 됨
-
-
 
 
    - 오늘 한 것:HTTP 완벽가이드 독서(27-60), 생활코딩 node.js 강의 54- 63 까지 들음
