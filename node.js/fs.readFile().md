@@ -1,0 +1,25 @@
+##  1. fs.readFile(path[, options], callback)
+    - 비동기적으로 파일의 전체 내용을 읽어들인다. 
+    - path는 파일이름이나 파일 경로이다.
+    - option은 파일 인코딩 방식 등 올 수 있다.
+    - callback 함수는  err와 data 2개의 인자를 전달 받는다. 
+ 
+ ~~~Java Script
+import { readFile } from 'fs';   
+// 예전에는 var fs = require('fs') 하는 식으로 모듈을 불러들였는데 자바스크립트 ECMA 스크립트 버전이 업그레이드 되면서 
+// 방식이 바꼈나보다
+
+readFile('/etc/passwd', (err, data) => { // 두번째 인자 callback 함수
+  if (err) throw err;
+  console.log(data);
+});
+
+~~~   
+    - callback 함수는  err와 data 2개의 인자를 전달 받으며 data는 파일의 내용을 가지고 있다. 
+    - 인코딩 방식이 명세되어 있지 않다면, 버퍼 내 raw data 그대로 웹브라우저에 보내어 진다. 
+    - 만약 options이 string이라면 인코딩 방식을 필요로한다.
+
+ ~~~Java Script
+import { readFile } from 'fs';
+
+readFile('/etc/passwd', 'utf8', callback);
