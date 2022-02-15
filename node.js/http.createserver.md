@@ -25,11 +25,11 @@
 
 
 ## 4. http.IncomingMessage 객체
-    - IncomingMessage 객체는 http.Server 와 http.ClientRequest 에 의해 생성되고, request와 response 이벤트의 첫번째 인자로 각각 전달 된다. 
-      또한 응답 상태(예: 200), 헤더, 데이터에 접근하기 위해사용된다.
+    - IncomingMessage 객체는 http.Server 와 http.ClientRequest 에 의해 생성되고, request와 response 이벤트의 첫번째 인자로 
+      각각 전달 된다. 또한 응답 상태(예: 200), 헤더, 데이터에 접근하기 위해사용된다.
     - <stream.Duplex>의 하위 클래스인 socket value와 다른 점은  IncomingMessage 자체가 <stream.Readable>를 확장한다는 것이다. 
-      또한 IncomingMessage 객체는 keep-alive 옵션의 경우, 밑의 기반이 되는 소켓이 여러 번 재사용 될 때에, 들어오는 HTTP 헤더와 payload를 
-      따로 구문분석하고 내보내기 위해 각각 생성된다.
+      또한 IncomingMessage 객체는 keep-alive 옵션의 경우, 밑의 기반이 되는 소켓이 여러 번 재사용 될 때에, 들어오는 HTTP 헤더와
+      payload를 따로 구문분석하고 내보내기 위해 각각 생성된다.
 
 
 ## 5. response.writeHead(statusCode, [statusMessage], [headers])
@@ -142,20 +142,62 @@ myEmitter.emit('event');
 ~~~  
 
 ##  11-1. 객체.on('data', function (data) { 
-          - 위의 11번의 설명을 토대로 
-          - request 라는 객체에 data 라는 이벤트가 발생시 실행시킬 함수를 추가한다. 
+    - 위의 11번의 설명을 토대로 
+    - request 라는 객체에 data 라는 이벤트가 발생시 실행시킬 함수를 추가한다. 
 
 ##  11-2. 객체.on('end', function () {
-          - 위의 11번의 설명을 토대로 
-          - request 라는 객체에 end 라는 이벤트가 발생시 실행시킬 함수를 추가한다. 
+    - 위의 11번의 설명을 토대로 
+    - request 라는 객체에 end 라는 이벤트가 발생시 실행시킬 함수를 추가한다. 
 
-##  14. fs.writeFile(`data/${title}`, description, 'utf8', function (err) {
-   또한 EventEmitter 객체가 이벤트를 방출할때, 이 특정 이벤트에 연결된 모든 함수들이 동기적으로 호출된다. 
-      또한 호출된 리스너(콜백함수)에 의해 반환된 values들은 무시되고, 버려진다.
+##  13. fs.writeFile(file, data[, options], callback)
+    - file: filename 이나 file descriptor 명시
+    - data: 파일에 적힐 내용
+    - options: 생략가능하며, 파일 인코딩 방식 등이 올 수 있다. (utf8)(데이터가 버퍼 면 생략)
+    - callback: 파일이 create 된 후 호출될 함수
+    - 예시: fs.writeFile(`data/${title}`, description, 'utf8', function (err) { }
+    - 파일명이 존재하면 파일 내용(description)응 수정하고, 파일명이 없으면, 새로 파일 생성하여 파일 내용을 적는다. 
 
-##  15. var post = qs.parse(body);
+##  14. querystring.parse(str[, sep[, eq[, options]]]){}
+    - querystring.parse() method 는 URL query 문자열을 key와 value 값을 가진 쌍으로 구문분석하기 위해 쓰인다. 
+    => 구문분석한 쌍을 key와 value를 가진 객체로 반환
+    - str: 구문분석할 URL 문의 문자열(query string)
+    - sep: str(URL 문의 문자열) 중 key와 value를 가진 한 쌍을 다른 한 쌍과 구분짓는 데 쓰이는 쓰는 문자열(예: &)
+    - eq: str(URL 문의 문자열) 중 key와 value를 한 쌍으로 만드는 범위를 짓기위해 쓰는 문자열(예: =)
+    - 예를들면, the query string 
+    'foo=bar&abc=xyz&abc=123' 는 아래와 같이 구문분석 될 것이다.
 
-##  16.  fs.rename(`data/${id}`, `data/${title}`, function (error) {
-
+~~~Java Script
+{
+  foo: 'bar',
+  abc: ['xyz', '123']
+}
+~~~
+##  15.  fs.rename(oldPath, newPath, callback) { }
+    - 비동기적으로 oldPath에 있는 파일을 newPath에 제공된 pathname으로 변경한다. newPath가 이미 존재 한다면, 파일 이름이 겹쳐 쓰일 것이다. 
+    - newPath에 있는게 다이렉터리라면, 에러가 대신 발생할 것이다. 
+    - 가능한 예외(err)가 아닌 어떠한 인자도 fs.rename 함수가 수행된 후 호출되는 컬백함수에 제공되지 않는다.
+    - 예: fs.rename(`data/${id}`, `data/${title}`, function (error) {
     
+~~~Java Script
+import { rename } from 'fs';
+
+rename('oldFile.txt', 'newFile.txt', (err) => {
+  if (err) throw err;
+  console.log('Rename complete!');
+});
+~~~
+
+ ##  16.  fs.unlink(path, callback) { }
+     - 인자인 path에 위치한 파일이나 심볼릭 링크를 비동기적으로 삭제한다. 
+     - 가능한 예외(err)가 아닌 어떠한 인자도 fs.unlink 함수가 수행된 후 호출되는 컬백함수에 제공되지 않는다.
+     - fs.unlink() 는 다이렉터리 삭제에는 적용되지 않고(비어있는 다이렉터라 하더라도), 대신 다이렉터리 삭제의 경우 fs.rmdir()를 사용한다. 
+     - fs.unlink() will not work on a directory, empty or otherwise(비어있든지 아니든지). To remove a directory, use fs.rmdir().
     
+~~~Java Script
+import { unlink } from 'fs';
+// Assuming that 'path/file.txt' is a regular file.
+unlink('path/file.txt', (err) => {
+  if (err) throw err;
+  console.log('path/file.txt was deleted');
+});
+~~~
