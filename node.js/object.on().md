@@ -1,0 +1,40 @@
+##  1. request.on('data', function (data) {
+- 참조: [node.js 공홈 Event 모듈 글](https://nodejs.org/api/events.html#eventsonceemitter-name-options)
+       
+        - Node.js 의 핵심 API는 대부분 관용적인 비동기적 이벤트 구동 아키텍쳐라고 한다. 이 말은, 어떤 특정 종류의 객체(이른바 emitter)는 
+       명명된 이벤트를 방출하는데, 이 이벤트는 함수 객체가 호출되도록 야기한다. (node.js 공홈 내용)
+     => 나의 짧은 자바스크립트 지식을 바탕으로 이해한 바 로는 '관용적인' 이라는 말은 (네이버 영어사전 :언어 표현이 모국어 사용자가 쓰는 
+       것같이) 자연스럽게, 까다로운 문법 방식이 아니라, 편하게 함수를 추가 할수 있다고 이야기 하는 것 같다. 가령 이벤트 발생시
+       콜백 함수 추가를 편하게 on을 써서 할 수 있다.
+       
+      - 예를들면, fs.ReadStream는 파일이 열릴때 이벤트를 발생시키고, stream은 데이터가 읽기가 가능하다면 언제든지 이벤트를 발생시킨다. 
+      - 또한, 이벤트를 발생시키는 모든 객체는 EventEmitter class 의 자식들이다. 따라서 이러한 객체들은 eventEmitter.on() 의 형태로  
+        객체에 의해 발생한 명명된 이벤트에(예를 들면 'data' 이벤트에) 한 개 이상의 이벤트 함수를 추가 할 수 있다.
+        (이벤트 발생시 호출되는 함수)
+        
+    => 이 말은 JS에서 object.addEventLister('click', function); 식으로 이벤트 리스너 함수 추가 하는것과 같이 onclick=function(){})
+      으로 함수 추가 할수 있다고 이야기하는것과 비슷한 맥락인거 같다. 자유롭게 함수가 추가 가능하다!
+      
+      - 또한 EventEmitter 객체가 이벤트를 방출할때, 이 특정 이벤트에 연결된 모든 함수들이 동기적으로 호출된다. 
+      또한 호출된 리스너(콜백함수)에 의해 반환된 values들은 무시되고, 버려진다.
+      - 아래의 예시는 하나의 리스너를 가진 간단한 EventEmitter instance 의 형태이다. eventEmitter.on() 메서드는 리스너를 추가하는데 
+      쓰이고, eventEmitter.emit()는 함수를 trigger 시키는데 쓰인다. (공홈 내용 참조)
+
+~~~Java Script
+const EventEmitter = require('events');
+class MyEmitter extends EventEmitter {}
+
+const myEmitter = new MyEmitter();
+myEmitter.on('event', () => {
+  console.log('an event occurred!');
+});
+myEmitter.emit('event');
+~~~  
+
+##  11-1. 객체.on('data', function (data) { 
+    - 위의 11번의 설명을 토대로 
+    - request 라는 객체에 data 라는 이벤트가 발생시 실행시킬 함수를 추가한다. 
+
+##  11-2. 객체.on('end', function () {
+    - 위의 11번의 설명을 토대로 
+    - request 라는 객체에 end 라는 이벤트가 발생시 실행시킬 함수를 추가한다.
