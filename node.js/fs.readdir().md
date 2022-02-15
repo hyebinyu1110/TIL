@@ -1,4 +1,4 @@
-## 1. fs.readdir('./data', function (error, filelist) {
+## 1. fs.readdir('./data', function (error, filelist) { }
     - fs.readdir(path[, options], callback) 메서드
     - path는 문자열, URL, 버퍼가 됨
     - option은 인코딩 방식이나, fileType이 옴
