@@ -3,21 +3,147 @@
 # http.createserver () {
 
 
-## 1. http.createServer([options][, requestListener]) 메서드
+## 1. http.createServer([options][, requestListener]) { }
     - http 객체의 createServer() 메서드를 이용하여 데이터를 받을 서버 객체를 생성한 후 반환한다.
     - 첫번째 인자 option에는 생략가능한 인자 http.ServerResponse, ServerResponse, insecureHTTPParser, maxHeaderSize 올 수 있다.
-    - 두번째 인자인 requestListener함수는 request(요청) 이벤트에 자동으로 추가되는 함수 이다. 
+    - 두번째 인자인 requestListener함수는 request(요청) 이벤트에 자동으로 추가되는 함수 이다. (아래의 2번 item 설명 참조)
     
-## 2. function (request, response) {} 
+## 2. function (request, response) { } 
+    - 이 익명함수는 http.createServer의 두번째 인자로 전달되는 함수이며 http.createServer 결과로 생성된 server 객체에 
+      request 이벤트가 발생 시(클라이언트로부터 request를 받았을 때) 실행되는 함수이다.
     - 익명함수의 인자 request는 객체로서 http통신으로 받은 요청메세지에 대한 객체이다. 
+    - 익명함수의 인자 response는 객체로서 http통신으로 내보낼 응답메세지에 대한 객체이다. 
     - http.clientRequest 객체는 http.request()로부터 반환된 내부적으로 생성된 객체이다.
     - http.serverResponse 객체는 http 서버에 의해 내부적으로 생성되며(사용자에 의해서가 아니라,), 
       request(요청) 이벤트의 2번째 인자로 전달된다.
+    - 위의 http.createServer() 메서드의 반환을 변수에 대입하였고, 그 반환물을 console.log(app)로 출력하니 아래의 
+      결과물이 prompt창에 나온다.
+      
+~~~Java Script
+C:\Users\HBYU\Desktop\web2-nodejs>node main.js
+<ref *1> Server {
+  maxHeaderSize: undefined,
+  insecureHTTPParser: undefined,
+  _events: [Object: null prototype] {
+    request: [Function (anonymous)],
+    connection: [Function: connectionListener]
+  },
+  _eventsCount: 2,
+  _maxListeners: undefined,
+  _connections: 1,
+  _handle: TCP {
+    reading: false,
+    onconnection: [Function: onconnection],
+    [Symbol(owner_symbol)]: [Circular *1]
+  },
+  _usingWorkers: false,
+  _workers: [],
+  _unref: false,
+  allowHalfOpen: true,
+  pauseOnConnect: false,
+  httpAllowHalfOpen: false,
+  timeout: 0,
+  keepAliveTimeout: 5000,
+  maxHeadersCount: null,
+  maxRequestsPerSocket: 0,
+  headersTimeout: 60000,
+  requestTimeout: 0,
+  _connectionKey: '6::::3000',
+  [Symbol(IncomingMessage)]: [Function: IncomingMessage], // 아무래도 이 심볼 객체가 request 인자에 전달되는 듯
+  [Symbol(ServerResponse)]: [Function: ServerResponse], // 아무래도 이 심볼 객체가 response 인자에 전달되는 듯
+  [Symbol(kCapture)]: false,
+  [Symbol(async_id_symbol)]: 2
+}
+~~~
 
 ## 3. url.parse(urlString[, parseQueryString[, slashesDenoteHost]]) { }  
     - urlString은 구문분석(parse)할 URL 문자열이다.
     - parseQueryString의 자리에 오는 값은 true 또는 false를 사용하는데, 만약 true를 쓰면, query 속성이 querystring 모듈의 
       parse메서드에 의해 반환된 객체에 항상 포함된다. 
+    - 예) var queryData = url.parse(_url, true).query;
+~~~Java Script
+C:\Users\HBYU\Desktop\web2-nodejs>node main.js
+/?id=hello // var _url = request.url 반환 값(도메인 뒤 url전체 반환)
+[Object: null prototype] { id: 'hello' } 
+// var queryData = url.parse(_url, true).query 반환 값(querystring을 구문분석하여 객체로 반환)
+/     // var pathname = url.parse(_url, true).pathname 반환 값(도메인 뒤 ? 이전  / 만 반환)
+~~~
+    - 아래는 url.parse(_url, true) 만 출력한 경우, 웹브라우저에서 a 태그를 클릭할 때마다 prompt창에서 뜨는 결과
+~~~Java Script
+C:\Users\HBYU\Desktop\web2-nodejs>node main.js
+Url { // 홈페이지 클릭할 경우
+  protocol: null,
+  slashes: null,
+  auth: null,
+  host: null,
+  port: null,
+  hostname: null,
+  hash: null,
+  search: null,
+  query: [Object: null prototype] {},
+  pathname: '/',
+  path: '/',
+  href: '/'
+}
+Url { // HTML 창 클릭할 경우
+  protocol: null,
+  slashes: null,
+  auth: null,
+  host: null,
+  port: null,
+  hostname: null,
+  hash: null,
+  search: '?id=HTML',
+  query: [Object: null prototype] { id: 'HTML' },
+  pathname: '/',
+  path: '/?id=HTML',
+  href: '/?id=HTML'
+}
+Url { // HTML 창에서 create 클릭할 경우
+  protocol: null,
+  slashes: null,
+  auth: null,
+  host: null,
+  port: null,
+  hostname: null,
+  hash: null,
+  search: null,
+  query: [Object: null prototype] {},
+  pathname: '/create',
+  path: '/create',
+  href: '/create'
+}
+Url { // HTML 창에서 create 창에서 내용 작성 후 submit 버튼 누른 후
+  protocol: null,
+  slashes: null,
+  auth: null,
+  host: null,
+  port: null,
+  hostname: null,
+  hash: null,
+  search: null,
+  query: [Object: null prototype] {},
+  pathname: '/create_process',
+  path: '/create_process',
+  href: '/create_process'
+}
+Url { // HTML 창에서 create 창에서 내용 작성 후 submit 버튼 누른 후 서버에서 응답 받았을 때
+  protocol: null,
+  slashes: null,
+  auth: null,
+  host: null,
+  port: null,
+  hostname: null,
+  hash: null,
+  search: '?id=dsfsd',
+  query: [Object: null prototype] { id: 'dsfsd' },
+  pathname: '/',
+  path: '/?id=dsfsd',
+  href: '/?id=dsfsd'
+}
+
+~~~
+
     - url.parse() 메서드는 URL string을 가져와서, 구문분석을 하며, URL 객체를 반환한다.
     * 기억할 점: node.js 공홈 명세에 적히기로는 url.parse() method 사용이 권장되지 않는다고 한다. 개발자는 WHATWG URL API를 사용해야한다.
     - 왜냐면 url.parse() method 는 url을 구문분석할때 관대하고 비표준의 알고리즘을 사용하기에, 보안상 문제가 생길 수 있다. 
@@ -37,7 +163,20 @@
     - statusMessage는 사람이 읽을 수 있는 응답메시지이다. 200의 의미로 OK를 적음
     - headers는 응답헤더이다.
     - response.end(인자)메서드가 호출되기 전에 호출되어야 한다.
-    
+    - 아래의 내용은 main.js 파일에
+      console.log(response.writeHead(302, { Location: `/` })); 하여 프롬프트 창에 뜬 결과이다.
+      
+~~~Java Script
+// <ref *2> ServerResponse { } 객체의 많은 키 중에 _header 값만 아래에 카피해 놓았다
+// status 값과 Location: 에 response.writeHead(302, { Location: `/` })에 적은 것이 들어 가있다. 
+_header: 'HTTP/1.1 302 Found\r\n' +
+    'Location: /\r\n' +
+    'Date: Tue, 15 Feb 2022 07:15:10 GMT\r\n' +
+    'Connection: keep-alive\r\n' +
+    'Keep-Alive: timeout=5\r\n' +
+    'Transfer-Encoding: chunked\r\n' +
+    '\r\n',
+~~~~
 
 ## 6. response.end([data[, encoding]][, callback]){ }  
     - 이 메서드는 모든 응답헤더와 바디가 보내어졌음을 서버에게 신호를 보내는 의미다.
@@ -46,11 +185,12 @@
     - callback함수는 응답 스트림이 다 끝나고 수행되는 함수이다.
     
     
-## 7. fs.readdir('./data', function (error, filelist) {
-    - fs.readdir(path[, options], callback) 메서드
+## 7. fs.readdir(path[, options], callback){ }
+    - 예: fs.readdir('./data', function (error, filelist) 
     - path는 문자열, URL, 버퍼가 됨
     - option은 인코딩 방식이나, fileType이 옴
-    - callback함수는 (err, files) 두 인자를 받는데, files인자는 '.' 과'..'을 제외한  다이렉터리 내  파일들의 이름의 배열을 가지고 있다.
+    - fs.readdir함수 수행 후 callback함수는 (err, files) 두 인자를 받는데, 
+      iles인자는 '.' 과'..'을 제외한  다이렉터리 내  파일들의 이름의 배열을 가지고 있다.
    
    
 ## 8. path.parse(queryData.id).base 
@@ -79,8 +219,8 @@
     - 비동기적으로 파일의 전체 내용을 읽어들인다. 
     - path는 파일이름이나 파일 경로이다.
     - option은 파일 인코딩 방식 등 올 수 있다.
-    - callback 함수는  err와 data 2개의 인자를 전달 받는다. 
- 
+    - callback 함수는  err와 data 2개의 인자를 전달 받는다. 그 중 The callback is passed two arguments (err, data), where data is the contents of the file.
+    - data인자는 파일의 내용을 담고 있다.
  ~~~Java Script
 import { readFile } from 'fs';   
 // 예전에는 var fs = require('fs') 하는 식으로 모듈을 불러들였는데 자바스크립트 ECMA 스크립트 버전이 업그레이드 되면서 
@@ -148,12 +288,52 @@ myEmitter.emit('event');
 ##  11-2. 객체.on('end', function () { }  
     - 위의 11번의 설명을 토대로 
     - request 라는 객체에 end 라는 이벤트가 발생시 실행시킬 함수를 추가한다. 
+    - 아래의 예는 main.js에 적힌 코드 
+~~~Java Script
+  var body = '';
+    request.on('data', function (data) {
+
+      body = body + data;
+      
+
+    });
+
+    request.on('end', function () {
+      console.log(body);
+      var post = qs.parse(body);
+      console.log(post);
+      var id = post.id;
+      var title = post.title;
+      var description = post.description;
+  
+      fs.rename(`data/${id}`, `data/${title}`, function (error) {
+        fs.writeFile(`data/${title}`, description, 'utf8', function (err) {
+          response.writeHead(302, { Location: `/?id=${title}` });
+          response.end();
+
+        });
+      });
+    })
+    
+~~~  
+    - 프롬프트 창 결과물
+~~~Java Script
+C:\Users\HBYU\Desktop\web2-nodejs>node main.js
+id=JS&title=JS&description=JS+is...hehefdfd //   console.log(body); 한 값(update_process form 에서 받은 값)
+// form 에서 name 속성에 대한 id 값을 key와 value의 쌍으로 &로 연결되어 body로 표현 됨
+[Object: null prototype] { //  console.log(post); 한 값 (body를 parse하여 객체로 만듬)
+  id: 'JS',
+  title: 'JS',
+  description: 'JS is...hehefdfd'
+}
+~~~
+
 
 ##  13. fs.writeFile(file, data[, options], callback){ }  
     - file: filename 이나 file descriptor 명시
     - data: 파일에 적힐 내용
     - options: 생략가능하며, 파일 인코딩 방식 등이 올 수 있다. (utf8)(데이터가 버퍼 면 생략)
-    - callback: 파일이 create 된 후 호출될 함수
+    - callback: 파일이 성공적으로 create 된 후 호출될 함수
     - 예시: fs.writeFile(`data/${title}`, description, 'utf8', function (err) { }
     - 파일명이 존재하면 파일 내용(description)응 수정하고, 파일명이 없으면, 새로 파일 생성하여 파일 내용을 적는다. 
 
