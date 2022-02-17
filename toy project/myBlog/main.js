@@ -40,9 +40,9 @@ function templateList(filelist) {
 
 var server = http.createServer((request, response) => {
 
+
   var _url = request.url; // 프롬프트에 출력해보면 <ref *1>IncomingMessage 객체에 url 키 가 있다. 서버로 들어온 url 웹주소 전체를 받음('/' 포함)
   var queryData = url.parse(_url, true).query;
-
   //url 모듈로 _url 구문분석하여 객체로 만듬 , 객체 내 에 query 속성이 있음.
   // / true이면 id? 다음에 오는 foo=bar&abc=xyz&abc=123%27를 객체로 반환
   // 2번째 인자인 true가 없으면 객체가 안되고, string 으로만 나옴
@@ -51,33 +51,38 @@ var server = http.createServer((request, response) => {
 
   if (pathname === '/') { // localhost:4000만 쳐도 프롬프트에 pathname은 '/'로 나옴
     if (queryData.id === undefined) {
-      fs.readdir("./data", function(error, filelist){
+      fs.readdir("./data", function (error, filelist) {
         var title = ``;
         var description = ``;
         var list = templateList(filelist);
-        var HTML = templateHtml(title, list,description,
+        var HTML = templateHtml(title, list, description,
           `<h3><a href="/create">create</a></h3>`
-          );
+        );
         response.writeHead(200); // 파일을 성공적으로 전송
         response.end(HTML);
       });
-    }else{
-      fs.readdir('./data', function(error, filelist){
-        fs.readFile(`./data/${queryData.id}`, 'utf8', function(error, description){
-        var title = queryData.id;
-        var description = description;
-        var list = templateList(filelist);
-        var HTML = templateHtml(title, list,description,
-          `<h3><a href="/create">create</a> <a href="/update">update</a></h3>`
+    } else {
+      fs.readdir('./data', function (error, filelist) {
+        fs.readFile(`./data/${queryData.id}`, 'utf8', function (error, description) {
+          var title = queryData.id;
+          var description = description;
+          var list = templateList(filelist);
+          var HTML = templateHtml(title, list, description,
+            `<h3><a href="/create">create</a> <a href="/update?id=${title}">update</a> </h3>
+            <form action="/delete" method="post">
+            <input type="hidden" name="id" value='${title}' />
+            <input type="submit" value="delete">
+            </form>         
+            `
           );
-        response.writeHead(200); // 파일을 성공적으로 전송
-        response.end(HTML);
+          response.writeHead(200); // 파일을 성공적으로 전송
+          response.end(HTML);
         })
       })
     }
-  }else if(pathname === '/create'){
+  } else if (pathname === '/create') {
 
-    fs.readdir('./data', function(error, filelist){
+    fs.readdir('./data', function (error, filelist) {
       var title = '';
 
       var list = templateList(filelist);
@@ -93,66 +98,98 @@ var server = http.createServer((request, response) => {
       </p>
         `,
         ``);
-      
+
+      response.writeHead(200); // 파일을 성공적으로 전송
+      response.end(HTML);
+
+    })
+  } else if (pathname === "/create_process") {
+    var body = '';
+    request.on('data', function (data) {
+      body = body + data;
+    })
+    request.on('end', function () {
+      var post = qs.parse(body);
+      var title = post.title;
+      var description = post.description;
+
+      fs.writeFile(`./data/${title}`, description, function (err) {
+        response.writeHead(302, { 'Location': `/?id=${title}` });
+        response.end('');
+      });
+    });
+
+  } else if (pathname === "/update") {
+
+    fs.readdir('./data', function (error, filelist) {
+      fs.readFile(`./data/${queryData.id}`, 'utf-8', function (error, description) {
+
+        var title = queryData.id;
+        var list = templateList(filelist);
+        var HTML = templateHtml(``, list, // 적을때 따옴표까지 잘지켜서 적어야 한다. 
+          `
+          <form action="/update_process" method="post">
+          <input type="hidden" name="id" value="${title}">
+          <p><input type="text" name="title" value="${title}"></p>
+          <p>
+          <textarea name="description" placeholder="description">${description}</textarea>
+          </p> 
+          <p>
+          <input type="submit" value="submit">
+          </p>
+          </form>
+          `,
+          `<a href="/create">create</a> <a href="/update?id=${title}">update</a>`)
         response.writeHead(200); // 파일을 성공적으로 전송
         response.end(HTML);
 
-    })
-  }else if(pathname === "/create_process"){
-    var body ='';
-    request.on('data', function(data){
+      });
+    });
+
+
+  } else if (pathname === "/update_process") {
+
+    var body = '';
+    request.on('data', function (data) {
       body = body + data;
     })
-    request.on('end', function(){ 
-    var post = qs.parse(body);
-    var title = post.title;
-    var description = post.description;
+    request.on('end', function () {
+      var post = qs.parse(body);
+      var id = post.id;
+      var title = post.title;
+      var description = post.description;
 
-    fs.writeFile(`./data/${title}`, description, function(err){
-      response.writeHead(302, { 'Location' : `/?id=${title}`});
-      response.end('');
+      fs.rename(`./data/${id}`, `./data/${title}`, function(err){
+      fs.writeFile(`./data/${title}`, description, function (err) {
+        response.writeHead(302, { 'Location': `/?id=${title}` });
+        response.end('');
+      });
     });
-    });
+  });
 
-  }else if(pathname === "/update"){
-    console.log(request);
-    console.log(_url);
-    console.log(url.parse(_url, true));
-    fs.readdir('./data', function(error, filelist){
-      fs.readFile(`./data/${queryData.id}`, function(){
+    } else if (pathname === "/delete") { 
 
-        var title = '';
-        var description ='';
-        var list = templateList(filelist);
-        var HTML = templateHtml(title, list,
-          `
-          <form action="/update_process" method="post">
-          <p><input type="hidden" name="id"></p>
-          <p><input type="text" name="title"</p>
-          <p><input type="submit" value="submit">
-          </form>
-          `,
-          `
-          `)
+      var body = '';
+      request.on('data', function(data){
+        body = body + data;
+
+      });
+
+    
+      request.on('end', function(){
+        var post = qs.parse(body);
+        console.log(post);
+        var id = post.id;
+        fs.unlink(`./data/${id}`, function(err){
+
+          response.writeHead(302, {Location: `/`});
+          response.end('');
+        });
   
-      })
-
-   
-
-    })
-
-
-
-
-
-
-
-
-
-  }else if(pathname === "update_process"){}
-
-
-
+      });
+ 
+    }
+    
 
 
 });
