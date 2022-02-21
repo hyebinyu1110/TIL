@@ -26,17 +26,17 @@ var app = http.createServer(function (request, response) {
   } else if (pathname === "/delete_process") {
     topic.delete_process(request, response);
   }else if(pathname === "/author"){
-    author.page(request, response);
-  }else if(pathname === "/author_create"){
-    author.author_create(request, response);
-  }else if(pathname === "/author_create_process"){
-    author.author_create_process(request, response);
-  }else if(pathname === "/author_update"){
-    author.author_update(request, response);
-  }else if(pathname === "/author_update_process"){
-    author.author_update_process(request, response);
-  }else if(pathname === "/delete_process"){
-    author.author_delete_process(request, response);
+    author.home(request, response);
+  }else if(pathname === "/author/create"){
+    author.create(request, response);
+  }else if(pathname === "/author/create_process"){
+    author.create_process(request, response);
+  }else if(pathname === "/author/update"){
+    author.update(request, response);
+  }else if(pathname === "/author/update_process"){
+    author.update_process(request, response);
+  }else if(pathname === "/author/delete_process"){
+    author.delete_process(request, response);
   }else{
 
   }
