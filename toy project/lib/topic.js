@@ -2,6 +2,7 @@ var db = require('./db.js');
 var template = require('./template.js');
 var url = require('url'); // 모듈 url
 var qs = require('querystring');
+var sanitizeHTML = require('sanitize-html');
 
 
 exports.home = function(request, response){
@@ -11,7 +12,8 @@ db.query(`SELECT * FROM topic`, function(error, topics){
     var description = 'Hello, node.js'
     var list = template.list(topics);
     var HTML = template.HTML(title, list,
-     `<h2>${title}</h2>${description}`,
+     `<h2>${title}</h2>
+     ${description}`,
      `<a href="/create">create</a>`);
     response.writeHead(200); // 파일을 성공적으로 전송
     response.end(HTML);
@@ -26,27 +28,34 @@ exports.page = function(request, response){
         if(error){
           throw error;        
         }
-        db.query(`SELECT * FROM topic LEFT JOIN author ON topic.author_id = author.id WHERE topic.id=? `, [queryData.id], function(error2, topic){
+   //  var sql = `SELECT * FROM topic LEFT JOIN author ON topic.author_id = author.id WHERE topic.id=${db.escape(queryData.id)}`;
+  // console.log(sql);
+  // var query = db.query(sql, function(error2, topic){
+  // db.js에 multipleStatement: true 와 여기에서 db.escape(queryData.id)보단 아래의 코드가 더 편하다. 내가 이유를 모르면 multipleStatement: true로 해놓지 말것
+      var query = db.query(`SELECT * FROM topic LEFT JOIN author ON topic.author_id = author.id WHERE topic.id=? `, [queryData.id], function(error2, topic){
           // 사용자가 입력한 값은 신용하면 안되기 때문에 id=?로 해놓고 두번째 인자에 id값을 넣음 그래서 ?로 두번째 인자가 치환됨. 두번째인자가 공격의 여지가 있는 것을 알아서 세탁해줌.
           if(error2){
             throw error2;        
           }
-        console.log(topic);
+ 
         var title = topic[0].title;
         var description = topic[0].description;
         var list = template.list(topics);
         var HTML = template.HTML(title, list,
-         `<h2>${title}</h2>${description}
-           <p> by ${topic[0].name }<p>`,
+         `<h2>${sanitizeHTML(title)}</h2>
+         ${sanitizeHTML(description)}
+           <p> by ${sanitizeHTML(topic[0].name)}<p>`,
          `<a href="/create">create</a>
-                <a href="/update?id=${queryData.id}">update</a>
+               <a href="/update?id=${queryData.id}">update</a>
                <form action="delete_process" method="post">
                <input type="hidden" name="id" value="${queryData.id}">
                <input type="submit" value="delete">
                </form>`
          );
+         
          response.writeHead(200); // 파일을 성공적으로 전송
          response.end(HTML);
+     
         });
        });
     }
@@ -63,7 +72,7 @@ exports.page = function(request, response){
               }
       
               var list = template.list(topics);
-              var HTML = template.HTML(title, list,
+              var HTML = template.HTML(sanitizeHTML(title), list,
                `
                <form action="/create_process" method="post">
                <p><input type="text" name="title" placeholder="title"></p>
@@ -129,11 +138,11 @@ exports.page = function(request, response){
                   }
           
                   var list = template.list(topics);
-                  var HTML = template.HTML(topic[0].title, list,
+                  var HTML = template.HTML(sanitizeHTML(topic[0].title), list,
                     `
                   <form action="/update_process" method="post">
                   <input type="hidden" name="id" value="${topic[0].id}">
-                  <p><input type="text" name="title" value="${topic[0].title}"></p>     
+                  <p><input type="text" name="title" value="${sanitizeHTML(topic[0].title)}"></p>     
                   <p>
                   <textarea name="description" placeholder="description">${topic[0].description}</textarea>
                   </p>
