@@ -23,7 +23,6 @@
       - 읽기, 수정, 삭제가 가능하다는 말이다. 
 
 
-
 ## 0. 데이터베이스의 본질
 - 참조: [생황코딩 데이터베이스의 본질](https://www.youtube.com/watch?v=2S6H6URQiY8)
 
@@ -104,7 +103,7 @@ var query = db.query(`SELECT * FROM topic LEFT JOIN author ON topic.author_id = 
 
 ## 5. how to escape query values (질의문의 값을 빠져나오게 하는 방법) => 데이터베이스 보안과 관련
        - npm 웹사에 있는 영어문장을 번역하면서 한번 더 문장의 뜻을 생각하게 되었다. 
-       - 보통은 sql 질의 구문은 query=value 이렇게 구성되어있다. 하지만 query=? 이렇게 표기함으로써 문법상 원래 질의문 뒤에 와야 하는 값을
+       - 보통은 sql 질의 구문은 'query=value' 이렇게 구성되어있다. 하지만 'query=?' 이렇게 표기함으로써 문법상 원래 질의문 뒤에 와야 하는 값을
          다른 곳에 위치하도록하는 방법을 escape query values를 의미하는 것 같다. 
        - 질의문의 값을 빠져나오것은 오직 NO_BACKSLASH_ESCAPES SQL mode 가 disabled(작동꺼져 있음)으로 되어있어야 작동한다.
         (MySQL 기본모드는 disabled이다.)
@@ -148,30 +147,29 @@ connection.query('UPDATE users SET foo = ?, bar = ?, baz = ? WHERE id = ?',
 ~~~
 
 ## 6. sanitize-html
-- 참조: [npm 웹사이트 sanitize-html 파트](https://www.npmjs.com/package/sanitize-html)
-- sanitize-html 모듈은 이해하기 쉬운 API를 가진 간단한 HTML 청소기?? 이다.
+    - 참조: [npm 웹사이트 sanitize-html 파트](https://www.npmjs.com/package/sanitize-html)
+    - sanitize-html 모듈은 이해하기 쉬운 API를 가진 간단한 HTML 세정기(??) 이다.
 - sanitize-html는 인내심이 많습니당. 풍부한 text editor들이나 CKEditor에 의한 만들어진 HTML 조각들을 청소하는데 적합합니다.
 - sanitize-html은 당신이 허용하는 태그와 그 태그에 허용되는 속성을 명세화하도록합니다.
 
 <사용방법>
-- on 브라우저: 먼저 생각하세요. 당신은 왜 sanitize-html 모듈을 브라우저에서 사용하려는 겁니까? 기억하세요. 서버는 브라우저를 절대 신용해서는 안됩니다.
+ 1) 브라우저 상 : 먼저 생각하세요. 당신은 왜 sanitize-html 모듈을 브라우저에서 사용하려는 겁니까? 기억하세요. 서버는 브라우저를 절대 신용해서는 안됩니다.
 - 당신은 서버에 저장하기위해 다른 어디에서도 HTML를 깨끗하게 할수 없고 오직 서버에서만 HTML를 깨끗하게 할 수 있습니다.
-How to use
-Browser
-Think first: why do you want to use it in the browser? Remember, servers must never trust browsers. 
-You can't sanitize HTML for saving on the server anywhere else but on the server.
+- (Think first: why do you want to use it in the browser? Remember, servers must never trust browsers. 
+    You can't sanitize HTML for saving on the server anywhere else but on the server.)
 - 그러나 어쩌면 당신은 미리보기를 위해 브라우저에서 즉시 정화된 HTML을 보기를 원할지도 모릅니다. 
 - 아니면 모든 페이지를 로드할때 정화작업하기를 브라우저에게 요청하세요. 당신이 원한다면 할수 있습니다!
-- 패키지 install하는 방법; npm install sanitize-html or yarn add sanitize-html
+- 패키지 install하는 방법; ' npm install sanitize-html or yarn add sanitize-html '
 
-- 2.x 로 시작하는 sanitize-html 버전에서의 주된 변화는 더이상 브라우저 사용을 위해 준비된 build를 포함하지 않는다는 겁니다.
+- 2.x로 시작하는 sanitize-html 버전에서의 주된 변화는 더이상 브라우저 사용을 위해 준비된 build를 포함하지 않는다는 겁니다.
 - 개발자들은 다른 종속성에 하는것과 마찬가지로 webpack과 같은 그들의 프로젝트 빌드내부에 sanitize-html을 포함하도록 예측되어 집니다.
 - 그리하여 sanitize-html은 더이상 HTML내부에서 직접적으로 연결되도록 준비되지 않는 반면에, 개발자들은 이제 더 쉽게 그들의 필요에 따라 sanitize-html을 처리할 수 있습니다.
 
 - 다른 프로젝트 자바스크립트를 가진 브라우저에 일단 코드가 만들어지고, 연결되면, sanitize-html은 프론트엔드 코드 상에 있는 HTML 문자열을 깨끗하게 소독하도록 사용됩니다. 
 
-Once built and linked in the browser with other project Javascript, it can be used to sanitize HTML strings in front end code:
+- 브라우저 상에서 들어오는 입력값(query의 값은 모두 서버상 sanitize 되도록 미리 설정해둘 것!)
 
+~~~Java Script
 import sanitizeHtml from 'sanitize-html';
 
 const html = "<strong>hello world</strong>";
@@ -179,12 +177,12 @@ console.log(sanitizeHtml(html));
 console.log(sanitizeHtml("<img src=x onerror=alert('img') />"));
 console.log(sanitizeHtml("console.log('hello world')"));
 console.log(sanitizeHtml("<script>alert('hello world')</script>"));
-Node (Recommended)
-Install module from console:
+~~~
 
-npm install sanitize-html
-Import the module:
+ 2) nodedjs 상(추천되는 방법): 콘솔에 모듈을 먼저 설치 할것 ' npm install sanitize-html '
+- 그 다음 .js 파일에서 모듈을 import 하기
 
+~~~Java Script
 // In ES modules
 import sanitizeHtml from 'sanitize-html';
 
@@ -194,9 +192,8 @@ Use it in your JavaScript app:
 
 const dirty = 'some really tacky HTML';
 const clean = sanitizeHtml(dirty);
-That will allow our default list of allowed tags and attributes through. It's a nice set, but probably not quite what you want. So:
-
-// Allow only a super restricted set of tags and attributes
+// 위의 sanitizeHTML(dirty) 는 디폴트로 허용된 태그와 속성만 남겨둡니다. 디폴트 리스트에 적힌 태그와 속성은 잘 만들어져있지만
+// 어쩌면 당신이 원하는 태그와 속성이 아닐지도 모르니 아래와 같이 당신이 원하는 태그들과 속성들을 명세화하세요.
 const clean = sanitizeHtml(dirty, {
   allowedTags: [ 'b', 'i', 'em', 'strong', 'a' ],
   allowedAttributes: {
@@ -204,16 +201,9 @@ const clean = sanitizeHtml(dirty, {
   },
   allowedIframeHostnames: ['www.youtube.com']
 });
-Boom!
+
+~~~
+
+     - 완성되었습니다!
 
  
-
-## 2. var mysql = require('mysql');
-     var db = mysql.createConnection({
-     host: 'localhost',
-     user: 'root',
-     password: 'hby6362488',
-     database: 'dotconnector',
-    }); 
-    db.connect();
-    module.exports = db;
