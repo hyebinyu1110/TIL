@@ -1,3 +1,4 @@
+~~~ Java Script
 var db = require('./db.js');
 var template = require('./template.js');
 var url = require('url'); // 모듈 url
@@ -103,3 +104,4 @@ throw error1;
 })
   })
 }
+~~~
