@@ -1,73 +1,195 @@
-//   module.exports = template;
-var sanitizeHTML = require('sanitize-html'); // 사용자가 작성가능한 곳을 sanitizeHTML을 사용하여 오염 방지
-module.exports = {
+var db = require('./db.js');
+var template = require('./template.js');
+var url = require('url'); // 모듈 url
+var qs = require('querystring');
+var sanitizeHTML = require('sanitize-html');
 
-  HTML: function(title, list, body, control) {
-    return `
-    <!doctype html>
-    <html>
-    <head>
-    <title>WEB2 - ${title}</title>
-   <meta charset="utf-8">
-   </head>
-   <body>
-   <h1><a href="/">WEB2</a></h1>
-   <a href="/author">author</a>
-  <p> 
-  ${list}
-  </p>
-  ${control}
-  ${body}
-   </body>
-   </html>
-  `
-  },
 
-  list: function (topics) {
-    var list = '<ul>';
-    var i = 0;
-    while (i < topics.length) {
-      list = list + `<li><a href="/?id=${topics[i].id}">${sanitizeHTML(topics[i].title)}</a></li>`;
-      i = i + 1;
+exports.home = function(request, response){
+
+db.query(`SELECT * FROM topic`, function(error, topics){
+    var title = 'welcome';
+    var description = 'Hello, node.js'
+    var list = template.list(topics);
+    var HTML = template.HTML(title, list,
+     `<h2>${title}</h2>
+     ${description}`,
+     `<a href="/create">create</a>`);
+    response.writeHead(200); // 파일을 성공적으로 전송
+    response.end(HTML);
+  });
+
+} 
+
+exports.page = function(request, response){
+    var _url = request.url;
+  var queryData = url.parse(_url, true).query;
+    db.query(`SELECT * FROM topic`, function(error, topics){
+        if(error){
+          throw error;        
+        }
+   //  var sql = `SELECT * FROM topic LEFT JOIN author ON topic.author_id = author.id WHERE topic.id=${db.escape(queryData.id)}`;
+  // console.log(sql);
+  // var query = db.query(sql, function(error2, topic){
+  // db.js에 multipleStatement: true 와 여기에서 db.escape(queryData.id)보단 아래의 코드가 더 편하다. 내가 이유를 모르면 multipleStatement: true로 해놓지 말것
+      var query = db.query(`SELECT * FROM topic LEFT JOIN author ON topic.author_id = author.id WHERE topic.id=? `, [queryData.id], function(error2, topic){
+          // 사용자가 입력한 값은 신용하면 안되기 때문에 id=?로 해놓고 두번째 인자에 id값을 넣음 그래서 ?로 두번째 인자가 치환됨. 두번째인자가 공격의 여지가 있는 것을 알아서 세탁해줌.
+          if(error2){
+            throw error2;        
+          }
+ 
+        var title = topic[0].title;
+        var description = topic[0].description;
+        var list = template.list(topics);
+        var HTML = template.HTML(title, list,
+         `<h2>${sanitizeHTML(title)}</h2>
+         ${sanitizeHTML(description)}
+           <p> by ${sanitizeHTML(topic[0].name)}<p>`,
+         `<a href="/create">create</a>
+               <a href="/update?id=${queryData.id}">update</a>
+               <form action="delete_process" method="post">
+               <input type="hidden" name="id" value="${queryData.id}">
+               <input type="submit" value="delete">
+               </form>`
+         );
+         
+         response.writeHead(200); // 파일을 성공적으로 전송
+         response.end(HTML);
+     
+        });
+       });
     }
-    list = list + '</ul>';
-    return list;
-  },
 
-  authorSelect: function(authors){
-    var tag = '';
-    var i = 0;
-    while(i < authors.length){
-      tag += `<option value="${authors[i].id}">${sanitizeHTML(authors[i].name)}</option>`;
-      i++;
-    }
-    return `
-    <p>
-    ${template.authorSelect(authors)} 
-    </p>
-    `
-  },
+       exports.create = function(request, response){
+        db.query(`SELECT * FROM topic`, function(error, topics){
+            db.query(`SELECT * FROM author`, function(error2, authors){
+              var title = 'Create';
+              var tag = '';
+              var i = 0;
+              while(i < authors.length){
+                tag += `<option value="${authors[i].id}">${authors[i].name}</option>`;
+                i++;
+              }
+      
+              var list = template.list(topics);
+              var HTML = template.HTML(sanitizeHTML(title), list,
+               `
+               <form action="/create_process" method="post">
+               <p><input type="text" name="title" placeholder="title"></p>
+               <p>
+               <textarea name="description" id="" cols="30" rows="10" placeholder="description"></textarea>
+               </p>
+               <p>
+               <select name="author">
+               ${tag}
+               </select>
+               </p>
+               <p>
+               <input type="submit">
+               </p>
+               </form>
+               `,
+               `<a href="/create">create</a>`);
+              response.writeHead(200); // 파일을 성공적으로 전송
+              response.end(HTML);
+            });
+            });
 
-  table: function(authors){
+        }
     
-      var i = 0;
-      var table = '<table border=1 style="border-collapse:collapse">';
-      table += '<tr><td>id</td><td>name</td><td>profile</td><td colspan=2>edit</td></tr>';
-      while (i < authors.length) {
-          table += `<tr><td>${authors[i].id}</td><td>${sanitizeHTML(authors[i].name)}</td><td>${sanitizeHTML(authors[i].profile)}</td>
-          <td><a href="/author/update?id=${authors[i].id}">update</a> </td>
-          <td><form action="/author/delete_process" method="post">
-          <input type="hidden" name="id" value="${authors[i].id}">
-          <input type="submit" value="delete">
-          </form> </td></tr>    
-          `            
-          ;
-          i++;
-      }
-      table += '</table>';
-      return table;
-  }
-  
-  };
-  
+        exports.create_process = function(request, response){
 
+            var body = '';
+            request.on('data', function (data) {
+        
+              body = body + data;
+            });
+        
+            request.on('end', function () {
+        
+              var post = qs.parse(body);
+                db.query(
+                  `INSERT INTO topic (title, description, created, author_id)
+                   VALUES(?, ?, NOW(), ?)`,
+                   [post.title, post.description, post.author], 
+                   function(error, result){
+                if(error){
+                  throw error;
+                }
+                response.writeHead(302, {Location: `/?id=${result.insertId}`});
+                response.end('');
+              }
+              )
+            });
+        }
+
+        exports.update = function(request, response){
+            var _url = request.url;
+            var queryData = url.parse(_url, true).query;
+
+            db.query(`SELECT * FROM topic`, function (error, topics) {
+                if (error) {
+                  throw error;
+                }
+                db.query(`SELECT * FROM topic WHERE id=?`, [queryData.id], function (error2, topic) {
+                  // 사용자가 입력한 값은 신용하면 안되기 때문에 id=?로 해놓고 두번째 인자에 id값을 넣음 그래서 ?로 두번째 인자가 치환됨. 두번째인자가 공격의 여지가 있는 것을 알아서 세탁해줌.
+                  if (error2) {
+                    throw error2;
+                  }
+          
+                  var list = template.list(topics);
+                  var HTML = template.HTML(sanitizeHTML(topic[0].title), list,
+                    `
+                  <form action="/update_process" method="post">
+                  <input type="hidden" name="id" value="${topic[0].id}">
+                  <p><input type="text" name="title" value="${sanitizeHTML(topic[0].title)}"></p>     
+                  <p>
+                  <textarea name="description" placeholder="description">${topic[0].description}</textarea>
+                  </p>
+                  <p>
+                  <input type="submit">
+                  </p>
+                  </form>
+                  `,
+                    `<a href="/create">create</a> <a href="/update?id=${topic[0].id}">update</a>`);
+                  response.writeHead(200); // 파일을 성공적으로 전송
+                  response.end(HTML);
+                });
+              });
+            }
+
+            exports.update_process = function(request, response){
+                var body = '';
+                request.on('data', function (data) {
+                  body = body + data;
+                });
+            
+                request.on('end', function () {
+                  var post = qs.parse(body);
+                  db.query(
+                    `UPDATE topic SET title=?, description=?, author_id=1 WHERE id=?`, [post.title, post.description, post.id], function (error, result) {
+                      if (error) {
+                        throw error;
+                      }
+                      response.writeHead(302, { Location: `/?id=${post.id}` });
+                      response.end('');
+                    })
+                });
+            }
+            exports.delete_process = function(request, response){
+                var body = '';
+                request.on('data', function (data) {
+                  body = body + data;
+                });
+                request.on('end', function () {
+                  var post = qs.parse(body);
+                  db.query(`DELETE FROM topic WHERE id = ?`, [post.id], function (error, result) {
+                    if (error) {
+                      throw error;
+                    }
+                    response.writeHead(302, { Location: `/` });  // 302는 redirection  을 의미
+                    response.end();
+                  })
+                });
+
+        }
