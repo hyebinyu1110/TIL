@@ -1,107 +1,89 @@
-~~~ Java Script
 var db = require('./db.js');
 var template = require('./template.js');
-var url = require('url'); // 모듈 url
+var url = require('url');
 var qs = require('querystring');
-var sanitizeHTML = require('sanitize-html');
 
-exports.home = function (request, response) {
-  db.query(`SELECT * FROM topic`, function (error, topics) {
-
-    if (error) {
-      throw error;
-    }
-    var title = 'welcome!';
-    var description = `It's hyebin's website`;
+exports.home = function(request, response){
+  db.query(`SELECT * FROM topic`, function(error, topics){
+    if(error) throw error;
+    var title ='<h2>welcome!</h2>';
+    var description = `Hello there,`;
     var list = template.list(topics);
-    var HTML = template.HTML(title, list,
-      `<p><a href='/create'>create</a></p>`,
-      description);
+    var HTML = template.HTML(title, list, 
+      `
+     <p> <a href="/create">create</a></p>
+      `
+      , description );
     response.writeHead(200);
     response.end(HTML);
 
-  });
+  })
 }
 
-exports.page = function (request, response) {
-
+exports.page = function(request, response){
   var _url = request.url;
   var queryData = url.parse(_url, true).query;
-
-  db.query(`SELECT * FROM topic`, function (error, topics) {
-
-    if (error) {
-      throw error;
-    }
-
-    db.query(`SELECT * FROM topic WHERE id=?`, [queryData.id], function (error2, topic) {
-      var title = 'welcome!';
+  db.query(`SELECT * FROM topic`, function(error, topics){
+    if(error) throw error;
+    db.query(`SELECT * FROM topic WHERE id=?`, [queryData.id], function(error2, topic){
+      var title = `<h2>${topic[0].title}</h2>`;
       var list = template.list(topics);
-      var HTML = template.HTML(title, list,
+      var HTML = template.HTML(title, list, 
         `
-    <p><a href='/create'>create</a>  <a href="/update">update</p>
-    <h2>${topic[0].title}</h2>
-    `,
-        topic[0].description);
+        <p> <a href="/create">CREATE</a>   <a href="/update?id=${queryData.id}">UPDATE</a> </p>
+        `,
+        topic[0].description
+        );
+        response.writeHead(200);
+        response.end(HTML);
+    })
+  })
+}
+
+
+
+exports.create = function(request, response){
+
+  db.query(`SELECT * FROM topic`, function(error, topics){
+
+    var title = ``;
+    var description = ``;
+
+    var list = template.list(topics);
+    var HTML = template.HTML(title, list,
+      `
+    <a href="/create">create</a> 
+      `,
+      `
+      <form action="/create_process" method="post">
+      <p><input type="text" placeholder="title" name="title" /></<p>
+      <p> <textarea name="description" placeholder="description"></textarea></<p>
+      <p><input type="submit" value="submit" /></p>
+      </form>
+      `);
+
       response.writeHead(200);
       response.end(HTML);
-    });
-  });
+
+
+  })
 }
 
-exports.create = function (request, response) {
 
-  var _url = request.url;
-  var queryData = url.parse(_url, true).query;
 
-  db.query(`SELECT * FROM topic`, function (error, topics) {
-    if (error) {
-      throw error;
-    }
-
-    var title = 'welcome!';
-    var list = template.list(topics);
-    var HTML = template.HTML(title, list,
-      `
-    <p><a href='/create'>create</a>  <a href="/update">update</p>
-    `,
-      `
-    <form action="/create_process" method="post">
-    <p><input type="text" name="title" placeholder="title"  />
-    <p> <textarea name="description" placeholder="description"></textarea></p>
-    <input type="submit" value="submit" />
-    </form>
-    `
-    );
-    response.writeHead(200);
-    response.end(HTML);
-
-  });
-}
-
-exports.create_process = function (request, response) {
-  db.query(`SELECT * FROM topic`, function(error1, topics){
-if (error1) {
-throw error1;
-}
+exports.create_process = function(request, response){
   var body = '';
-  request.on('data', function (data) {
+  request.on('data', function(data){
     body += data;
   })
-  request.on('end', function () {
+  request.on('end', function(){
     var post = qs.parse(body);
-    db.query(
-      `INSERT INTO topic (title, description, created, author_id)
-       VALUES(?, ?, NOW(), 1)`,
-       [post.title, post.description, post.author], 
-       function(error, result){
-    if(error){
-      throw error;
-    }
-    response.writeHead(302, {Location: `/?id=${result.insertId}`});
-    response.end('');
+    db.query(`INSERT INTO topic VALUES (title=?, description=?, created=NOW(), author_id=? )`,
+    [post.title, post.description, 1],
+    function(error, result){
+        if(error) throw error;
+        response.writeHead(302, { Location: `/?id=${result.insertId}`});
+        response.end('');
   })
 })
-  })
 }
-~~~
