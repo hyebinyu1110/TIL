@@ -1,3 +1,4 @@
+~~~ Java Script
 var db = require('./db.js');
 var template = require('./template.js');
 var url = require('url');
@@ -175,3 +176,4 @@ exports.delete_process = function(request, response){
     });
   })
 }
+~~~ 
