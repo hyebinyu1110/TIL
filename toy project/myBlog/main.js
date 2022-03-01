@@ -1,4 +1,4 @@
-~~~Java Script
+
 var http = require('http');
 var url = require('url'); // 모듈 url
 var topic = require('./lib/topic.js');
@@ -45,4 +45,4 @@ var app = http.createServer(function (request, response) {
 
 });
 app.listen(4000);
-~~~
+
