@@ -3,12 +3,8 @@ var template = require('./template.js');
 var url = require('url');
 var qs = require('querystring');
 var moment = require('moment'); // Importing the Moment.js module
-var date = moment(
-  moment.now(),
-    "dd MM DD YYYY"
-); // This is your query from MySQL
-
-let mydate = date.format("YYYY-MM-DD"); // Using moment.format() with the given format, it converts the date
+const { blob } = require('stream/consumers');
+var mydate = moment().format("YYYY-MM-DD(day)"); // Using moment.format() with the given format, it converts the date
 
 
 exports.home = function (request, response) {
@@ -52,8 +48,8 @@ exports.page = function (request, response) {
                 var id = topic[0].id;
                 var title = topic[0].title;
                 var description = `<pre>${topic[0].description}</pre>`;
-                var list = template.list(topics);
-                var HTML = template.HTML(title, list, description,
+               
+                var HTML = template.HTML(title, ``, description,
              
                     `
                 <a href="/create">create</a>
@@ -91,8 +87,7 @@ exports.create = function (request, response) {
         </p>
         </form>
         `
-        var list = template.list(topics);
-        var HTML = template.HTML(title, list, description,
+        var HTML = template.HTML(title, ``, description,
             control);
 
         response.writeHead(200);
@@ -146,7 +141,7 @@ exports.update = function(request, response){
             if(error1) throw error1;
 
             var list = template.list(topics);
-            var HTML = template.HTML(``, list, 
+            var HTML = template.HTML(``, ``, 
             `
             <form action="/update_process" method="post">
             <input type="hidden" name="id" value="${topic[0].id}">
@@ -221,4 +216,36 @@ request.on('end', function(){
         response.end('');
     })
 })
+}
+
+
+exports.search_process = function(request, response){
+    
+    var _url = request.url;
+    var queryData = url.parse(_url, true).query;
+   
+    console.log(queryData);
+        db.query(`SELECT * FROM topic WHERE title LIKE ?`, `%`+queryData.title+`%`, function(error, result){
+            if(error) throw error;
+
+            console.log(result);
+
+            if(result[0] = null){
+            var title = `result`;
+            var HTML = template.HTML(title, ``,
+            `
+           ${template.list(result)}
+         
+            `,
+            ``);
+        }else{
+
+            var title = `result`
+            var description = `sorry, couldn't find the content you wanted.`;
+            var HTML = template.HTML(title, ``,description, ``);
+        }
+            response.writeHead(200);
+            response.end(HTML);
+        })
+
 }
