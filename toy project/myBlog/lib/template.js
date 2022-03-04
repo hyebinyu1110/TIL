@@ -1,4 +1,3 @@
-
 //   module.exports = template;
 
 module.exports = {
@@ -14,22 +13,29 @@ module.exports = {
      a {
        decoration: none;
      }
-
      div{
        float: left;
      }
-
     
      </style>
      </head>
      <body>
      <h1><a href="/">sanitizeDIAMOND(💎);</a></h1>
      <br/>
+
+     <form action="/search_process" method="GET">
+     <input type="text" name="title" placeholder="title을 입력하세요." />
+     <input type="submit" value="search" />
+     </form>
+  
+
+     <br/>
      <h3>"자신의 일지를 리뷰함으로써 당신은 미래를 만들어 내기 위해 과거와 현재를 재배치할 수 있다."<br/><h6>- 프로그래머의 길, 멘토에게 묻다. p.213</h6></h3>
      
      <h4><어제, 오늘, 내일을 찾을 수 있는 위키></h4>
-    ${list}
-    ${control}
+     ${control}
+     ${list}
+  
     <h3>${title}</h3>
      ${body}
       </body>
@@ -47,8 +53,6 @@ module.exports = {
       list = list + '</ul>';
       return list;
     }
-  
-    
   }
   
   
