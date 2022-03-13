@@ -30,7 +30,7 @@ router.get('/create', function(request, response){
   var title = post.title;
   var description = post.description;
   fs.writeFile(`data/${title}`, description, 'utf8', function(err){
-    response.redirect(`topic/${title}`);
+    response.redirect(`/topic/${title}`);
   });
   });
   
@@ -68,7 +68,7 @@ router.get('/create', function(request, response){
     var description = post.description;
     fs.rename(`data/${id}`, `data/${title}`, function(error){
       fs.writeFile(`data/${title}`, description, 'utf8', function(err){
-        response.redirect( `/${title}`);
+        response.redirect( `/topic/${title}`);
       });
     });
   });
