@@ -9,6 +9,11 @@ var helmet = require('helmet');
 
 var port = 3000;
 
+// express도 http를 결국엔 가지고 있다. UI와 같이 개발자가 이해하기 쉬운 코드를 만들어놓은게 프레임 워크 구나...  많은 코드를 줄이기. 
+// 하지만 그 코드는 결국 뒤에 다 숨겨져 있다. 
+// 누가 그 숨겨진 코드를 잘 이해하느냐가 더 나은 개발자가 되는 길 이겠군.
+
+
 app.use(helmet());
 
 app.use(express.static('public'));
