@@ -53,7 +53,7 @@
 Set-Cookie: <cookie-name>=<cookie-value>
 ~~~
     - 이 설정은 클라이언트에게 쿠키들의 쌍(쿠키 이름-쿠키 값)을 저장할 것을 말하도록 서버에게 헤더를 보낼것을 지침합니다.
-This instructs the server sending headers to tell the client to store a pair of cookies:
+
 ~~~Java Script
 HTTP/2.0 200 OK
 Content-Type: text/html
