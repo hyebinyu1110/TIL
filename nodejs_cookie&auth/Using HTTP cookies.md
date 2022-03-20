@@ -3,6 +3,7 @@
 - 참조: [[MDN Web Docs References] HTTP Using HTTP cookies - Using HTTP cookies](https://developer.mozilla.org/en-US/docs/Web/HTTP/Cookies)
 ----
 
+## Using HTTP cookies
     - HTTP 쿠키(웹 쿠키, 브라우저 쿠키)는 서버가 사용자의 웹브라우저에 보내는 작은 데이터 조각입니다.
     - 브라우저는 쿠키를 웹브라우저에 저장하고, 같은 서버에 나중에 요청을 보낼때 쿠키를 다시 보냅니다.
     - 전형적으로, HTTP 쿠키는 두개의 요청들이 같은 브라우저로부터 왔는지 알려주기위해 사용되어 지며,
