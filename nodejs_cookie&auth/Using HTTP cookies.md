@@ -43,7 +43,7 @@
     - 데이터 요청자는 만료날짜나 시한을 명세화할 수 있고, 그리고 나서 쿠키는 서버로 보내지지 말아야 합니다.
     - 데이터 요청자는 또한 특정한 도메인이나 경로로 어디로 쿠키가 보내어질지 제한하기위해 추가적인 제한 사항을 설정할 수 있습니다.
     - 아래에 언급된 헤더 속성에 대한 더 자세한 사항을 위해, 
-   [Set-Cookie reference artice](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Set-Cookie)을 참조해 주세요.
+   [Set-Cookie reference article](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Set-Cookie)을 참조해 주세요.
     
     
 ## The Set-Cookie and Cookie headers
