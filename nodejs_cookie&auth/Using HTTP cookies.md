@@ -1,6 +1,7 @@
 # Using HTTP cookies
 
 - 참조: [[MDN Web Docs References] HTTP Using HTTP cookies - Using HTTP cookies](https://developer.mozilla.org/en-US/docs/Web/HTTP/Cookies)
+- 참조: [Attribute와 Property 의 차이점](https://medium.com/hexlant/attribute-%EC%99%80-property-%EC%9D%98-%EC%B0%A8%EC%9D%B4-c6f1c91ba91)
 ----
 
 ## Using HTTP cookies(HTTP 쿠키를 사용하기)
