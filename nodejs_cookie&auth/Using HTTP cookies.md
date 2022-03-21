@@ -243,6 +243,96 @@ console.log(document.cookie);
 
     - 자바스크립트를 통해 생성된 쿠키들은 HttpOnly 플래그를 포함할 수 없습니다.
     - 아래의 Security 섹션에서 보안 이슈들을 확인하여 주세요. 자바스크립트에 이용가능한 쿠키들은 XSS를 통하여 훔쳐질 수 있습니다.
+    
+  
+### Security
+---
+Note:  당신이 쿠키들에 정보를 저장할 때, 모든 쿠키 값이 최종 사용자에의해 변경되거나, 최종사용자에게 보인다는 것을 기억하십시오.
+애플리케이션에 따라, 당신은 서버가 찾아보는(검색하는) 또는 JSON 웹 토큰과 같은 대안적인 인증이나/비밀(기밀) 메커니즘을 조사하는 이해하기 힘든 식별자를 사용하고 싶을 지도 모릅니다.
+When you store information in cookies, keep in mind that all cookie values are visible to, and can be changed by, the end user. Depending on the application, you may want to use an opaque identifier that the server looks up, or investigate alternative authentication/confidentiality mechanisms such as JSON Web Tokens.
+---
+
+#### Ways to mitigate attacks involving cookies:
+
+    - HttpOnly 속성을 사용하여 자바스크립트를 통한 쿠키 값으로의 접근을 예방하십시오.
+    - 민감한 정보(인증을 나타내는)에 사용되는 쿠키는 짧은 생명주기를 가져야 하며, SameSite속성은 Strict나 Lax로 설정되어 있어야 합니다.
+    (위에 있는 SameSite 속성을 보아주세요). [
+   - [SameSite을 지원하는 브라우저에서는](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Set-Cookie#browser_compatibility) 사이트간(cross-site) 요청과 함께 인증 
+   
+    
+    - 쿠키가 보내지지 않는 다는 것을 보장합니다. 이 행위가 요청이 효과적으로 어플리케이션 서버에 인증되지 않도록 합니다.
+
+
+### Tracking and privacy
+#### Third-party cookies
+
+    - 쿠키는 특정 도메인과 스킴(http or https와 같은)과 연관되어 있습니다.또한 만약 Set-Cookie 도메인 속성이 설정되어있다면, 하위도메인과 연관되어 있을수 있습니다.
+    - 만약 쿠키 도메인과 스킴이 현재 페이지에서 일치 한다면, 쿠키는 페이지로서 같은 사이트에서 온 것을 간주 됩니다. 그리고 직접적으로 연관된 쿠키로서 참조됩니다.
+    
+    - 만약 도메인과 스킴이 다르다면, 쿠키는 같은 페이지로부터 온것이 아니라 다른 사람 쿠키로서 간주됩니다. 서버가 웹페이지를 호스팅하는것이 first-party 쿠키를 설정하는 반면에 
+    페이지는 third-party  쿠키들을 설정할지도 모르는 다른 도메인(광고 배너와 같은) 안에있는 서버에 저장된 다른 구성요소나 이미지를 포함할지 모릅니다. 
+    - 이것들은 주로 광고나 웹을 가로지로 트래킹을 하는데 사용됩니다. 예를 들어 구글에 의해 사용되는 종류의 쿠키들 말입니다.
+    
+    - A third-party 서버는 다양한 사이트를 접근할 때 같은 브라우저에 의해 보내어진 쿠키들에 기반하여 사용자의 브라우징 히스토리와 습관의 프로필을 생성할 수 있습니다.
+    - 파이어폭스는 기본설정으로 trackers 를 포함하는 것으로 알려진 third-party 쿠키를 차단합니다. third-party 쿠키들(또는 단순한 tracking 쿠키들)은
+    또한 다른 브라우저 설정이나, 확장에 의해 차단될지도 모릅니다. 쿠키 차단은 몇 third-party 구성요소(소셜 메디아 위젯과 같은) 의도된 대로 기능하지 못하도록 막습니다.
+     
+---
+Note: 서버들은(그리고 해야합니다.) third party 사이트들에 쿠키들을 보낼지 말지의 여부를 명세화하는 SameSite  속성 쿠키를 설정할 수 있습니다.
+---
+
+
+### Cookie-related regulations
+    - 쿠키들의 사용을 다루는 규정이나 입법은 아래를 포함합니다.
+
+~~~ Java Script
+The General Data Privacy Regulation (GDPR) in the European Union
+The ePrivacy Directive in the EU
+The California Consumer Privacy Act
+~~~ 
+    - 이 규정들은 전 세계적으로 범위를 미칩니다. 규정들은 이러한 관할구역으로 부터의 사용자가 접근하는  World Wide Web의 어떤 사이트든지 적용됩니다.
+    (EU and California에 적용되며, 캘리포니아의 법은 다른 것 중에 오직 총 수익이 2,500만 달러 이상을 가진 법인에만 적용되는 경고가 있습니다.)
+    - 이 규정은 다음과 같은 요구사항을 포함합니다.
+
+~~~Java Script
+Notifying users that your site uses cookies.(당신의 사이트가 쿠키를 사용한다는 것을 사용자에게 알리는 것)
+Allowing users to opt out of receiving some or all cookies.(사용자로 하여금 모든 쿠키는 몇 쿠키로부터 연관되지 않는 것을 허용하는 것)
+Allowing users to use the bulk of your service without receiving cookies.(사용자로 하여금 쿠키를 받는 것 없이 당신의 서비스의 대부분을 사용하도록 하는 것)
+~~~ 
+    - 당신의 현지에서 쿠키의 사용을 관장하는 다른 규정이 있을지도 모릅니다. 부담/책임은 당신이 알고, 이러한 규정을 따르는 것입니다.
+    - 어떤 회사들은 당신이 이런 규정을 따르도록 도와주는 cookie banner 코드를 제공합니다.
+
+
+### Other ways to store information in the browser(브라우저에 정보를 저장하는 다른 방법들)
+   
+    - 브라우저에 데이터를 저장하는 다른 접근 Web Storage API 입니다. window.sessionStorage and window.localStorage 속성은 지속중인 세션과 영구 쿠키에 상응합니다.
+    - 그러나 쿠키보다 더 큰 저장소 제한을 가지고 있습니다.그리고 서버에 절대로 보내어지지 않습니다. 더 구조화 되고 더 큰 양의 데이터들이 IndexedDB API나 데이터 위에
+    세워진 라이브러리를 사용하여 저장될 수 있습니다.
+    
+    - 쿠키들이 삭제된후에 쿠키들을 재생성하도록 디자인된 몇몇 기술들이 있습니다. 이러한 쿠키를 '좀비' 라부릅니다. 이러한 기법은 사용자 사생활과 사용자 제어 원칙을 위반하고,
+    데이터 사생활 규정을 위반하는 것입니다. 그래서 좀비쿠키를 사용하는 웹사이트에 법적인 책임을 부여할수 있습니다.
+
+Another approach to storing data in the browser is the Web Storage API. The window.sessionStorage and window.localStorage properties correspond to session and permanent cookies in duration, but have larger storage limits than cookies, and are never sent to a server. More structured and larger amounts of data can be stored using the IndexedDB API, or a library built on it.
+
+There are some techniques designed to recreate cookies after they're deleted. These are known as "zombie" cookies. These techniques violate the principles of user privacy and user control, may violate data privacy regulations, and could expose a website using them to legal liability.
+
+또한 아래를 참조해 주세요.
+
+Set-Cookie
+Cookie
+Document.cookie
+Navigator.cookieEnabled
+SameSite cookies
+Inspecting cookies using the Storage Inspector
+Cookie specification: RFC 6265
+HTTP cookie on Wikipedia
+Cookies, the GDPR, and the ePrivacy Directive
+Found a problem with this page?
+Edit on GitHub
+Source on GitHub
+Report a problem with this content on GitHub
+Want to fix the problem yourself? See our Contribution guide.
+Last modified: Jan 21, 2022, by MDN contributors
 
 
 
