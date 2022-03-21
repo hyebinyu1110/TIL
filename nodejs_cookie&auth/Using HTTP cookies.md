@@ -130,6 +130,81 @@ Set-Cookie: id=a3fWa; Expires=Thu, 21 Oct 2021 07:28:00 GMT; Secure; HttpOnly
 ~~~
 
 
+## Define where cookies are sent(어디에 쿠키가 보내질지 정의하기)
+    - 도메인(Domain)과 경로(Path)속성은 무슨 URLs로 쿠키들이 보내져야 하는지 쿠키의 범위를 정의합니다.
+
+
+### Domain attribute
+    - Domain 속성은 어떤 호스트가 쿠키를 받을 수 있는지 명세화 합니다. 만약 Domain 속성이 명세화 되지 않았다면, 
+    쿠키를 설정한 같은 호스트로 속성이 기본 설정됩니다. (subdomain을 제외한) 
+    - 만약 Domain이 명세화 되어있다면, subdomain은 항상 포함됩니다(domain을 가진 subdomain에서 쿠키를 보낼수있다는 뜻)
+    - 그러므로 Domain을 명세화하는 것은 Domain을 생략하는 것보다 덜 제한적이지만, 그러나 subdomains들이 사용자에 대한 정보를 
+     공유할 필요가 있을때 도움이 됩니다.
+    - 예를들어, 당신이 만약 Domain=mozilla.org 로 설정한다면, 쿠키들은 항상 developer.mozilla.org와 같은 하위 도메인에서 이용가능해집니다.
+
+
+### Path attribute
+    - Path 속성은 Cookie 헤더를 보내기 위해, 요청된 URL에 반드시 존재해야하는 URL Path(경로)를 나타내어야합니다.
+    - %x2F("/") 문자는 다이렉터리 구분자로 간주되어 지고, (도메인 속성에 설정된 값을 가지고 그 뒤에 오는)하위 디렉터리들도 
+      마찬가지로 일치합니다.(도메인 설정 값 + 디렉터리 구분자 뒤에 오는 하위 디렉터리도 쿠키 값을 보낼 수 있는 경로로 인식한다는 건가?) 
+    ( The %x2F ("/") character is considered a directory separator, and subdirectories match as well.)
+    - 예를들어, 당신이 만약 Path=/docs을 설정한다면, 이러한 요청 경로는 아래와 일치 해야 합니다.
+~~~Java Script
+/docs
+/docs/
+/docs/Web/
+/docs/Web/HTTP
+But these request paths don't:
+
+/
+/docsets
+/fr/docs
+~~~
+### SameSite attribute
+
+The SameSite attribute lets servers specify whether/when cookies are sent with cross-site requests (where Site is defined by the registrable domain and the scheme: http or https). This provides some protection against cross-site request forgery attacks (CSRF). It takes three possible values: Strict, Lax, and None.
+
+With Strict, the cookie is only sent to the site where it originated. Lax is similar, except that cookies are sent when the user navigates to the cookie's origin site. For example, by following a link from an external site. None specifies that cookies are sent on both originating and cross-site requests, but only in secure contexts (i.e., if SameSite=None then the Secure attribute must also be set). If no SameSite attribute is set, the cookie is treated as Lax.
+
+Here's an example:
+
+Set-Cookie: mykey=myvalue; SameSite=Strict
+Note: The standard related to SameSite recently changed (MDN documents the new behavior above). See the cookies Browser compatibility table for information about how the attribute is handled in specific browser versions:
+
+SameSite=Lax is the new default if SameSite isn't specified. Previously, cookies were sent for all requests by default.
+Cookies with SameSite=None must now also specify the Secure attribute (they require a secure context).
+Cookies from the same domain are no longer considered to be from the same site if sent using a different scheme (http: or https:).
+Cookie prefixes
+Because of the design of the cookie mechanism, a server can't confirm that a cookie was set from a secure origin or even tell where a cookie was originally set.
+
+A vulnerable application on a subdomain can set a cookie with the Domain attribute, which gives access to that cookie on all other subdomains. This mechanism can be abused in a session fixation attack. See session fixation for primary mitigation methods.
+
+As a defense-in-depth measure, however, you can use cookie prefixes to assert specific facts about the cookie. Two prefixes are available:
+
+__Host-
+If a cookie name has this prefix, it's accepted in a Set-Cookie header only if it's also marked with the Secure attribute, was sent from a secure origin, does not include a Domain attribute, and has the Path attribute set to /. This way, these cookies can be seen as "domain-locked".
+
+__Secure-
+If a cookie name has this prefix, it's accepted in a Set-Cookie header only if it's marked with the Secure attribute and was sent from a secure origin. This is weaker than the __Host- prefix.
+
+The browser will reject cookies with these prefixes that don't comply with their restrictions. Note that this ensures that subdomain-created cookies with prefixes are either confined to the subdomain or ignored completely. As the application server only checks for a specific cookie name when determining if the user is authenticated or a CSRF token is correct, this effectively acts as a defense measure against session fixation.
+
+Note: On the application server, the web application must check for the full cookie name including the prefix. User agents do not strip the prefix from the cookie before sending it in a request's Cookie header.
+
+For more information about cookie prefixes and the current state of browser support, see the Prefixes section of the Set-Cookie reference article.
+
+JavaScript access using Document.cookie
+You can create new cookies via JavaScript using the Document.cookie property. You can access existing cookies from JavaScript as well if the HttpOnly flag isn't set.
+
+document.cookie = "yummy_cookie=choco";
+document.cookie = "tasty_cookie=strawberry";
+console.log(document.cookie);
+// logs "yummy_cookie=choco; tasty_cookie=strawberry"
+Copy to Clipboard
+Cookies created via JavaScript can't include the HttpOnly flag.
+
+Please note the security issues in the Security section below. Cookies available to JavaScript can be stolen through XSS.
+
 
 
 
