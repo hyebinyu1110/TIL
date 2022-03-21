@@ -160,50 +160,89 @@ But these request paths don't:
 /docsets
 /fr/docs
 ~~~
-### SameSite attribute
+### SameSite attribute(SameSite 속성)
 
-The SameSite attribute lets servers specify whether/when cookies are sent with cross-site requests (where Site is defined by the registrable domain and the scheme: http or https). This provides some protection against cross-site request forgery attacks (CSRF). It takes three possible values: Strict, Lax, and None.
-
-With Strict, the cookie is only sent to the site where it originated. Lax is similar, except that cookies are sent when the user navigates to the cookie's origin site. For example, by following a link from an external site. None specifies that cookies are sent on both originating and cross-site requests, but only in secure contexts (i.e., if SameSite=None then the Secure attribute must also be set). If no SameSite attribute is set, the cookie is treated as Lax.
-
-Here's an example:
-
+   - [SameSite](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Set-Cookie/SameSite) 속성은 
+   
+    - 서버로 하여금 쿠키가 cross-site(사이트 간) 요청과 함께 보내질지의 여부/ 언제 쿠키가 cross-site 요청과 보내질지 명세하게 합니다.
+   (여기서, [Site](https://developer.mozilla.org/en-US/docs/Glossary/Site)는 등록가능한 도메인과 스킴( http 또는 https) 에 의해 정의됩니다.)
+    - SameSite 속성은  cross-site 요청 위조 공격[CSRF](https://developer.mozilla.org/en-US/docs/Glossary/CSRF)에 대하여 몇가지 보호를 제공합니다. 
+    - SameSite 속성은 3가지 가능한 값을 가집니다. (Strict, Lax, None)
+    - Strict으로, 쿠키는 오직 쿠키가 생성된 사이트로만 보내어집니다.
+    - 쿠키의 최초 사이트로 사용자가 넘어갈때 보내어진다는거 외에는 Lax도 Strict와 비슷하다.
+    (예를들어, 외부 웹사이트로부터 링크로 쿠키가 생성된 사이트로 넘어갈때)
+    - None 은 쿠키가 처음 생성된 웹사이트와 cross-site(사이트 간) 요청 둘 다에서 보내어지는 것을 명세화하며, 오직 secure 문맥에서만 보내어집니다.
+    (예를 들어, SameSite=None이 설정되면 Secure 속성 또한 함께 설정되어야 한다.) 
+    - 만약 SameSite 속성이 설정되어있지 않다면, 쿠키는 Lax로 취급됩니다. 
+    - 여기에 예가 있습니다.
+    :
+~~~Java Script
 Set-Cookie: mykey=myvalue; SameSite=Strict
-Note: The standard related to SameSite recently changed (MDN documents the new behavior above). See the cookies Browser compatibility table for information about how the attribute is handled in specific browser versions:
+~~~
+---
+    - Note: SameSite 에 대한 표준이 최근에 변경되었습니다.(MDN 은 새로운 실행에 대해 위에 기록합니다.)
+    (어떻게 속성이 특정 브라우저 버전에서 처리되는지에 관한 정보를 위해 쿠키 브라우저 호환성 테이블을 참조해주세요.)
+    -  SameSite=Lax는 SameSite가 명세화되어 있지 않다면 설정되는 기본설정입니다. 이전에는 쿠키가 기본설정으로 모든 요청에 대하여 
+    보내졌었습니다.
+    - SameSite=None 를 가진 쿠키는 현재 Secure 속성을 반드시 명세화하여야 합니다.(secure context를 필요로 하기때문에)
+    - 같은 도메인으로부터의 쿠키들은 만약 다른 스킴(http: or https:)을 사용하여 보내어진다면 같은 사이트로부터 보내어진것으로 취급되지 
+    않습니다.
+---
 
-SameSite=Lax is the new default if SameSite isn't specified. Previously, cookies were sent for all requests by default.
-Cookies with SameSite=None must now also specify the Secure attribute (they require a secure context).
-Cookies from the same domain are no longer considered to be from the same site if sent using a different scheme (http: or https:).
-Cookie prefixes
-Because of the design of the cookie mechanism, a server can't confirm that a cookie was set from a secure origin or even tell where a cookie was originally set.
 
-A vulnerable application on a subdomain can set a cookie with the Domain attribute, which gives access to that cookie on all other subdomains. This mechanism can be abused in a session fixation attack. See session fixation for primary mitigation methods.
+### Cookie prefixes
 
-As a defense-in-depth measure, however, you can use cookie prefixes to assert specific facts about the cookie. Two prefixes are available:
+    - 쿠키가 작동하는 메커니즘의 디자인 때문에, 서버는 쿠키가 안전한 origin 으로부터 설정되었는지 확인할 수 없고, 또한 
+    어디서 쿠키가 처음 설정되었는지 말할 수 없습니다.
+    - subdomain에 있는 취약한 어플리케이션은 Domain 속성으로 쿠키를 설정할 수 있습니다. Domain 속성으로 쿠키를 설정하는 것으로
+     모든 다른 하위 도메인에 대하여 쿠키의 접근을 허가합니다.?? 뭔말이니...
+     (A vulnerable application on a subdomain can set a cookie with the Domain attribute, which gives access to that cookie on all other subdomains.)
+    - 이 메커니즘은 세션 고정 공격에서 남용 될 수 있습니다.  
+   - 주요한 경감 메서드를 보기위해 [session fixation](https://developer.mozilla.org/en-US/docs/Web/Security/Types_of_attacks#session_fixation)를 참조해주세요.
+    
+    - 그러나, 깊이 있는 방어 방법으로, 당신은 쿠키 접두사를 사용하여 쿠키에 대한 특정사실을 단언하는데 사용할 수 있습니다. 
+    - 2 개의 접두사가 이용가능합니다.
 
-__Host-
-If a cookie name has this prefix, it's accepted in a Set-Cookie header only if it's also marked with the Secure attribute, was sent from a secure origin, does not include a Domain attribute, and has the Path attribute set to /. This way, these cookies can be seen as "domain-locked".
+    __Host-
+    - 만약 쿠키 이름이 Host 접두사를 가지고 있고, 안전한 origin에서 보내어진(Domain 속성을 포함하지 않는) secure 속성과 함께 표기되어 있다면, 
+    Set-Cookie 헤더에서 받아들여 집니다. (또한 '/'(루트)로 설정된 Path 속성을 가지고 있습니다.) 이 방식으로, 쿠키들은 "domain-locked"로 보여 질수 있습니다.
+   
+    __Secure-
+    - 만약 쿠키 이름이 Secure 접두사를 가지고 있고, 안전한 origin으로 부터 보내어진 Secure 속성을 가진것으로 표기되어있다면 Set-Cookie 헤더에서 받아들여 집니다.
+     이것은 __Host 접두사보다 약한 기능 가지고 있습니다.
 
-__Secure-
-If a cookie name has this prefix, it's accepted in a Set-Cookie header only if it's marked with the Secure attribute and was sent from a secure origin. This is weaker than the __Host- prefix.
+    - 브라우저는 접두사가 가진 제약을 따르지 않는 접두사를 가진 쿠키들을 받아들이지 않을 것입니다. 이 방식은 접두사와 함께 하위도메인에서 생성된 쿠키들이 
+    하위도메인에 국한되거나 완전히 무시당하는 것을 보장한다는 것을 기억하세요. 
+    - 어플리케이션 서버는 사용자가 인증되었거나 CSRF 토큰이 올바른지 결정하기 위해 오직 특정 쿠키 이름만을 확인하기 떄문에, 이 방식은 세션 고정에 반하여
+    방어 조치로서 효과적으로 행동합니다.
 
-The browser will reject cookies with these prefixes that don't comply with their restrictions. Note that this ensures that subdomain-created cookies with prefixes are either confined to the subdomain or ignored completely. As the application server only checks for a specific cookie name when determining if the user is authenticated or a CSRF token is correct, this effectively acts as a defense measure against session fixation.
-
+---
+Note: 어플리케이션 서버상에서, 웹 어플리케이션은 반드시 prefix를 포함하는 cookie 전체이름을 체크해야 합니다.  User Agents들은 요청의 쿠키 헤더에 있는
+접두사를 보내기전에 쿠키로부터 접두사를 떼어내 버리지 않습니다.
 Note: On the application server, the web application must check for the full cookie name including the prefix. User agents do not strip the prefix from the cookie before sending it in a request's Cookie header.
+---
 
-For more information about cookie prefixes and the current state of browser support, see the Prefixes section of the Set-Cookie reference article.
+    - 쿠키 접두사와 브라우저 지원에 대한 현재 상태에 대해 더 많은 정보를 위해,
+    [Prefixes section of the Set-Cookie reference article](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Set-Cookie#cookie_prefixes)
+    를 봐주세요.
+    
+    
+### JavaScript access using Document.cookie
+    - 당신은 Document.cookie 속성을 사용하여 자바스크립트를 통해 새로운 쿠키들을 생성할 수 있습니다. 당신은
+    - 만약 HttpOnly 플래그가 설정되어있지 않다면 당신은 또한 현존하는 쿠키를 자바스크립트로 접근할 수 있습니다.
+    
+   - [Attribute와 Property의 차이점](https://medium.com/hexlant/attribute-%EC%99%80-property-%EC%9D%98-%EC%B0%A8%EC%9D%B4-c6f1c91ba91)
 
-JavaScript access using Document.cookie
-You can create new cookies via JavaScript using the Document.cookie property. You can access existing cookies from JavaScript as well if the HttpOnly flag isn't set.
-
+    
+~~~Java Script
 document.cookie = "yummy_cookie=choco";
 document.cookie = "tasty_cookie=strawberry";
 console.log(document.cookie);
 // logs "yummy_cookie=choco; tasty_cookie=strawberry"
-Copy to Clipboard
-Cookies created via JavaScript can't include the HttpOnly flag.
+~~~
 
-Please note the security issues in the Security section below. Cookies available to JavaScript can be stolen through XSS.
+    - 자바스크립트를 통해 생성된 쿠키들은 HttpOnly 플래그를 포함할 수 없습니다.
+    - 아래의 Security 섹션에서 보안 이슈들을 확인하여 주세요. 자바스크립트에 이용가능한 쿠키들은 XSS를 통하여 훔쳐질 수 있습니다.
 
 
 
