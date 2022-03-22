@@ -31,7 +31,7 @@
    [IndexedDB](https://developer.mozilla.org/en-US/docs/Web/API/IndexedDB_API) 입니다.
       
     - NOTE: 저장되어진 쿠키들을( 그리고 웹페이지가 사용할 수 있는 다른 스토리지들을) 보기 위해서, 
-            웹브라우저 사용자는 개발자 도구에 있는 스토리지 inspector 기능을 활성화할 
+            당신은 Developer Tools에 있는 Storage inspector 기능을 활성화하고,
             스토리지 트리로부터 쿠키들을 선택할 수 있습니다.
             
        
@@ -40,9 +40,9 @@
 ## Creating cookies(쿠키 생성하기)
  
     - HTTP 요청을 받은 후에, 서버는 한 개 또는 그 이상의 Set-Cookie 헤더를 응답과 함께 보낼수 있습니다. 브라우저는 보통 쿠키를
-      저장하고 웹브라우저 상에 저장하고, Cookie HTTP 헤더 내부에 같은 서버로 만들어진 요청과 함께 쿠키를 포함하여 보냅니다.
-    - 데이터 요청자는 만료날짜나 시한을 명세화할 수 있고, 그리고 나서 쿠키는 서버로 보내지지 말아야 합니다.
-    - 데이터 요청자는 또한 특정한 도메인이나 경로로 어디로 쿠키가 보내어질지 제한하기위해 추가적인 제한 사항을 설정할 수 있습니다.
+      저장하고, Cookie HTTP 헤더 내부에 같은 서버로 만들어진 요청과 함께 쿠키를 포함하여 보냅니다.
+    - 당신은 만료날짜나 시한을 명세화할 수 있고, 그리고 나서 쿠키는 서버로 보내지지 말아야 합니다.
+    - 당신은 또한 어디로 쿠키가 보내어질지 제한하기위해  특정한 도메인이나 경로에 추가적인 제한 사항을 설정할 수 있습니다.
     - 아래에 언급된 헤더 속성에 대한 더 자세한 사항을 위해, 
    [Set-Cookie reference article](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Set-Cookie)을 참조해 주세요.
     
@@ -193,8 +193,8 @@ Set-Cookie: mykey=myvalue; SameSite=Strict
 
 ### Cookie prefixes
 
-    - 쿠키가 작동하는 메커니즘의 디자인 때문에, 서버는 쿠키가 안전한 origin 으로부터 설정되었는지 확인할 수 없고, 또한 
-    어디서 쿠키가 처음 설정되었는지 말할 수 없습니다.
+    - 쿠키가 작동하는 메커니즘의 디자인 때문에, 서버는 쿠키가 안전한 출처으로부터 설정되었는지 확인할 수 없고, 또한 
+    쿠키가 원래 어디서 처음 설정되었는지 말할 수 없습니다.
     - subdomain에 있는 취약한 어플리케이션은 Domain 속성으로 쿠키를 설정할 수 있습니다. Domain 속성으로 쿠키를 설정하는 것으로
      모든 다른 하위 도메인에 대하여 쿠키의 접근을 허가합니다.?? 뭔말이니...
      (A vulnerable application on a subdomain can set a cookie with the Domain attribute, which gives access to that cookie on all other subdomains.)
