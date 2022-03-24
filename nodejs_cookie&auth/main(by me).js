@@ -18,7 +18,7 @@ function loginUser(request, response) { // 함수를 만듬으로써, 훨씬 더
   if (request.headers.cookie !== undefined) {
  
     cookies = cookie.parse(request.headers.cookie);
-    console.log(cookies);
+
   }
 
   if (cookies.name === "hyebinyu1110@gmail.com" && cookies.password === "6362488") {
@@ -26,7 +26,7 @@ function loginUser(request, response) { // 함수를 만듬으로써, 훨씬 더
     isUserLogined = true;
 
   }
-
+  console.log(isUserLogined);
     return isUserLogined;
 
 }
@@ -40,6 +40,7 @@ function authStatusUI(request, response) {
     login = `<a href="/logout_process">log-out</a>`;
   }
 
+  console.log(login);
   return login;
 }
 
@@ -94,7 +95,7 @@ var app = http.createServer(function (request, response) {
     }
   } else if (pathname === '/create') {
 
-    if (isUserLogined) {
+    if (loginUser(request, response)) {
       fs.readdir('./data', function (error, filelist) {
         var title = 'WEB - create';
         var list = template.list(filelist);
