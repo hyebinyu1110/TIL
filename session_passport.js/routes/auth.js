@@ -32,7 +32,8 @@ module.exports = function(passport){
   });
   
   
-  router.post('/login_process', // 로그인 폼에서 auth/login_process로 전송한 데이터를 passport가 받도록 함. 그 때 전송된 데이터는 local 전략(id와 password로 로그인하는 전략으로 처리하겠다.)   
+  router.post('/login_process', // 로그인 폼에서 auth/login_process로 전송한 데이터를 passport가 받도록 함.
+              //그 때 전송된 데이터는 local 전략(id와 password로 로그인하는 전략으로 처리하겠다.)   
   passport.authenticate('local', { failureRedirect: '/auth/login', failureFlash: true, successFlash: true}),
   function(request, response) {
     request.session.save(function(){
