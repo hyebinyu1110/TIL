@@ -36,7 +36,6 @@ app.use(flash()); //flash 미들웨어를 설치함
 // flash 메시지는 일회용 메시지 이다. 내부적으로 세션 스토어의 데이터를 저장했다,  데이터를 사용하면 그 다음에 지운다는 특성이 있다. 바로 이러한 점을 passport는 활용하고 있다.
 
 var passport = require('./lib/passport')(app);
-
 var topicRouter = require('./routes/topic');
 var indexRouter = require('./routes/index');
 var authRouter = require('./routes/auth')(passport);
