@@ -1,0 +1,13 @@
+{
+  
+  "exports": {
+  "require": "./index.js",
+  "import": "./esm/wrapper.js"
+},  
+
+    "type": "module",
+
+    "dependencies": {
+    "lowdb": "^3.0.0"
+  }
+}

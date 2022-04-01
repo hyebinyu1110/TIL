@@ -1,0 +1,39 @@
+<!doctype html>
+<html>
+    <head>
+            <script src="https://unpkg.com/lodash@4/lodash.min.js"></script>
+            <!--lowdb는 lodash에 굉장히 많은 영향을 받았고, 의존하고 있어서 위의 코드 필요-->
+            <script src="https://unpkg.com/lowdb@0.17/dist/low.min.js"></script>
+            <script src="https://unpkg.com/lowdb@0.17/dist/LocalStorage.min.js"></script>
+                <!--local storage는 웹브라우저의 클라이언트 딴의 데이터를 저장할 수 있는 비교적 최신기술을 핸들링하는 그런 파일-->
+            <script>
+              var adapter = new LocalStorage('db') 
+              // LocalStorage의 db라는 곳에다가 데이터를 저장하겠다.  
+              var db = low(adapter) // 그것을 lowdb를 만드는 코드, 거기에 인자로 주면, 나는 localstorage db에다가 lowdb의 데이터를 저장하겠다. 
+              // 그리고 db라고 하는 변수를 통해 그 lowdb를 제어하겠다라고 표시해둠 
+              // 그리고 아이러니 하지만, python -m http.server 를 치면, python 에 내장되어있는 웹서버에 의해 현재 디렉터리가 웹서버의 다큐먼트 루트가 된다.
+              // Read data from JSON file, this will set db.data content
+             
+              db.defaults({ topic: [], author: [] }).write();
+            //   db.get('author').push({
+            //       id:1,
+            //       name: 'egoing',
+            //       profile: 'developer'
+            //   }).write();
+            //   db.get('topic').push({
+            //       id:1,
+            //       title: 'lowdb',
+            //       description: 'lowdb is..',
+            //       author: 1
+            //   }).write();
+                  db.get('topic').push({
+                  id:2,
+                  title: 'mysql',
+                  description: 'mysql is..',
+                  author: 1
+              }).write();
+              
+            </script>
+             
+    </head>
+</html>
