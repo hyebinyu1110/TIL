@@ -13,9 +13,9 @@
               // 그리고 db라고 하는 변수를 통해 그 lowdb를 제어하겠다라고 표시해둠 
               // 그리고 아이러니 하지만, python -m http.server 를 치면, python 에 내장되어있는 웹서버에 의해 현재 디렉터리가 웹서버의 다큐먼트 루트가 된다.
               // Read data from JSON file, this will set db.data content
-             
-              db.defaults({ topic: [], author: [] }).write();
-            //   db.get('author').push({
+
+              // db.defaults({ topic: [], author: [] }).write();
+            //    db.get('author').push({
             //       id:1,
             //       name: 'egoing',
             //       profile: 'developer'
@@ -26,13 +26,49 @@
             //       description: 'lowdb is..',
             //       author: 1
             //   }).write();
-                  db.get('topic').push({
-                  id:2,
-                  title: 'mysql',
-                  description: 'mysql is..',
-                  author: 1
-              }).write();
-              
+            // db.get('topic').push({
+            //       id:2,
+            //       title: 'mysql',
+            //       description: 'mysql is..',
+            //       author: 1
+            //   }).write();
+
+            // console.log(
+            //   db.get('topic')
+            //   .find({
+            //     title: 'lowdb',
+            //     author: 1
+            //   })
+            // .value()
+            // );
+           
+            // console.log(
+            //   db.get('topic')
+            //   .find({
+            //     title: 'lowdb',
+            //     author: 1
+            //   })
+            //   .value()
+            // );
+
+             
+              // db.get('topic')
+              // .find({
+              //  id: 2,
+              //  })
+              // .assign({
+              //   title: 'MySQL & Maria DB'
+              // }).write();
+
+                   
+              db.get('topic')
+              .remove({
+               id: 2,
+               })
+               .write();
+
+
+
             </script>
              
     </head>
