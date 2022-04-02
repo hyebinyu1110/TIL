@@ -1,49 +1,90 @@
-/*
-const low = require('lowdb');
-const FileSync = require('lowdb/adapters/FileSync'); // 어떤 방식으로 데이터를 저장할 것인가라는 것에 따라 우리가 가져와야할 모듈이 달라진다.  파일의 동기방식으로 저장하겠다라는 의미
-const adapter = new FileSync('db.json');// 우리 데이터를 db.json이라고 하는 파일의 JSON의 형식에 따라 저장하겠다라는 의미 
-const db = low(adapter); // lowdb에게 adapter라고 하는 db.json파일에다가 동기방식으로 저장하겠다라고 이렇게 지정해줌.    db라는 변수를 통해 lowdb를 제어할 수 있게된다. 
-// 어떤 방식으로 데이터를 저장할 것인가라는 것에 따라 우리가 가져와야할 모듈이 달라진다.  파일의 동기방식으로 저장하겠다라는 의미
-*/
-
 import { join, dirname } from 'path'
 import { Low, JSONFile } from 'lowdb'
 import { fileURLToPath } from 'url'
+import lodash from 'lodash'
+import { nanoid } from 'nanoid'
 
-const __dirname = dirname(fileURLToPath(import.meta.url));
 
-// Use JSON file for storage
-const file = join(__dirname, 'db.json')
-const adapter = new JSONFile(file)
-const db = new Low(adapter)
+var  __dirname = dirname(fileURLToPath(import.meta.url));
 
-// Read data from JSON file, this will set db.data content
+var file = join(__dirname, 'db.json')
+var adapter = new JSONFile(file)
+var db = new Low(adapter)
+
+
 await db.read()
 
-// If file.json doesn't exist, db.data will be null
-// Set default data
-// db.data = db.data || { posts: [] } // Node < v15.x
-db.data ||= { topic: [], author: [] }             // Node >= 15.x
+db.data ||= { topic: [], author: [] }            
 
-// Finally write db.data content to file
+// db.data.author.push({
+//     id:1,
+//     name: 'egoing',
+//     profile: 'developer'
+// });
+// db.data.topic.push({
+//     id:1,
+//     title: 'lowdb',
+//     description: 'lowdb is..',
+//     author: 1
+// });
+// db.data.topic.push({
+//     id:2,
+//     title: 'mysql',
+//     description: 'mysql is..',
+//     author: 1
+// });
+
+// await db.write();
+
+db.chain = lodash.chain(db.data)
+// const post = db.chain
+//   .get('topic')
+//   .find({ title: 'lowdb', author: 1 })
+//   .value()
+
+// console.log(post);  // find함수 실행 하면 터미널에 { id: 1, title: 'lowdb', description: 'lowdb is..', author: 1 }가 뜸  
+
+// db.chain
+// .get('topic')
+// .find({id:2})
+// .assign({title:'MySQL & MariaDB'})
+// .value();
+
+// db.write(); // 여기까지 하면 json파일에 id: 2의 title이 수정됨 (update)
+
+// db.chain
+// .get('topic')
+// .remove({id:2})
+// .value();
+
+// db.write();
+
+            
+
+var nid = nanoid();
+
+db.chain
+.get('author')
+.push({
+    id: nid,
+    name: 'duru',
+    profile: 'db admin',
+})
+.value();
+
+db.chain
+.get('topic')
+.push({
+    id: nanoid(),
+    title:'MSSQL',
+    description: 'MSSQL is...',
+    author: nid
+})
+.value();
 
 
-db.data.author.push({
-    id:1,
-    name: 'egoing',
-    profile: 'developer'
-});
-db.data.topic.push({
-    id:1,
-    title: 'lowdb',
-    description: 'lowdb is..',
-    author: 1
-});
-db.data.topic.push({
-    id:2,
-    title: 'mysql',
-    description: 'mysql is..',
-    author: 1
-});
 
-await db.write()
+await db.write();
+
+
+
