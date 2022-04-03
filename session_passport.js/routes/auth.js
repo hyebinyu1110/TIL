@@ -47,7 +47,9 @@ module.exports = function(passport){
     //   response.redirect('/');
     // })  
     request.logout();
+    request.session.save(function(){
     response.redirect('/');
+  })
   });
 
   return router;
