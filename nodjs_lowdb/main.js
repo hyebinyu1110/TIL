@@ -1,90 +1,56 @@
-import { join, dirname } from 'path'
-import { Low, JSONFile } from 'lowdb'
-import { fileURLToPath } from 'url'
-import lodash from 'lodash'
-import { nanoid } from 'nanoid'
+var express = require('express'); // module에 express 라는 이름을 붙임
+var app = express(); // express는 함수라는 뜻이다.
+var fs = require('fs');
+var compression = require('compression')
+var bodyParser = require('body-parser');
+var helmet = require('helmet');
+app.use(helmet());
+var session = require('express-session')
+var FileStore = require('session-file-store')(session); // 세션을 파일에 저장할거니까 파일시스템 사용
+var flash = require('connect-flash');
 
+app.use(express.static('public'));
+app.use(bodyParser.urlencoded({ extended: false })); // 사용자가 post한 request 객체에 body property 속성을 추가해줌
+app.use(compression());
+app.use(session({
+  secret: 'keyboard cat',
+  resave: false, // 세션데이터의 값이 바뀌기 전까지는 세션 저장소의 값을 저장하지 않는다.  
+  //true 면 값이 바꼈건 바뀌지 않았건 계속 저장한다. 
+  saveUninitialized: true, // 세션이 필요하기 전까지는 세션을 구동시키지 않는다. 
+  //false세션이 필요하건 아니건 무조건 구동시킨다. 
+  store: new FileStore()
+}))
 
-var  __dirname = dirname(fileURLToPath(import.meta.url));
+app.use(flash());
 
-var file = join(__dirname, 'db.json')
-var adapter = new JSONFile(file)
-var db = new Low(adapter)
+var passport = require('./lib/passport.js')(app);
 
+app.get('*', function (request, response, next) {
+  fs.readdir('./data', function (error, filelist) {
+    request.list = filelist;
+    next();
+  })
+});
 
-await db.read()
+// 이거 위에 있을 필요 없을거 같은데 라며 아래로 router를 가져옴.
+var topicRouter = require('./routes/topic.js');
+var authRouter = require('./routes/auth.js')(passport);
+var indexRouter = require('./routes/index.js');
 
-db.data ||= { topic: [], author: [] }            
+app.use('/', indexRouter);
+app.use('/topic', topicRouter);
+app.use('/auth', authRouter);
 
-// db.data.author.push({
-//     id:1,
-//     name: 'egoing',
-//     profile: 'developer'
-// });
-// db.data.topic.push({
-//     id:1,
-//     title: 'lowdb',
-//     description: 'lowdb is..',
-//     author: 1
-// });
-// db.data.topic.push({
-//     id:2,
-//     title: 'mysql',
-//     description: 'mysql is..',
-//     author: 1
-// });
-
-// await db.write();
-
-db.chain = lodash.chain(db.data)
-// const post = db.chain
-//   .get('topic')
-//   .find({ title: 'lowdb', author: 1 })
-//   .value()
-
-// console.log(post);  // find함수 실행 하면 터미널에 { id: 1, title: 'lowdb', description: 'lowdb is..', author: 1 }가 뜸  
-
-// db.chain
-// .get('topic')
-// .find({id:2})
-// .assign({title:'MySQL & MariaDB'})
-// .value();
-
-// db.write(); // 여기까지 하면 json파일에 id: 2의 title이 수정됨 (update)
-
-// db.chain
-// .get('topic')
-// .remove({id:2})
-// .value();
-
-// db.write();
-
-            
-
-var nid = nanoid();
-
-db.chain
-.get('author')
-.push({
-    id: nid,
-    name: 'duru',
-    profile: 'db admin',
+app.use((req, res, next) => { // 미들웨어는 순차적으로 실행이 되어서, 여기까지 찾지 못한 것을 실행함
+  res.status(404).send("Sorry can't find that!")
 })
-.value();
 
-db.chain
-.get('topic')
-.push({
-    id: nanoid(),
-    title:'MSSQL',
-    description: 'MSSQL is...',
-    author: nid
+app.use((err, req, res, next) => { // next를 통해 전달받을 err 데이터가 담김. 에러가 있을시 4개의 인자를 가진 미들웨어를 호출하는 것으로 정해져 있음. 
+  console.error(err.stack)
+  res.status(500).send('Something broke!')
 })
-.value();
 
 
-
-await db.write();
-
-
-
+app.listen(3000, () => {
+  console.log(`Example app listening on port 3000`);
+})
