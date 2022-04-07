@@ -1,0 +1,9 @@
+{"web":{
+    "client_id":"291985062118-9jp3fvajujsu0vt5g1ea5vuubqof6l6t.apps.googleusercontent.com",
+    "project_id":"robust-builder-346505",
+    "auth_uri":"https://accounts.google.com/o/oauth2/auth","token_uri":"https://oauth2.googleapis.com/token","auth_provider_x509_cert_url":"https://www.googleapis.com/oauth2/v1/certs",
+    "client_secret":"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",
+    "redirect_uris": ["http://localhost:3000"] // https:// 가 아니라 http:// 여야 함 안그러면  400 오류: redirect_uri_mismatch 에러뜸
+
+    }
+}
