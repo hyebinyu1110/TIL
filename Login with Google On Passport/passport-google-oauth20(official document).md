@@ -12,7 +12,8 @@
     $ npm install passport-google-oauth20
  ## TypeScript support
     $ npm install @types/passport-google-oauth20
- ## Usage
+
+## Usage
  ### Register Application
     - Google 전략은 사용자의 구글 계정을 이용하여 사용자를 인증한다. 당신의 애플리케이션이 Google의 인증시스템을 사용할 수 있기전에, 
     - 당신은 무조건 먼저 당신의 애플리케이션이  Google APIs로 OAuth 2.0을 사용하도록 등록해야 한다. 
@@ -46,28 +47,106 @@
 ### Configure Strategy
      - 일단 당신의 애플리케이션을 등록했으면, strategy는 Oauth 2.0 리다이렉트 최종목적지와 함께, 당신의 애플리케이션의 client ID와 
        secret으로 설정될 필요가 있습니다.
-     (strategy는 애플리케이션상 passport가 사용자를 인증할때 사용하는 방식이고, OAuth 2.0 보안방식으로 구글계정에 로그인할 때
-     사용될 Passport상 new GoogleStrategy 부분에 client ID와 secret 정보를 애플리케이션에 기록하기)
+      (strategy는 애플리케이션상 passport가 사용자를 인증할때 사용하는 방식이고, OAuth 2.0 보안방식으로 구글계정에 로그인할 때
+      사용될 Passport상 new GoogleStrategy 부분에 client ID와 secret 정보를 애플리케이션에 기록하기)
      
      - strategy는 인수로서, verify 함수를 취하고, verifty 함수는 accessToken, refreshToken, and profile 을 인자로서 받아들입니다.
      - accessToken 과 refreshToken은 API 접근을 위해 사용되며, 인증을 위해선 필요되지 않습니다.
      - profile은 구글 계정에 저장된 사용자의 profile 정보를 포함합니다.
-     - 사용자를 인증할 때, 이 strategy는 Google에 대한 API 요청들과 리다이렉트들의 순서를 통하여 이 정보(사용자의 profile 정보)를 얻기위해 
+     - 사용자를 인증할 때, 이 strategy는 일련의 Google에 대한 API 요청들과 리다이렉트들을 통하여 이 정보(사용자의 profile 정보)를 얻기위해 
        Oauth 2.0 프로토콜을 사용합니다.
        
      - verify 함수는 사용자가 어느 구글 계정에 속한지 결정하기 위한 책임이 있습니다. 
-     - 계정이 처음으로 로그인 되는 경우에는, 새로운 사용자 기록이 대체로 자동적으로  생성됩니다.
+     - 계정이 처음으로 로그인 되는 경우에는, 새로운 사용자 기록이 대체로 자동적으로 생성됩니다.
      - 그 다음 로그인 부터는, 기존의 사용자 기록은 그것의 구글 계정과의 관계성을 통하여 발견될겁니다.
 
      - verify 함수는 어플리케이션에 의해 제공되기 때문에, 어플리케이션이 선택하는 어떤 데이터를 쓸수 있습니다.
      - 아래의 예시는 SQL 데이터베이스의 사용을 자세히 보여줍니다.
+     
+~~~Java Script
+var GoogleStrategy = require('passport-google-oauth20');
 
-profile contains the user's profile information stored in their Google account. When authenticating a user, 
-this strategy uses the OAuth 2.0 protocol to obtain this information via a sequence of redirects and API requests to Google.
+passport.use(new GoogleStrategy({
+    clientID: GOOGLE_CLIENT_ID,
+    clientSecret: GOOGLE_CLIENT_SECRET,
+    callbackURL: 'https://www.example.com/oauth2/redirect/google',
+    scope: [ 'profile' ],
+    state: true
+  },
+  function(accessToken, refreshToken, profile, cb) {
+    db.get('SELECT * FROM federated_credentials WHERE provider = ? AND subject = ?', [
+      'https://accounts.google.com',
+      profile.id
+    ], function(err, cred) {
+      if (err) { return cb(err); }
+      if (!cred) {
+        // The account at Google has not logged in to this app before.  Create a
+        // new user record and associate it with the Google account.
+        db.run('INSERT INTO users (name) VALUES (?)', [
+          profile.displayName
+        ], function(err) {
+          if (err) { return cb(err); }
 
-The verify function is responsible for determining the user to which the Google account belongs. 
-In cases where the account is logging in for the first time, a new user record is typically created automatically. 
-On subsequent logins, the existing user record will be found via its relation to the Google account.
+          var id = this.lastID;
+          db.run('INSERT INTO federated_credentials (user_id, provider, subject) VALUES (?, ?, ?)', [
+            id,
+            'https://accounts.google.com',
+            profile.id
+          ], function(err) {
+            if (err) { return cb(err); }
+            var user = {
+              id: id,
+              name: profile.displayName
+            };
+            return cb(null, user);
+          });
+        });
+      } else {
+        // The account at Google has previously logged in to the app.  Get the
+        // user record associated with the Google account and log the user in.
+        db.get('SELECT * FROM users WHERE id = ?', [ cred.user_id ], function(err, user) {
+          if (err) { return cb(err); }
+          if (!user) { return cb(null, false); }
+          return cb(null, user);
+        });
+      }
+    };
+  }
+));
+~~~
 
-Because the verify function is supplied by the application, the app is free to use any database of its choosing.
-The example below illustrates usage of a SQL database.
+### Define Routes
+    - 2개의 라우트들이 사용자가 그들의 구글 계정으로 로그인하도록 필요합니다.
+    - 첫번째 라우트들은 Google 페이지로 사용자를 리다이렉트 하는데, 2개의 라우트 들은 아래를 인증합니다. 
+    :
+    
+~~~Java Script
+app.get('/login/google', passport.authenticate('google'));
+~~~
+
+    - 두번째 라우트는 인증 응답을 처리하고, 사용자가 로그인되게 합니다. 그 뒤 Googleㅇ은 사용자를 다시 어플리케이션으로 이동시킵니다.
+    : 
+~~~Java Script
+
+app.get('/oauth2/redirect/google',
+  passport.authenticate('google', { failureRedirect: '/login', failureMessage: true }),
+  function(req, res) {
+    res.redirect('/');
+  });
+  
+~~~
+
+##  Documentation
+    - OAuth 2.0을 사용하여 Google APIs 로  당신의 애플리케이션을 통합하는것에 대한 더 많은 정보를 위해 google APIs에 접근하도록 Using OAuth 2.0 을 참조하여 주세요. 
+
+
+## Examples
+[odos-express-google-oauth2](https://github.com/passport/todos-express-google-oauth2)
+
+- 위의 예시가 어떻게 Express 애플리케이션 내에서 Google strategy를 사용하는지 설명합니다.
+
+
+## icense
+The MIT License
+
+Copyright (c) 2012-2022 Jared Hanson <https://www.jaredhanson.me/>
