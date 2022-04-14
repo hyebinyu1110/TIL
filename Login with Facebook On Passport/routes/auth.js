@@ -8,6 +8,8 @@ const bcrypt = require('bcrypt');
 
 
 module.exports = function(passport){
+
+
   router.get('/login', function (request, response) {
     var feedback = '';
     var fmsg = request.flash();
@@ -78,12 +80,12 @@ module.exports = function(passport){
       response.redirect('/auth/register');
     }else{
       bcrypt.hash(pwd, 10, function(err, hash) {
-        var user = db.get('users').find({email:email}).value();
-        if(user){
-          user.password = hash;
-          user.displayName = displayName;
-          db.get('users').find({id:user.id}).assign(user).write();
-
+        var puser = db.get('users').find({email:email}).value();
+        console.log('puser',puser);
+        if(puser){
+          puser.password = hash;
+          puser.displayName = displayName;
+          db.get('users').find({id:puser.id}).assign(puser).write();
         }else{
           var user = {
             id: nanoid(),
@@ -93,20 +95,21 @@ module.exports = function(passport){
           }
           db.get("users").push(user).write();
         }
-        // Store hash in your password DB.
       
-   
+        // Store hash in your password DB.
+    
         request.login(user, function(err){
-          if(err) return next(err);
-        });   
         request.session.save(function(){
              response.redirect('/');
         })
       
     });
   
-  }
-  }); 
+  });
+}
+  })
+
+
   router.get('/logout', function (request, response) {
     request.logout();
     request.session.save(function(){
