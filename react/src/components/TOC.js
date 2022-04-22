@@ -2,9 +2,18 @@ import React, { Component } from 'react';
 // 리액트라고 하는 라이브러리에서 component라고 하는 클래스를 로딩한 것이다. 
 
 class TOC extends Component {
-    
+    shouldComponentUpdate(newProps, newState){
+      console.log('==>TOC render shouldComponentUpdate',
+      newProps.data,
+      this.props.data);
+      if(this.props.data === newProps.data){
+        return false;
+      }
+        return true;
+     
+    }
     render(){
-        console.log('TOC render');
+      console.log('==>TOC render');
         var lists = [];
         var data  = this.props.data;
         var i = 0;
