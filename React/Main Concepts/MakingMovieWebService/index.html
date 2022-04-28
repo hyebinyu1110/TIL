@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<body>
+   <div id="root"></div>
+</body>
+<script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+<!-- React JS는 어플리케이션이 아주 interactive 하도록 만들어 주는 라이브러리 / element 를 생성하고 event listener를 더하는 것을 도와주는 라이브러리-->
+<script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+<!-- react-dom은 라이브러리 or package 는 모든 React Element들을 HTML  body에 둘수 있도록 해줌 -->
+<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+<script type="text/babel">
+   const root = document.getElementById("root");
+    function App (){
+     const data = React.useState();
+     console.log(data);
+    
+     return (              
+    <div>
+    <h3 >Total Clicks : 0 </h3>
+    <button >Click Me! </button>
+    </div>
+   );
+    }
+        
+
+
+   ReactDOM.render(<App />, root) ;  // render의 의미는 여기 React element를 가지고 HTML로 만들어 배치한다는 것! show it to the user
+
+// 우리가 방금 전 배운건 어떻게 하면 컴포넌트를 다른 컴포넌트 안에 넣는가 이다. 
+
+
+</script>
+</html>
