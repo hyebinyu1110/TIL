@@ -11,13 +11,38 @@
 <script type="text/babel">
    const root = document.getElementById("root");
     function App (){
-     const data = React.useState();
-     console.log(data);
-    
+     // modifier 를 가지고 state를 변경할 떄, 컴포넌트가 재 생성된다. 새로운 값을 가지고 리렌더링된다. 
+     // react.js 가 가장 중점으로 두는 것 =>데이터가 바뀔때마다 컴포넌트를 리렌더링하고 UI를 refresh 하는 거다. 
+     const [amount, setAmount] = React.useState(0);
+     const [flipped, setFlip] = React.useState(false);
+ 
+     const onChange = (e)=>{
+        setAmount(e.target.value)
+     }
+
+     const reset =()=>{
+        setAmount(0);
+     }
+
+     const flip = (current)=>{
+         reset();
+         setFlip((current) =>!current);
+     }
      return (              
     <div>
-    <h3 >Total Clicks : 0 </h3>
-    <button >Click Me! </button>
+    <h1>Super Converter</h1>
+    <div>
+    <label htmlFor="minutes">Minutes</label >
+    <input value={flipped? amount*60 :  amount} id="minutes" type="text" placeholder="Minutes" onChange={onChange} disabled={flipped}/>
+</div>
+    <h4>you want to convert {amount} to </h4>
+    <div>
+    <label htmlFor="hours">Hours</label >
+    <input value={flipped? amount: Math.round(amount/60)}  id="hours" type="text" placeholder="Hours" onChange={onChange} disabled={!flipped} />
+
+</div>
+<button onClick={reset}>Reset</button>
+<button onClick={flip}>Flip</button>
     </div>
    );
     }
