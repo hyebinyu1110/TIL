@@ -16,7 +16,7 @@
      const [amount, setAmount] = React.useState(0);
      const [flipped, setFlip] = React.useState(false);
  
-     const onChange = (e)=>{
+     const onChange = (e)=>{ // 값을 바꾸고 싶을 때마다, setAmount나 setFlip 을 사용할 때마다 UI 가 새로고침된다.
         setAmount(e.target.value)
      }
 
@@ -42,7 +42,8 @@
 
 </div>
 <button onClick={reset}>Reset</button>
-<button onClick={flip}>Flip</button>
+<button onClick={flip}>{flipped? "turn back" : "flip"}</button>
+
     </div>
    );
     }
