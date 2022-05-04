@@ -59,7 +59,7 @@ Note:
     이것은 어쩌면 성능에 영향을 끼칠지 모릅니다.(아래를 봐주세요)
 
 
-Arrow Function in Render(render에서 화삺표 함수)
+### Arrow Function in Render(render에서 화삺표 함수)
 ~~~Java Script
 class Foo extends Component {
   handleClick() {
@@ -74,7 +74,8 @@ Note:
 
     - render 에서 화살표 함수( () => {} )를 사용하는 것은 컴포넌트가 렌더링할 때마다 새로운 함수를 생성하는 것입니다. 
     새로운 함수를 생성하는 것이 strict identity comparison(엄격한 신원 확인)을 기반으로한 최적화(최대한의 이용)을 약화시킬지 모릅니다.
-Using an arrow function in render creates a new function each time the component renders, which may break optimizations based on strict identity comparison.
+    (Using an arrow function in render creates a new function each time the component renders, which may break optimizations 
+    based on strict identity comparison.)
 
 ## Is it OK to use arrow functions in render methods?
 (화살표 함수를 render methods에서 사용하는 것이 괜찮은가요?)
@@ -102,9 +103,10 @@ method();
     - Binding 메서드는 두번째 코드가 첫번째와 같은 방식으로 작동하도록 보장하게 합니다.
 
     - React로, 일반적으로 다른 컴포넌트로 당신이 전달하는 메서드만 bind 할 필요가 있습니다. 
-    - 예를 들어 <button onClick={this.handleClick}> 는 this.handleClick을 전달합니다. 그래서 당신은 this.handleClick을 bind 하기를 원합니다.
-    - 그러나 lifeCycle 메서드나 render 메서드를 bind 하는 것은 필요하지 않기에, 우리는 다른 component들로 (lifeCycle 메서드나 render 메서드)를 
-    전달하지 않습니다.
+    - 예를 들어 <button onClick={this.handleClick}> 는 this.handleClick을 전달합니다. 
+     그래서 당신은 this.handleClick을 bind 하기를 원합니다.
+    - 그러나 lifeCycle 메서드나 render 메서드를 bind 하는 것은 필요하지 않기에, 우리는 다른 component들로 
+    (lifeCycle 메서드나 render 메서드)를 전달하지 않습니다.
     
 
 Yehuda Katz가 적은 이 포스트는 binding이 무엇인지, 자바스크립트에서 어떻게 함수가 작동하는지 자세하게 설명합니다. 
