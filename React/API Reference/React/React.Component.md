@@ -46,14 +46,15 @@ constructor(props) {
     - 문제(props를 state로 복사하는것) 는 불필요하며 (this.props.color를 대신에 바로 사용가능합니다.), 
       그리고 bug를 생성합니다.(color prop 으로의 업데이트가 state에 반영되지 않을 것입니다.)
 
-    - 당신이 고의적으로 prop 업데이트를 무시하고 싶은 경우에만 이 pattern을 사용하세요. 그 경우에는 prop을 initialColor 나 defaultColor 로 불리도록
-    다시 이름짓는 것이 이해가 쉽습니다.(타당합니다).
+    - 당신이 고의적으로 prop 업데이트를 무시하고 싶은 경우에만 이 pattern을 사용하세요. 그 경우에는 prop을 initialColor 나
+    defaultColor 로 불리도록 다시 이름짓는 것이 이해가 쉽습니다.(타당합니다).
     - 그러면 당신은 필요할때 state의 key를 바꿈으로써 컴포넌트가 자체의 내부 state를 "reset" 하도록 강제할 수 있습니다. 
     
 (Only use this pattern if you intentionally want to ignore prop updates. In that case, it makes sense to rename the prop to be called initialColor or defaultColor. You can then force a component to “reset” its internal state by changing its key when necessary.)
 
 
 
-    -  만약 props에 의존하는 여러개의 state 가 필요하다고 생각한다면 무엇을 할지를 배우기 위해 derived state를 피하기위한 우리의 블로그 포스트를
-    읽어주세요.
-    (Read our blog post on avoiding derived state to learn about what to do if you think you need some state to depend on the props.)
+    -  만약 props에 의존하는 여러개의 state 가 필요하다고 생각한다면 무엇을 할지를 배우기 위해 derived state를 피하기위한 
+    우리의 블로그 포스트를 읽어주세요.
+    (Read our blog post on avoiding derived state to learn about what to do if you think you need some state
+    to depend on the props.)
