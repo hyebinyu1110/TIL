@@ -1,4 +1,4 @@
-  ### 참조: React 공식 홈페이지 : [constructor()](https://reactjs.org/docs/react-component.html#constructor)
+  ### 참조: React 공식 홈페이지 : [API REFERENCE-React-constructor()](https://reactjs.org/docs/react-component.html#constructor)
   
   
   
