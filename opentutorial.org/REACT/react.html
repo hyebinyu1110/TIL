@@ -135,7 +135,28 @@ class UpdateContent extends React.Component{
             </form>
             )
     }
-
+}
+class CreateContent extends React.Component{
+    render(){
+    return(
+        <article>
+            <h2>Create</h2>
+            <form 
+                action="/create_process" 
+                method="post" 
+                onSubmit={function(e){
+                    e.preventDefault();
+                    this.props.onSubmit(e.target.title.value, e.target.desc.value);
+                }.bind(this)}>
+                <p><input type="text" name="title" placeholder="title" /></p>
+                <p>
+                <textarea name="desc" placeholder="description"></textarea>
+                </p>
+                <input type="submit" value="submit" />
+            </form>
+        </article>
+    )
+}
 }
 class App extends React.Component{
     constructor(props){
@@ -153,7 +174,6 @@ class App extends React.Component{
         ]
     }
     }
-
     render(){
         let _title, _desc, _article;
         if(this.state.mode === "welcome"){
@@ -181,33 +201,24 @@ class App extends React.Component{
         }
         }else if(this.state.mode === "create"){
             _article =(
-            <form 
-            action="/create_process" 
-            method="post" 
-            onSubmit={function(e){
-                e.preventDefault(); // ??????
-                this.max_content_id += 1;
-                let _content = Array.from(this.state.content);
-                _content.push({
-                    id: this.max_content_id, 
-                    title: e.target.title.value,
-                    desc: e.target.desc.value
-                  });
-                
-                this.setState({
-                    content: _content,
-                    mode: "read",
-                    selected_content_id: this.max_content_id
-                })
-            }.bind(this)}>
-            <h2>create</h2>
-            <input type="text" name="title" placeholder="title" />
-            <p>
-            <textarea name="desc" placeholder="description"></textarea>
-            </p>
-         <input type="submit" value="submit" />
-            </form>
+                <CreateContent
+                onSubmit={function(_title, _desc){
+                    this.max_content_id += 1;
+                    let _content = Array.from(this.state.content);
+                    _content.push({
+                        id: this.max_content_id, 
+                        title: _title,
+                        desc: _desc
+                    });
+                    this.setState({
+                        content: _content,
+                        mode: "read",
+                        selected_content_id: this.max_content_id
+                    })
+                }.bind(this)}>
+            </CreateContent>
             )
+       
 
         }else if(this.state.mode === "update"){
             const id = this.state.selected_content_id
