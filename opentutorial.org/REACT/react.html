@@ -16,296 +16,314 @@
 <script type="text/babel">
 
 
-class Subject extends React.Component{
-    render(){
-    return(
-    <div>
-        <h1><a href="#" onClick={function(e){
-            e.preventDefault();
-            this.props.onChangePage();
-        }.bind(this)}>{this.props.title}</a></h1>
-        <h3>{this.props.sub}</h3>
-    </div>
-    )
-}
-}
-
-class TOC extends React.Component{
-   
-    render(){
-        const contents = this.props.contents;
-        const contentList = contents.map((content,index)=>
-        <li key={content.id} >
-            <a 
-            href={"/contents/"+content.id}
-            data-id={content.id}
-            onClick={function(e){
-                e.preventDefault();
-               this.props.onChangePage(e.target.dataset.id);
-            }.bind(this)}>{content.title}</a></li>
-        );
-    return(
-        <ul>
-        {contentList}
-        </ul>
-        
-    )
-}
-}
-
-class Control extends React.Component{
-    render(){
-        return(
-            <div>
-            <li>
-                <a href="/create" 
-                    onClick={function(e){
+    class Subject extends React.Component {
+        render() {
+            return (
+                <div>
+                    <h1><a href="#" onClick={function (e) {
                         e.preventDefault();
-                        this.props.onChangeMode('create');
-                    }.bind(this)}>create</a>
-            </li>
-            <li>
-                <a href="/update" 
-                    onClick={function(e){
-                        e.preventDefault();
-                        this.props.onChangeMode('update');
-                    }.bind(this)}>update</a>
-            </li>
-            <li>
-                <input 
-                    onClick={function(e){
-                        e.preventDefault();
-                        this.props.onChangeMode('delete');
-                    }.bind(this)}
-                    type="button"
-                    value="delete"></input>
-            </li>
-        </div>
-
-        )
-    }
-}
-
-class UpdateContent extends React.Component{
-    constructor(props){
-        super(props);
-        this.state ={
-            id: this.props.id,
-            title: this.props.title,
-            desc: this.props.desc
+                        this.props.onChangePage();
+                    }.bind(this)}>{this.props.title}</a></h1>
+                    <h3>{this.props.sub}</h3>
+                </div>
+            )
         }
     }
-    render(){
-        return(
-            <form 
-            action="/update_process" 
-            method="post" 
-            onSubmit={function(e){
-                e.preventDefault();
-                this.props.onSubmit(
-                    this.state.id,
-                    this.state.title,
-                     this.state.desc
-                     );
-            }.bind(this)}>
-            <h2>update</h2>
-            <input type="hidden" value={this.state.id} />
-            <input 
-            type="text" 
-            name="title" 
-            value={this.state.title}
-            onChange={function(e){
-                this.setState({
-                    title: e.target.value
-                })
-            }.bind(this)}/>
-            <p>
-            <textarea 
-            name="desc" 
-            placeholder="description"
-            value={this.state.desc}
-            onChange={function(e){
-                this.setState({
-                    desc: e.target.value
-                })
-            }.bind(this)}>
-             </textarea>
-            </p>
-         <input type="submit" value="submit" />
-            </form>
-            )
-    }
-}
-class CreateContent extends React.Component{
-    render(){
-    return(
-        <article>
-            <h2>Create</h2>
-            <form 
-                action="/create_process" 
-                method="post" 
-                onSubmit={function(e){
-                    e.preventDefault();
-                    this.props.onSubmit(e.target.title.value, e.target.desc.value);
-                }.bind(this)}>
-                <p><input type="text" name="title" placeholder="title" /></p>
-                <p>
-                <textarea name="desc" placeholder="description"></textarea>
-                </p>
-                <input type="submit" value="submit" />
-            </form>
-        </article>
-    )
-}
-}
-class App extends React.Component{
-    constructor(props){
-    super(props);
-    this.max_content_id = 3;
-    this.state={
-     mode: 'welcome',
-      selected_content_id: 2,
-      subject: { title: 'WEB', sub: 'World Wide Web!' },
-      welcome: { title: 'welcome', desc: 'Hello, React!!' },
-        content:[
-        { id: 1, title: 'HTML', desc: 'HTML is for information' },
-        { id: 2, title: 'CSS', desc: 'CSS is for design' },
-        { id: 3, title: 'JavaScript', desc: 'JavaScript is for interactive' }
-        ]
-    }
-    }
-    render(){
-        let _title, _desc, _article;
-        if(this.state.mode === "welcome"){
-            _title = this.state.welcome.title;
-            _desc = this.state.welcome.desc;
-            _article = (
-            <article>
-                <h2>{_title}</h2>
-                {_desc}
-            </article>
-            )
-        }else if(this.state.mode === "read"){
-            const content = this.state.content;
-            for(let i = 0; i < content.length; i++){
-            if(this.state.selected_content_id === content[i].id){
-                _title = content[i].title;
-                _desc = content[i].desc;
-                _article = (
-                <article>
-                    <h2>{_title}</h2>
-                    {_desc}
-                </article>
-            )  
-            }
-        }
-        }else if(this.state.mode === "create"){
-            _article =(
-                <CreateContent
-                onSubmit={function(_title, _desc){
-                    this.max_content_id += 1;
-                    let _content = Array.from(this.state.content);
-                    _content.push({
-                        id: this.max_content_id, 
-                        title: _title,
-                        desc: _desc
-                    });
-                    this.setState({
-                        content: _content,
-                        mode: "read",
-                        selected_content_id: this.max_content_id
-                    })
-                }.bind(this)}>
-            </CreateContent>
-            )
-       
 
-        }else if(this.state.mode === "update"){
-            const id = this.state.selected_content_id
-            _article = (
-            <UpdateContent 
-            id={this.state.content[id-1].id}
-            title={this.state.content[id-1].title}
-            desc={this.state.content[id-1].desc} 
-            onSubmit={function(_id, _title, _desc){
-                const _content = Array.from(this.state.content);
-                for(let i=0; i<_content.length; i++){
-                    if(_content[i].id === _id){
-                        _content[i] ={
-                            id: _id,
-                            title: _title,
-                            desc: _desc
-                        }
-                        break;
-                    }
-                }
-                this.setState({
-                    mode:"read",
-                    content: _content
-                })
-            }.bind(this)}>
-            </UpdateContent >
-            )
-        }        
+    class TOC extends React.Component {
 
-        return (
-            <div>
-               <Subject
-                title={this.state.subject.title} 
-                sub={this.state.subject.sub} 
-                onChangePage={function(){
-                   this.setState({ mode:"welcome"})
-               }.bind(this)} ></Subject>
-            
-                <TOC 
-                contents={this.state.content} 
-                onChangePage={function(id){
-                    this.setState({
-                        mode:"read",
-                        selected_content_id: Number(id)
-                    });
-                }.bind(this)}></TOC>
+        render() {
+            const contents = this.props.contents;
+            const contentList = contents.map((content, index) =>
+                <li key={content.id} >
+                    <a
+                        href={"/contents/" + content.id}
+                        data-id={content.id}
+                        onClick={function (e) {
+                            e.preventDefault();
+                            this.props.onChangePage(e.target.dataset.id);
+                        }.bind(this)}>{content.title}</a></li>
+            );
+            return (
                 <ul>
-                <Control 
-                    onChangeMode={function(mode){
-                        if(mode === "delete"){
-                            if(window.confirm("do you really want to delete this item?")){
-                                const _content = this.state.content;
-                                for(let i = 0; i<_content.length; i++){
-                                    if(_content[i].id === this.state.selected_content_id){
-                                        _content.splice(_content[i],1);
-                                        break;
-                                    }                             
-                                }
-                                this.setState({
-                                    mode:"welcome",
-                                    content: _content
-                                })
-                                alert("delete is done!")
-                            }
-                        }else{
-                            this.setState({
-                            mode: mode
-                        })
-                        }
-                    }.bind(this)}>
-               
-                </Control>
+                    {contentList}
                 </ul>
 
-                {_article}
-            
-            </div>
-        )
+            )
+        }
     }
-}
 
-const root = ReactDOM.createRoot(
+    class Control extends React.Component {
+        render() {
+            return (
+                <div>
+                    <li>
+                        <a href="/create"
+                            onClick={function (e) {
+                                e.preventDefault();
+                                this.props.onChangeMode('create');
+                            }.bind(this)}>create</a>
+                    </li>
+                    <li>
+                        <a href="/update"
+                            onClick={function (e) {
+                                e.preventDefault();
+                                this.props.onChangeMode('update');
+                            }.bind(this)}>update</a>
+                    </li>
+                    <li>
+                        <input
+                            onClick={function (e) {
+                                e.preventDefault();
+                                this.props.onChangeMode('delete');
+                            }.bind(this)}
+                            type="button"
+                            value="delete"></input>
+                    </li>
+                </div>
+
+            )
+        }
+    }
+
+    class UpdateContent extends React.Component {
+        constructor(props) {
+            super(props);
+            this.state = {
+                id: this.props.id,
+                title: this.props.title,
+                desc: this.props.desc
+            }
+        }
+        render() {
+            return (
+                <form
+                    action="/update_process"
+                    method="post"
+                    onSubmit={function (e) {
+                        e.preventDefault();
+                        this.props.onSubmit(
+                            this.state.id,
+                            this.state.title,
+                            this.state.desc
+                        );
+                    }.bind(this)}>
+                    <h2>update</h2>
+                    <input type="hidden" value={this.state.id} />
+                    <input
+                        type="text"
+                        name="title"
+                        value={this.state.title}
+                        onChange={function (e) {
+                            this.setState({
+                                title: e.target.value
+                            })
+                        }.bind(this)} />
+                    <p>
+                        <textarea
+                            name="desc"
+                            placeholder="description"
+                            value={this.state.desc}
+                            onChange={function (e) {
+                                this.setState({
+                                    desc: e.target.value
+                                })
+                            }.bind(this)}>
+                        </textarea>
+                    </p>
+                    <input type="submit" value="submit" />
+                </form>
+            )
+        }
+    }
+    class CreateContent extends React.Component {
+        render() {
+            return (
+                <article>
+                    <h2>Create</h2>
+                    <form
+                        action="/create_process"
+                        method="post"
+                        onSubmit={function (e) {
+                            e.preventDefault();
+                            this.props.onSubmit(e.target.title.value, e.target.desc.value);
+                        }.bind(this)}>
+                        <p><input type="text" name="title" placeholder="title" /></p>
+                        <p>
+                            <textarea name="desc" placeholder="description"></textarea>
+                        </p>
+                        <input type="submit" value="submit" />
+                    </form>
+                </article>
+            )
+        }
+    }
+
+    class ReadContent extends React.Component {
+        render() {
+            return (
+                <article>
+                    <h2>{this.props.title}</h2>
+                    {this.props.desc}
+                </article>
+        )
+        }
+    }
+    class App extends React.Component {
+        constructor(props) {
+            super(props);
+            this.max_content_id = 3;
+            this.state = {
+                mode: 'welcome',
+                selected_content_id: 2,
+                subject: { title: 'WEB', sub: 'World Wide Web!' },
+                welcome: { title: 'welcome', desc: 'Hello, React!!' },
+                content: [
+                    { id: 1, title: 'HTML', desc: 'HTML is for information' },
+                    { id: 2, title: 'CSS', desc: 'CSS is for design' },
+                    { id: 3, title: 'JavaScript', desc: 'JavaScript is for interactive' }
+                ]
+            }
+            this.getReadContent = this.getReadContent.bind(this);
+            this.getContent = this.getContent.bind(this);
+
+        }
+
+        getReadContent() {
+            
+            for (let i = 0; i < this.state.content.length; i++) {
+                let data = this.state.content[i];
+                if (this.state.selected_content_id === data.id) {
+                    return data
+                    break;
+                }
+            }
+        }
+
+        getContent(){
+            let _title, _desc, _article;
+            if (this.state.mode === "welcome") {
+                _title = this.state.welcome.title;
+                _desc = this.state.welcome.desc;
+                _article = (
+                    <article>
+                        <h2>{_title}</h2>
+                        {_desc}
+                    </article>
+                )
+            } else if (this.state.mode === "read") {
+                let data = this.getReadContent();
+                        _article = (
+                            <ReadContent 
+                            title={data.title}
+                            desc={data.desc}>
+                            </ReadContent>
+                        )
+            }else if (this.state.mode === "create") {
+                _article = (
+                    <CreateContent
+                        onSubmit={function (_title, _desc) {
+                            this.max_content_id += 1;
+                            let _content = Array.from(this.state.content);
+                            _content.push({
+                                id: this.max_content_id,
+                                title: _title,
+                                desc: _desc
+                            });
+                            this.setState({
+                                content: _content,
+                                mode: "read",
+                                selected_content_id: this.max_content_id
+                            })
+                        }.bind(this)}>
+                    </CreateContent>
+                )
+            } else if (this.state.mode === "update") {
+                const id = this.state.selected_content_id
+                _article = (
+                    <UpdateContent
+                        id={this.state.content[id - 1].id}
+                        title={this.state.content[id - 1].title}
+                        desc={this.state.content[id - 1].desc}
+                        onSubmit={function (_id, _title, _desc) {
+                            const _content = Array.from(this.state.content);
+                            for (let i = 0; i < _content.length; i++) {
+                                if (_content[i].id === _id) {
+                                    _content[i] = {
+                                        id: _id,
+                                        title: _title,
+                                        desc: _desc
+                                    }
+                                    break;
+                                }
+                            }
+                            this.setState({
+                                mode: "read",
+                                content: _content
+                            })
+                        }.bind(this)}>
+                    </UpdateContent >
+                )
+            }
+        }
+        render() {
+            return (
+                <div>
+                    <Subject
+                        title={this.state.subject.title}
+                        sub={this.state.subject.sub}
+                        onChangePage={function () {
+                            this.setState({ mode: "welcome" })
+                        }.bind(this)} ></Subject>
+
+                    <TOC
+                        contents={this.state.content}
+                        onChangePage={function (id) {
+                            this.setState({
+                                mode: "read",
+                                selected_content_id: Number(id)
+                            });
+                        }.bind(this)}></TOC>
+                    <ul>
+                        <Control
+                            onChangeMode={function (mode) {
+                                if (mode === "delete") {
+                                    if (window.confirm("do you really want to delete this item?")) {
+                                        const _content = this.state.content;
+                                        for (let i = 0; i < _content.length; i++) {
+                                            if (_content[i].id === this.state.selected_content_id) {
+                                                _content.splice(_content[i], 1);
+                                                break;
+                                            }
+                                        }
+                                        this.setState({
+                                            mode: "welcome",
+                                            content: _content
+                                        })
+                                        alert("delete is done!")
+                                    }
+                                } else {
+                                    this.setState({
+                                        mode: mode
+                                    })
+                                }
+                            }.bind(this)}>
+
+                        </Control>
+                    </ul>
+                    {this.getContent()}
+                </div>
+            )
+        }
+    }
+
+    const root = ReactDOM.createRoot(
         document.getElementById("root")
     )
 
-root.render(<App />);
+    root.render(<App />);
 
 
 </script>
+
 </html>
