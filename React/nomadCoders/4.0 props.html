@@ -1,47 +1,64 @@
 <!DOCTYPE html>
-<html lang="en">
-
-<head>
-
-</head>
+<html>
 
 <body>
     <div id="root"></div>
-
-
 </body>
-<script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+<script crossorigin src="https://unpkg.com/react@17.0.2/umd/react.development.js "></script>
+<!-- React JS는 어플리케이션이 아주 interactive 하도록 만들어 주는 라이브러리 / element 를 생성하고 event listener를 더하는 것을 도와주는 라이브러리-->
 <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
-<script src="https://unpkg.com/@babel/standalone@7.17.11/babel.min.js"></script>
+<!-- react-dom은 라이브러리 or package 는 모든 React Element들을 HTML  body에 둘수 있도록 해줌 -->
+<script src="https://unpkg.com/prop-types@15.8.1/prop-types.js"></script>
+<!-- prop type 체크해주는 패키지 -->
+<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
 <script type="text/babel">
-
-    function Btn({text , big}){
+    function Btn({ text, fontSize = 16, changeValue }) {
+        console.log(text, "was rendered");
         return (
             <button
+                onClick={changeValue}
                 style={{
-                backgroundColor: "tomato",
-                color: "white",
-                padding: "10px 20px",
-                border: 0,
-                borderRadius: 10,
-                fontSize: big? 18: 16,
-            }}>
-            {text}
+                    backgroundColor: "tomato",
+                    color: "white",
+                    padding: "10px 20px",
+                    border: 0,
+                    borderRadius: 10,
+                    fontSize
+                }}
+            >
+                {text}
             </button>
         )
     }
-    function App(){
-            return(
-                <div>
-                    <Btn text="Save Changes" big={true} />
-                    <Btn text="Continue"  big={false}/>
-                </div>        
-                )
+    Btn.propTypes = {
+        text: PropTypes.string.isRequired,
+        fontSize: PropTypes.number,
+        fontSize: PropTypes.number,
     }
-    const root = ReactDOM.createRoot(
-        document.getElementById("root")
-    )
-    root.render(<App />);
+
+    function App() {
+        const [value, setValue] = React.useState("Save Changes");
+        const changeValue =
+            function () {
+                if (value === "Save Changes") {
+                    setValue("Revert Changes");
+                } else {
+                    setValue("Save Changes");
+                }
+            }
+        return (
+            <div>
+                <Btn text={value} fontSize={18} changeValue={changeValue} />
+                <Btn text={"continue"} />
+            </div>
+        );
+    }
+
+    const root = document.getElementById("root");
+    ReactDOM.render(<App />, root);
+
+
+
 </script>
 
 </html>
