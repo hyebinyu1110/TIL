@@ -1,0 +1,64 @@
+
+import { useEffect, useState } from "react";
+
+
+function App() {
+
+  const [loading, setLoading] = useState(true);
+  const [coins, setCoins] = useState([]); // 기본값으로 '[]'를 두는 이유는 적어도 비어있는 array로 두어서 undefined 되지 않도록 해준다. 
+  const [decidedCoins, setDecidedCoins] = useState([]); 
+  const [amount, setAmount] = useState(0);
+  const [calculatedAmount, setcalculatedAmount] = useState(0);
+  useEffect(()=>{
+    fetch("https://api.coinpaprika.com/v1/tickers")
+    .then((response)=>response.json())
+    .then((json)=>
+    setCoins(json),
+    setLoading(false)
+    );
+
+  }, [])
+
+  function onSubmit(e){
+    e.preventDefault();
+    setDecidedCoins(e.target.value);
+    setcalculatedAmount(amount*e.coin.beta_value)
+    
+  }
+  function onChange(e){
+    setDecidedCoins(e.target.value);
+    console.log(decidedCoins);
+  }
+  return (
+  <div>
+    <h1>The Coins! ({coins.length})</h1>
+    {loading? <strong>Loading...</strong> :  null}
+      <select onChange={onChange}>
+      <option>choose your type of coins</option> 
+     { coins.map((coin)=>
+       <option value={coin.beta_value}>{coin.name}({coin.symbol}): ${coin.quotes.USD.price} USD</option> 
+     )}
+   </select>
+
+   <form onSubmit={onSubmit}>
+    <div>
+   Amount:<input 
+    type="text"
+    placeholder="write your USD amount." 
+    value={amount} 
+    onChange={(e)=> 
+      setAmount(e.target.value)
+      }></input>
+   <input type="submit" value="submit" />
+    </div>
+
+    </form>
+   <div>
+   Result: <input readOnly type="text" value={calculatedAmount}></input>
+   </div>
+  
+  </div>
+)
+}
+
+export default App;
