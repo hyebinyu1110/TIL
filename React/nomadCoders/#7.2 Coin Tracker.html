@@ -1,4 +1,3 @@
-
 import { useEffect, useState } from "react";
 
 
@@ -6,7 +5,7 @@ function App() {
 
   const [loading, setLoading] = useState(true);
   const [coins, setCoins] = useState([]); // 기본값으로 '[]'를 두는 이유는 적어도 비어있는 array로 두어서 undefined 되지 않도록 해준다. 
-  const [decidedCoins, setDecidedCoins] = useState([]); 
+  const [USDAmountperBitcoin, setUSDAmountperBitcoin] = useState(0); 
   const [amount, setAmount] = useState(0);
   const [calculatedAmount, setcalculatedAmount] = useState(0);
   useEffect(()=>{
@@ -21,22 +20,21 @@ function App() {
 
   function onSubmit(e){
     e.preventDefault();
-    setDecidedCoins(e.target.value);
-    setcalculatedAmount(amount*e.coin.beta_value)
-    
+    const bitcoinvalue = 1 / USDAmountperBitcoin;
+    const calculatedAmount = bitcoinvalue * amount;
+    setcalculatedAmount(calculatedAmount);  
   }
-  function onChange(e){
-    setDecidedCoins(e.target.value);
-    console.log(decidedCoins);
-  }
+  
+ 
+
   return (
   <div>
     <h1>The Coins! ({coins.length})</h1>
     {loading? <strong>Loading...</strong> :  null}
-      <select onChange={onChange}>
-      <option>choose your type of coins</option> 
-     { coins.map((coin)=>
-       <option value={coin.beta_value}>{coin.name}({coin.symbol}): ${coin.quotes.USD.price} USD</option> 
+      <select onChange={(e)=>  {setUSDAmountperBitcoin(coins[e.target.value-1].quotes.USD.price);}}>
+      <option value="0">choose your type of coins</option> 
+     { coins.map((coin,index)=>
+       <option value={index+1}>{coin.name}({coin.symbol}): ${coin.quotes.USD.price} USD</option> 
      )}
    </select>
 
